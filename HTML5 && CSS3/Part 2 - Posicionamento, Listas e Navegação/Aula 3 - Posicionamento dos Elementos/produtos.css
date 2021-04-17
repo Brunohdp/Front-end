@@ -1,6 +1,10 @@
 header {
     background-color: #BBBBBB;
-    padding: 20px;
+}
+nav {
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 nav li {
     display: inline;
