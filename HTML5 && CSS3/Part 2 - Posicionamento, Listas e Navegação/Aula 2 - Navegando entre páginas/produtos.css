@@ -1,0 +1,10 @@
+header {
+    background-color: #BBBBBB;
+    padding: 20px;
+}
+nav li {
+    display: inline;
+}
+nav a {
+    text-transform: uppercase;
+}
