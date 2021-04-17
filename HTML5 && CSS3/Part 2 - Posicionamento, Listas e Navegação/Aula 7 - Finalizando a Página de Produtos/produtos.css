@@ -66,5 +66,17 @@ nav a:hover {
 .produto-preco {
     font-size: 22px;
     font-weight: bold;
-    margin-top: 15px;
+    margin-top: 10px;
+}
+
+/*rodapé*/
+footer {
+    text-align: center;
+    background: url("../imagens/bg.jpg");
+    padding: 40px 0;
+}
+.copyright {
+    color: #ffffff;
+    font-size: 13px;
+    margin: 20px 0 0;
 }
