@@ -4,7 +4,9 @@ body {
     border: 0;
 }
 
+
 /* Header */
+
 header {
     background-color: #BBBBBB;
     padding: 20px 0px;
@@ -40,6 +42,11 @@ nav a {
     font-size: 22px;
     text-decoration: none;
 }
+nav a:hover {
+    color: #C78C19;
+    text-decoration: underline;
+}
+
 
 /* Main */
 
