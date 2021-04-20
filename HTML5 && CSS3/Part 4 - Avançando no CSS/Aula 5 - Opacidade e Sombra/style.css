@@ -48,6 +48,7 @@ nav a:hover {
     font-size: 2em;
     margin: 0 0 1em;
     clear: left;
+    text-shadow: 2px 2px #ff0000;
 }
 .utensilios {
     width: 120px;
@@ -105,6 +106,12 @@ nav a:hover {
 }
 .imagemBeneficios {
     width: 60%;
+    opacity: 1;
+    transition: 400ms;
+    box-shadow: 10px 10px 15px black;
+}
+.imagemBeneficios:hover {
+    opacity: 0.3;
 }
 .video {
     width: 560px;
