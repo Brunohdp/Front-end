@@ -218,3 +218,20 @@ footer {
     font-size: 13px;
     margin: 20px 0 0;
 }
+
+
+/* Responsivo para cellphone */
+@media screen and (max-width: 480px) {
+    .caixa, .principal, .conteudo-beneficios, .mapa-conteudo, .video {
+        width: auto;
+    }
+    h1 {
+        text-align: center;
+    }
+    nav {
+        position: static;
+    }
+    .lista-beneficios, .imagemBeneficios {
+        width: 100%;
+    }
+}
