@@ -1,19 +1,47 @@
-console.log(`Trabalahando com Listas`);
-// const salvador = `Salvador`;
-// const saoPaulo = `São Paulo`;
-// const rioDeJaneiro = `Rio de Janeiro`;
-
+console.log(`Trabalahando com Condicionais`);
 const listaDeDestinos = new Array(
     `Salvador`,
     `São Paulo`,
     `Rio de Janeiro`,
 );
 
-listaDeDestinos.push(`Curitiba`);                       //adicionando um item na lista dinamicamente
+const idadeComprador = 18;
+const acompanhada = false;
+const temPassagemComprada = true;
+
 console.log(`Destinos possíveis: `);
-// console.log(salvador, saoPaulo, rioDeJaneiro);
 console.log(listaDeDestinos);
 
-listaDeDestinos.splice(1, 1);                           //removendo um item na lista
+// if (idadeComprador >= 18) {
+//     console.log(`Comprador maior de idade!`);
+//     listaDeDestinos.splice(1, 1);                           //removendo um item na lista
+// } else if (acompanhada) {
+//     listaDeDestinos.splice(1, 1);                           //removendo um item na lista
+//     console.log("Comprador está acompanhado")
+// } else {
+//     console.log(`Comprador não é maior de idade e não posso vender.`);
+// }
+
+
+if (idadeComprador >= 18 || acompanhada == true) {
+    console.log("Boa viagem!");
+    listaDeDestinos.splice(1, 1);                           //removendo um item na lista
+} else {
+    console.log(`Comprador não é maior de idade e não posso vender.`);
+}
+
+console.log("Embarque: \n\n");
+if(idadeComprador >= 18 && temPassagemComprada){
+    console.log("Boa viagem!");
+} else {
+    console.log("Você não pode embarcar!");
+}
+
+
 console.log(listaDeDestinos);
-console.log(listaDeDestinos[1])                         //printa um único elemento da posição 1, sendo ele o segundo elemento
+
+// console.log(idadeComprador > 18);                //maior que
+// console.log(idadeComprador >= 18);               //maior ou igual que
+// console.log(idadeComprador < 18);                //menor que
+// console.log(idadeComprador <= 18);               //menor ou igual que
+// console.log(idadeComprador == 18);               //igual que (um único sinal de igual significa atribuição)
