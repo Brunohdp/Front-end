@@ -9,5 +9,5 @@ console.log(`Meu nome é ${nome} ${sobrenome}`);
 
 let contador = 0;
 contador += 1;
-const nomeCompleto = nome + sobrenome;
+const nomeCompleto = primeiroNome + sobrenome;
 console.log(nomeCompleto);
