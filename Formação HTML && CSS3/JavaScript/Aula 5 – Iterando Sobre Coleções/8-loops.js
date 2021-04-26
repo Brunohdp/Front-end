@@ -1,4 +1,4 @@
-console.log(`Trabalahando com Loops`);
+console.log(`\n Trabalahando com Loops`);
 const listaDeDestinos = new Array(
     `Salvador`,
     `São Paulo`,
@@ -8,25 +8,35 @@ const listaDeDestinos = new Array(
 
 const idadeComprador = 18;
 const acompanhada = false;
-const temPassagemComprada = true;
+let temPassagemComprada = false;
+const destino = 'Curitiba';
 
-console.log(`Destinos possíveis: `);
+console.log(`\n Destinos possíveis: `);
 console.log(listaDeDestinos);
 
+const podeComprar = idadeComprador >= 18 || acompanhada == true;
 
-if (idadeComprador >= 18 || acompanhada == true) {
-    console.log("Boa viagem!");
-    listaDeDestinos.splice(1, 1);                           //removendo um item na lista
-} else {
-    console.log(`Comprador não é maior de idade e não posso vender.`);
+
+let contador = 0;
+let destinoExiste = false;
+while (contador < 3) {
+    if (listaDeDestinos[contador] == destino) {
+        destinoExiste = true;
+        break;
+    }
+    contador ++;
 }
 
-console.log("Embarque: \n\n");
-if(idadeComprador >= 18 && temPassagemComprada){
+console.log("Destino existe:", destinoExiste);
+
+if(podeComprar && destinoExiste){
     console.log("Boa viagem!");
-} else {
-    console.log("Você não pode embarcar!");
+} else{
+    console.log("Desculpe, tivemos um erro!");
 }
 
-
-console.log(listaDeDestinos);
+for (let cont = 0; cont < 3; cont++) {
+    if (listaDeDestinos[contador] == destino) {
+        destinoExiste = true;
+    }
+}
