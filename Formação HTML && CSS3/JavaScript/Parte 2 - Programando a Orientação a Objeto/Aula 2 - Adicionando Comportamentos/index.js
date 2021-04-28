@@ -1,28 +1,46 @@
-class Cliente{
+class Cliente {
     nome;
     cpf;
+}
+
+class ContaCorrente {
     agencia;
-    saldo;
-    rg;
+    //! #saldo = 0; https://github.com/tc39/proposal-class-fields#private-fields  !//
+    _saldo = 0;
+
+    sacar(valor) {
+        if (this._saldo >= valor) {
+            this._saldo -= valor;
+        } else {
+            console.log("[ERROR] Valor do saque superior ao Saldo!")
+        }
+        return valor;
+    }
+
+    depositar(valor) {
+        if (valor <= 0) {
+            return;
+        }
+        this._saldo += valor;
+    }
 }
 
 const cliente1 = new Cliente();
-const cliente2 = new Cliente();
-const cliente3 = new Cliente();
-
 cliente1.nome = "Bruno";
 cliente1.cpf = 55534512432;
-cliente1.agencia = 1001;
-cliente1.saldo = 0;
 
+const cliente2 = new Cliente();
 cliente2.nome = "Cleiton";
 cliente2.cpf = 99123752109;
-cliente2.agencia = 1001;
-cliente2.saldo = 0;
 
-cliente3.nome = "Alice";
-cliente3.cpf = 99123752109;
-cliente3.agencia = 1001;
-cliente3.saldo = 0;
+const contaCorrenteRicardo = new ContaCorrente();
+contaCorrenteRicardo.agencia = 1001;
 
-console.log(cliente1, cliente2, cliente3)
+contaCorrenteRicardo.depositar(-100);
+contaCorrenteRicardo.depositar(100);
+contaCorrenteRicardo.depositar(100);
+
+const valorSacado = contaCorrenteRicardo.sacar(50);
+console.log(valorSacado);
+
+console.log(contaCorrenteRicardo);
