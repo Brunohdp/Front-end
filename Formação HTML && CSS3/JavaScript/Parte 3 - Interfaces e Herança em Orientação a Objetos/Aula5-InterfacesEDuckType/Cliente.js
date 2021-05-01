@@ -10,6 +10,6 @@ export class Cliente {
         this._senha = senha;
     }
     autenticar(){
-        return false;
+        return true;
     }
 }
