@@ -1,0 +1,63 @@
+main {
+    width: auto;
+    margin: auto;
+}
+
+h1 {
+    font-family: sans-serif;
+    font-size: 38px;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+    padding: 10px 0;
+    margin: 10px 0 0 0;
+}
+
+.cartao, .cartao-imagem {
+    text-align: center;
+    width: 18rem;
+    margin: 1rem auto;
+    border: 2px solid #00000040;
+    border-radius: 10px;
+    margin: 10px auto;
+}
+
+.cartao-titulo {
+    text-align: left;
+    margin: 7px 0 0 7px;
+    font-size: 26px;
+    font-family: sans-serif;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.cartao-subtitulo {
+    font-size: 18px;
+    font-family: sans-serif;
+    color: #AAAAAA;
+    text-align: left;
+    padding: 5px;
+    margin: 0 0 7px 7px;
+}
+
+.cartao p {
+    font-size: 16px;
+    font-family: sans-serif;
+    text-align: left;
+    margin: 0 0 7px 7px;
+    padding: 5px;
+}
+
+.imagem-cartao {
+    width: 18rem;
+    margin: auto;
+    border-radius: 8px 8px 0 0;
+}
+
+.cartao-imagem__container p {
+    font-size: 16px;
+    font-family: sans-serif;
+    text-align: left;
+    margin: 0 0 0 7px;
+    padding: 5px;
+}
