@@ -13,7 +13,8 @@ h1 {
     margin: 10px 0 0 0;
 }
 
-.cartao, .cartao-imagem {
+.cartao,
+.cartao-imagem {
     text-align: center;
     width: 18rem;
     margin: 1rem auto;
