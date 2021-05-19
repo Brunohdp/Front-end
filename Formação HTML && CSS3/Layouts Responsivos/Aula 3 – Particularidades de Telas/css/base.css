@@ -22,7 +22,8 @@ body {
 }
 
 .container {
-    padding: 0 6% 0 6%;
+    padding-right: 6%;
+    padding-left: 6%;
 }
 
 .botao {
