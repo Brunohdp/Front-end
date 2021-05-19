@@ -1,19 +1,13 @@
 .cabecalho {
     color: var(--branco);
-
     width: 100%;
-
     box-sizing: border-box;
-
     display: flex;
     flex-direction: column;
     align-items: center;
-
     padding-top: .75rem;
     padding-bottom: .75rem;
-
     border-bottom: 1px solid var(--borda-cabecalho-mobile);
-
     position: absolute;
 }
 
@@ -30,7 +24,6 @@
 
 .cabecalho__link {
     font-size: 1.1rem;
-
     margin-right: .7rem;
     margin-bottom: 1.25rem;
     margin-left: .7rem;
