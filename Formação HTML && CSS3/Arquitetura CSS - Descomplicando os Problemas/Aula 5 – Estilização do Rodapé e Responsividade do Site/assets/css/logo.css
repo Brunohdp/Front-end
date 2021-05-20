@@ -1,0 +1,11 @@
+@media screen and (min-width: 0){
+    .cabecalho__logo {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .cabecalho__logo{
+        display: block;
+    }
+}
