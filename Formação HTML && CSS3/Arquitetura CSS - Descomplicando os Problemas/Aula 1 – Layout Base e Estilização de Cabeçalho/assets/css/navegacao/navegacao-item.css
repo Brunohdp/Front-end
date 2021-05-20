@@ -1,0 +1,13 @@
+.cabecalho__navegacao-item {
+    list-style: none;
+    margin-right: 1.25rem;
+}
+
+.cabecalho__navegacao-item:first-child {
+    color: #333333;
+    font-weight: bold;
+}
+
+.cabecalho__navegacao-item:last-child {
+    margin-right: 0;
+}
