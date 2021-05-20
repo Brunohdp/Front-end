@@ -1,0 +1,13 @@
+.navegacao__item {
+    list-style: none;
+    margin-right: 1.25rem;
+}
+
+.navegacao__item:first-child {
+    color: #333333;
+    font-weight: bold;
+}
+
+.navegacao__item:last-child {
+    margin-right: 0;
+}

@@ -1,0 +1,8 @@
+.navegacao__link {
+    color: #808080;
+    text-decoration: none;
+}
+
+.navegacao__link:hover {
+    text-decoration: underline;
+}
