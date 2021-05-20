@@ -1,0 +1,8 @@
+.cabecalho__navegacao-link {
+    color: #808080;
+    text-decoration: none;
+}
+
+.cabecalho__navegacao-link:hover {
+    text-decoration: underline;
+}
