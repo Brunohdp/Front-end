@@ -20,7 +20,7 @@ const handleNovoItem = (evento) => {
 
   lista.appendChild(criaTarefa)
 
-  sessionStorage.setItem("tarefas", JSON.stringify(dados))
+  localStorage.setItem("tarefas", JSON.stringify(dados))
 
   input.value = " "
 }
