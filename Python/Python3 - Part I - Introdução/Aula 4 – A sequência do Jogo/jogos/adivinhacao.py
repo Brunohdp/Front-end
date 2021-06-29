@@ -1,22 +1,28 @@
-print("*"*37)
+print("*" * 37)
 print("| Bem vindo ao jogo de adivinhação! |")
-print("*"*37)
+print("*" * 37)
 
-#Números para o jogo
 numero_secreto = 42
-chute = int(input("Digite um número!\nR: "))
+total_de_tentativas = int(input("Quantas vezes deseja tentar?\nR: "))
+rodada = 1
 
-#Condições
-acertou = chute == numero_secreto
-maior   = chute > numero_secreto
-menor   = chute < numero_secreto
+while (rodada <= total_de_tentativas):
+    print("Tentativa", rodada, "de", total_de_tentativas)
+    chute = int(input("Digite um número!\nR: "))
 
-if (acertou):
-    print('Parabéns, você acertou! O número secreto era:', numero_secreto)
-else:
-    if (maior):
-        print('Oh não, você errou! O número secreto está mais para baixo do que seu chute')
-    elif (menor):
-        print('Oh não, você errou! O número secreto está mais para cima do que seu chute')
+    acertou = chute == numero_secreto
+    maior   = chute > numero_secreto
+    menor   = chute < numero_secreto
+
+    if (acertou):
+        print('Parabéns, você acertou! O número secreto era:', numero_secreto)
+    else:
+        if (maior):
+            print('Oh não, você errou! O número secreto está mais para baixo do que seu chute')
+        elif (menor):
+            print('Oh não, você errou! O número secreto está mais para cima do que seu chute')
+
+    print("\n")
+    rodada += 1
 
 print("\nFim do Jogo!")
