@@ -7,7 +7,7 @@ total_de_tentativas = int(input("Quantas vezes deseja tentar?\nR: "))
 rodada = 1
 
 while (rodada <= total_de_tentativas):
-    print("Tentativa", rodada, "de", total_de_tentativas)
+    print("Tentativa {} de {}", format(rodada, total_de_tentativas))
     chute = int(input("Digite um número!\nR: "))
 
     acertou = chute == numero_secreto
