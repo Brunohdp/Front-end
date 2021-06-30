@@ -6,6 +6,7 @@ print("*" * 37)
 
 numero_secreto = randint(1, 100)
 total_de_tentativas = 0
+pontos = 1000
 
 print("-" * 34)
 print("| Escolha o nível de dificuldade |")
@@ -27,6 +28,7 @@ for rodada in range(1, total_de_tentativas + 1):
     print("*" * 22)
     print("-" * 35)
     print("| Digite um número entre 1 e 100: |")
+
     print("-" * 35)
     chute = int(input("| R: ", end="|"))
     print("-" * 35)
@@ -40,13 +42,15 @@ for rodada in range(1, total_de_tentativas + 1):
     menor   = chute < numero_secreto
 
     if (acertou):
-        print(f'Parabéns, você acertou! O número secreto era: {numero_secreto}')
+        print(f'Parabéns, você acertou! O número secreto era: {numero_secreto}.\nSua pontuação foi {pontos}')
         break
     else:
         if (maior):
             print('Oh não, você errou! O número secreto está mais para baixo do que seu chute')
         elif (menor):
             print('Oh não, você errou! O número secreto está mais para cima do que seu chute')
+        pontos_perdidos = abs(numero_secreto - chute)
+        pontos -= pontos_perdidos
 
     print("\n")
     rodada += 1
