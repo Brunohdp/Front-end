@@ -30,7 +30,7 @@ for rodada in range(1, total_de_tentativas + 1):
     print("| Digite um número entre 1 e 100: |")
 
     print("-" * 35)
-    chute = int(input("| R: ", end="|"))
+    chute = int(input("| R: "))
     print("-" * 35)
 
     if (chute < 1 or chute > 100):
