@@ -1,12 +1,14 @@
+from random import randint
+
 print("*" * 37)
 print("| Bem vindo ao jogo de adivinhação! |")
 print("*" * 37)
 
-numero_secreto = 42
+numero_secreto = randint(1, 100)
 total_de_tentativas = int(input("Quantas vezes deseja tentar?\nR: "))
 
 for rodada in range(1, total_de_tentativas + 1):
-    print('Tentativa {} de {}', format(rodada, str(total_de_tentativas)))
+    print(f'Tentativa {rodada:d} de {total_de_tentativas:d}')
     chute = int(input("Digite um número entre 1 e 100!\nR: "))
 
     if (chute < 1 or chute > 100):
@@ -18,7 +20,7 @@ for rodada in range(1, total_de_tentativas + 1):
     menor   = chute < numero_secreto
 
     if (acertou):
-        print('Parabéns, você acertou! O número secreto era:', numero_secreto)
+        print(f'Parabéns, você acertou! O número secreto era: {numero_secreto}')
         break
     else:
         if (maior):
