@@ -17,7 +17,7 @@ const criaNovaLinha = (nome, email) => {
 
 const tabela = document.querySelector('[data-tabela]')
 
-clienteService()
+clienteService.listaClientes()
   .then(data => {
     data.forEach(elemento => {
       tabela.appendChild(criaNovaLinha(elemento.nome, elemento.email))
