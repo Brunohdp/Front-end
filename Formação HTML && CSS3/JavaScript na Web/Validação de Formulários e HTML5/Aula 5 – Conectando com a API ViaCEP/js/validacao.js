@@ -37,12 +37,22 @@ const mensagensDeErro = {
   cep: {
     valueMissing: 'O campo CEP não pode estar vazio.',
     patternMismatch: 'O CEP digitado não é válido'
+  },
+  logradouro: {
+    valueMissing: 'O campo Logradouro não pode estar vazio.',
+  },
+  cidade: {
+    valueMissing: 'O campo Cidade não pode estar vazio.',
+  },
+  estado: {
+    valueMissing: 'O campo Estado não pode estar vazio.',
   }
 }
 
 const validadores = {
   dataNascimento: input => validaDataNascimento(input),
-  cpf: input => validaCPF(input)
+  cpf: input => validaCPF(input),
+  cep: input => recuperarCEP(input)
 }
 
 const tiposDeErros = [
@@ -149,8 +159,24 @@ function confirmaDigito(soma) {
   return 11 - (soma % 11)
 }
 
-// 123.456.789-01
+function recuperarCEP(input) {
+  const cep = input.value.replace(/\D/g, '')
+  const url = `https://viacep.com.br/ws/${cep}/json/`
+  const options = {
+    method: 'GET',
+    mode: 'cors',
+    headers: {
+      'content-type': 'application/json;charset=utf-8'
+    }
+  }
 
-// let soma = (10 * 1) + (9 * 2) + (8 * 3) + (7 * 4) + (6 * 5) + (5 * 6) + (4 * 7) + (10 *1)
-
-// let digitoVerificador = 11 - (soma / 11)
+  if(!input.validity.patternMismatch && !input.validity.valueMissing){
+    fetch(url, options).then(
+      response => response.json()
+    ).then(
+      data => {
+        console.log(data)
+      }
+    )
+  }
+}
