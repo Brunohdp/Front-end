@@ -33,6 +33,10 @@ const mensagensDeErro = {
   cpf: {
     valueMissing: 'O campo CPF não pode estar vazio.',
     customError: 'O CPF digitado não é valido.'
+  },
+  cep: {
+    valueMissing: 'O campo CEP não pode estar vazio.',
+    patternMismatch: 'O CEP digitado não é válido'
   }
 }
 
