@@ -142,7 +142,7 @@ function checaDigitoVerificador(cpf, multiplicador) {
 }
 
 function confirmaDigito(soma) {
-  return 11 - (soma / 11)
+  return 11 - (soma % 11)
 }
 
 // 123.456.789-01
