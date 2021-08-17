@@ -40,13 +40,16 @@ const mensagensDeErro = {
     customError: 'O CEP não é válido.'
   },
   logradouro: {
-    valueMissing: 'O campo Logradouro não pode estar vazio.',
+    valueMissing: 'O campo Logradouro não pode estar vazio.'
   },
   cidade: {
-    valueMissing: 'O campo Cidade não pode estar vazio.',
+    valueMissing: 'O campo Cidade não pode estar vazio.'
   },
   estado: {
-    valueMissing: 'O campo Estado não pode estar vazio.',
+    valueMissing: 'O campo Estado não pode estar vazio.'
+  },
+  preco: {
+    valueMissing: 'O campo Preço não pode estar vazio.'
   }
 }
 
