@@ -11,6 +11,7 @@ def jogar():
     while (not enforcou and not acertou):
 
         chute = input("Qual letra?\nR: ").lower()
+        chute = chute.strip()
 
         index = 0
         for letra in palavra_secreta:
