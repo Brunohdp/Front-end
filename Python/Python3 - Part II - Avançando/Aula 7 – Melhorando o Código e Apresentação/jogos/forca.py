@@ -58,9 +58,9 @@ def inicializa_letras_acertadas(palavra):
     return ["_" for letra in palavra]
 
 def pede_chute():
-    chute = input("Qual letra?\nR: ").upper()
-    chute = chute.strip()
-    return
+    chute = input("Qual letra?\nR: ")
+    chute = chute.strip().upper()
+    return chute
 
 
 def marca_chute_correto(chute, letras_acertadas, palavra_secreta):
