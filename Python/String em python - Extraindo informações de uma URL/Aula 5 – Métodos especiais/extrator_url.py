@@ -47,11 +47,12 @@ class ExtratorURL:
     def __str__(self):
         return "URL: " + self.url + "\n" + "Parâmetros: " + self.get_url_parametros() + "\n" + "URL Base: " + self.get_url_base()
 
+    def __eq__(self, other):
+        return self.url == other.url
+
 
 url = "bytebank.com/cambio?quantidade=100&moedaOrigem=real&moedaDestino=dolar"
 extrator_url = ExtratorURL(url)
-print("o tamanho da URL: ", len(extrator_url))
-print(extrator_url)
+extrator_url_2 = ExtratorURL(url)
 
-valor_quantidade = extrator_url.get_valor_parametro("quantidade")
-print(valor_quantidade)
+print(extrator_url == extrator_url_2)
