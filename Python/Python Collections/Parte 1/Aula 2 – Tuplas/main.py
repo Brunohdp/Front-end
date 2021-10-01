@@ -32,7 +32,7 @@ idades = [39, 30, 27, 18]
 # print(maior_de_idade)
 # maior_de_idade = [(idade) for idade in idades if idade > 21]
 
-def faz_processamento_de_visualização(lista):
-    print(len(lista))
-
-faz_processamento_de_visualização(idades)
+# def faz_processamento_de_visualização(lista):
+#     print(len(lista))
+#
+# faz_processamento_de_visualização(idades)
