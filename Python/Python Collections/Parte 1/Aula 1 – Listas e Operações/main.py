@@ -21,13 +21,18 @@ idades = [39, 30, 27, 18]
 # for cada in idades:
 #     print(f'Recebendo o elemento: {cada}')
 
-idades_no_ano_que_vem = []
-for idade in idades:
-    idades_no_ano_que_vem.append(idade+1)
-print(idades_no_ano_que_vem)
+# idades_no_ano_que_vem = []
+# for idade in idades:
+#     idades_no_ano_que_vem.append(idade+1)
+# print(idades_no_ano_que_vem)
+#
+# idades_no_ano_que_vem = [(idade+1) for idade in idades]
+# print(idades_no_ano_que_vem)
+#
+# print(maior_de_idade)
+# maior_de_idade = [(idade) for idade in idades if idade > 21]
 
-idades_no_ano_que_vem = [(idade+1) for idade in idades]
-print(idades_no_ano_que_vem)
+def faz_processamento_de_visualização(lista):
+    print(len(lista))
 
-maior_de_idade = [(idade) for idade in idades if idade > 21]
-print(maior_de_idade)
+faz_processamento_de_visualização(idades)
