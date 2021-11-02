@@ -1,6 +1,9 @@
+from telefonesBr import TelefonesBr
 import re
 
-padrao = ".*@[a-z]{3,10}.com(.br)?"
-email = "bruno.h.depaula@hotmail.com"
-resposta = re.search(padrao, email)
-print(resposta)
+# padrao = "\+?\d{2}?\(?\d{2}?\)?\d{4,5}-?\d{4}"
+telefone = "1998074526"
+
+telefone_objeto = TelefonesBr(telefone)
+
+print(telefone_objeto)
