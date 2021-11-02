@@ -29,3 +29,6 @@ class DatasBr:
     def __str__(self):
         return self.format_data()
 
+    def tempo_cadastro(self):
+        tempo_cadastro = (datetime.today() + timedelta(days=30)) - self.momento_cadastro
+        return tempo_cadastro
