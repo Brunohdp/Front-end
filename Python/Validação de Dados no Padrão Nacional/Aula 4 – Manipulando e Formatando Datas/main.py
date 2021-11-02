@@ -1,10 +1,7 @@
-from telefonesBr import TelefonesBr
-import re
+from datetime import datetime, timedelta
+from datas_br import DatasBr
 
-telefone = "551438137190"
+cadastro = DatasBr()
 
-telefone_objeto = TelefonesBr(telefone)
-# resposta = re.search(padrao, telefone)
-# print(resposta.group(2))
+print(cadastro.dia_semana())
 
-print(telefone_objeto)
