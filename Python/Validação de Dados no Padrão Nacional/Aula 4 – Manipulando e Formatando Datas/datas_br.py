@@ -21,3 +21,11 @@ class DatasBr:
         ]
         dia_cadastro = self.momento_cadastro.weekday()
         return dia_semana[dia_cadastro]
+
+    def format_data(self):
+        data_formatada = self.momento_cadastro.strftime('%d/%m/%Y %H:%M')
+        return data_formatada
+
+    def __str__(self):
+        return self.format_data()
+
