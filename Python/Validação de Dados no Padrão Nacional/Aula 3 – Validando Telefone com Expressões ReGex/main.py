@@ -1,9 +1,10 @@
 from telefonesBr import TelefonesBr
 import re
 
-# padrao = "\+?\d{2}?\(?\d{2}?\)?\d{4,5}-?\d{4}"
-telefone = "1998074526"
+telefone = "551438137190"
 
 telefone_objeto = TelefonesBr(telefone)
+# resposta = re.search(padrao, telefone)
+# print(resposta.group(2))
 
 print(telefone_objeto)
