@@ -1,8 +1,6 @@
-from cpf_cnpj import Documento
+import re
 
-exemplo_cnpj = "35379838000112"
-exemplo_cpf = "46789082859"
-
-documento1 = Documento.cria_documento(exemplo_cpf)
-documento2 = Documento.cria_documento(exemplo_cnpj)
-print(f'{documento1}\n{documento2}')
+padrao = ".*@[a-z]{3,10}.com(.br)?"
+email = "bruno.h.depaula@hotmail.com"
+resposta = re.search(padrao, email)
+print(resposta)
