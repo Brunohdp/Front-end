@@ -23,18 +23,14 @@ class TestLeilao(TestCase):
         self.assertEqual(maior_valor_esperado, self.leilao.maior_lance)
 
 
-    def test_deve_retornar_o_maior_e_o_menor_valor_de_um_lance_quando_adicionados_em_ordem_decrescente(self):
-        yuri = Usuario('Yuri')
-        lance_do_yuri = Lance(yuri, 100.0)
+    def test_nao_deve_propor_um_lance_em_ordem_decrescente(self):
+        with self.assertRaises(ValueError):
+            yuri = Usuario('Yuri')
+            lance_do_yuri = Lance(yuri, 100.0)
 
-        self.leilao.propoem(self.lance_do_gui)
-        self.leilao.propoem(lance_do_yuri)
+            self.leilao.propoem(self.lance_do_gui)
+            self.leilao.propoem(lance_do_yuri)
 
-        menor_valor_esperado = 100.0
-        maior_valor_esperado = 150.0
-
-        self.assertEqual(menor_valor_esperado, self.leilao.menor_lance)
-        self.assertEqual(maior_valor_esperado, self.leilao.maior_lance)
 
     def test_deve_retornar_o_mesmo_valor_para_o_maior_e_menor_lance_quando_o_leilao_tiver_um_lance(self):
         self.leilao.propoem(self.lance_do_gui)
@@ -49,8 +45,8 @@ class TestLeilao(TestCase):
         lance_do_yuri = Lance(yuri, 100.0)
         lance_do_bru = Lance(bru, 200.0)
 
-        self.leilao.propoem(self.lance_do_gui)
         self.leilao.propoem(lance_do_yuri)
+        self.leilao.propoem(self.lance_do_gui)
         self.leilao.propoem(lance_do_bru)
 
         menor_valor_esperado = 100.0
@@ -67,7 +63,6 @@ class TestLeilao(TestCase):
         self.assertEqual(1, quantidade_de_lances_recebido)
 
 
-    # Se o último usuário for diferente, deve permitir propor o lance
     def test_deve_permitir_propro_um_lance_caso_o_ultimo_usuario_seja_diferente(self):
         yuri = Usuario('Yuri')
 
@@ -81,11 +76,10 @@ class TestLeilao(TestCase):
         self.assertEqual(2, quantidade_de_lances_recebidos)
 
 
-    # Se o último usuário for o mesmo, não deve permitir propor o lance
     def test_nao_deve_permitir_propor_lance_caso_o_usuario_seja_o_mesmo(self):
         lance_do_gui200 = Lance(self.gui, 200.0)
 
-        ""with self.assertRaises(ValueError):
+        with self.assertRaises(ValueError):
             self.leilao.propoem(self.lance_do_gui)
             self.leilao.propoem(lance_do_gui200)
 
