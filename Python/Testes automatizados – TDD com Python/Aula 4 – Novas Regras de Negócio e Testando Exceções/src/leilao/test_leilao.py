@@ -2,7 +2,7 @@ from unittest import TestCase
 from src.leilao.dominio import Usuario, Lance, Leilao
 
 
-class TestAvaliador(TestCase):
+class TestLeilao(TestCase):
     def setUp(self):
         self.gui = Usuario('Gui')
         self.lance_do_gui = Lance(self.gui, 150.0)
@@ -60,3 +60,34 @@ class TestAvaliador(TestCase):
         self.assertEqual(maior_valor_esperado, self.leilao.maior_lance)
 
 
+    def test_deve_permitir_propor_lance_caso_o_leilao_não_tenha_lances(self):
+        self.leilao.propoem(self.lance_do_gui)
+
+        quantidade_de_lances_recebido = len(self.leilao.lances)
+        self.assertEqual(1, quantidade_de_lances_recebido)
+
+
+    # Se o último usuário for diferente, deve permitir propor o lance
+    def test_deve_permitir_propro_um_lance_caso_o_ultimo_usuario_seja_diferente(self):
+        yuri = Usuario('Yuri')
+
+        lance_do_yuri = Lance(yuri, 200.0)
+
+        self.leilao.propoem(self.lance_do_gui)
+        self.leilao.propoem(lance_do_yuri)
+
+        quantidade_de_lances_recebidos = len(self.leilao.lances)
+
+        self.assertEqual(2, quantidade_de_lances_recebidos)
+
+
+    # Se o último usuário for o mesmo, não deve permitir propor o lance
+    def test_nao_deve_permitir_propor_lance_caso_o_usuario_seja_o_mesmo(self):
+        lance_do_gui200 = Lance(self.gui, 200.0)
+
+        self.leilao.propoem(self.lance_do_gui)
+        self.leilao.propoem(lance_do_gui200)
+
+        quantidade_de_lances_recebidos = len(self.leilao.lances)
+
+        self.assertEqual(1, quantidade_de_lances_recebidos)
