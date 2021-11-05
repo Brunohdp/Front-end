@@ -4,3 +4,4 @@ def saudacao():
     return print(f'Olá, {nome}! Você tem a mesma idade que eu: {idade} anos')
 
 saudacao()
+
