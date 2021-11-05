@@ -7,3 +7,4 @@ def verifica_se_pode_dirigir(idade_usuario):
         raise ValueError('Você não tem idade para dirigir!')
 
 verifica_se_pode_dirigir(idade)
+
