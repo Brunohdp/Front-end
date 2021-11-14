@@ -84,3 +84,25 @@ plt.hist(medias_por_filme)
 plt.figure(figsize=(5,8))
 sns.boxplot(y=medias_por_filme)
 
+"""# Aula 3 – Variáveis
+
+## Tipos de Variáveis
+"""
+
+tmdb = pd.read_csv('tmdb_5000_movies.csv')
+tmdb.head()
+
+# Categórica Nominal:
+
+tmdb['original_language'].unique()
+
+# Categórica Ordinal
+
+# escolaridade: 1°, 2° e 3° graus
+# 1 grau < 2 grau < 3 grau
+
+# budget => orçamento => quantitativo contínuo
+
+# Quantidade de votos => 1, 2, 3, 4, não tem 2.5 votos.
+# notas do movielens => 0.5, 1, 1.5, ... ,5 não tem 2.7
+
