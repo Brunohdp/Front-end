@@ -161,3 +161,18 @@ total_por_lingua_de_outros_filmes
 filmes_sem_lingua_original_em_ingles = tmdb.query("original_language != 'en'")
 sns.catplot(x = 'original_language', kind = 'count', data = filmes_sem_lingua_original_em_ingles)
 
+"""# Aula 5 – Continuando Com Visualização
+
+## Refinando Visualizações
+"""
+
+plt.figure(figsize=(5, 10))
+sns.catplot(x = 'original_language', kind = 'count', data = filmes_sem_lingua_original_em_ingles)
+
+sns.catplot(x = 'original_language', kind = 'count', data = filmes_sem_lingua_original_em_ingles, aspect=2)
+
+total_por_lingua_de_outros_filmes = tmdb.query("original_language != 'en'").original_language.value_counts()
+sns.catplot(x = 'original_language', kind = 'count', data = filmes_sem_lingua_original_em_ingles, aspect=2, order=total_por_lingua_de_outros_filmes.index)
+
+sns.catplot(x = 'original_language', kind = 'count', data = filmes_sem_lingua_original_em_ingles, aspect=2, palette='mako', order=total_por_lingua_de_outros_filmes.index)
+
