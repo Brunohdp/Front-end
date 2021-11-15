@@ -176,3 +176,53 @@ sns.catplot(x = 'original_language', kind = 'count', data = filmes_sem_lingua_or
 
 sns.catplot(x = 'original_language', kind = 'count', data = filmes_sem_lingua_original_em_ingles, aspect=2, palette='mako', order=total_por_lingua_de_outros_filmes.index)
 
+"""# Aula 6 – Dados e Estatística
+
+## Média, mediana, desvio padrão, boxplot, histograma, tendência central e dispersão, como tudo isso se encaixa
+"""
+
+filmes.head(2)
+
+notas_toy_story = notas.query('filmeId == 1')
+notas_jumanji = notas.query('filmeId == 2')
+print(len(notas_toy_story), len(notas_jumanji))
+
+print(f'Nota média do Toy Story: {notas_toy_story.nota.mean():.2f}')
+print(f'Nota média do Jumanji: {notas_jumanji.nota.mean():.2f}')
+
+print(f'Nota mediana do Toy Story: {notas_toy_story.nota.median():.2f}')
+print(f'Nota mediana do Jumanji: {notas_jumanji.nota.median():.2f}')
+
+import numpy as np
+
+filme1 = np.append(np.array([2.5] * 10), np.array([3.5] * 10))
+filme2 = np.append(np.array([5] * 10), np.array([1] * 10))
+
+print(np.mean(filme1), np.mean(filme2))
+print(np.std(filme1), np.std(filme2))
+print(np.median(filme1), np.median(filme2))
+
+sns.distplot(filme1)
+sns.distplot(filme2)
+
+plt.hist(filme1)
+plt.hist(filme2)
+
+sns.boxplot(filme1)
+sns.boxplot(filme2)
+
+plt.boxplot([filme1, filme2])
+plt.show()
+
+sns.boxplot(notas_toy_story.nota)
+sns.boxplot(notas_jumanji.nota)
+
+plt.boxplot([notas_toy_story.nota, notas_jumanji.nota])
+plt.show()
+
+sns.boxplot(x = 'filmeId', y = 'nota', data = notas.query('filmeId == [1,2,3,4,5]'))
+
+print(notas_jumanji.nota.std(), notas_toy_story.nota.std())
+
+
+
