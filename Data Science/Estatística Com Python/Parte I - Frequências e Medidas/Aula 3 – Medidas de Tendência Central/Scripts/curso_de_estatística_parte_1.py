@@ -378,7 +378,13 @@ dist_freq_quantitativas_personalizadas.Frequência.plot.bar(width = 1, color = '
 ## DataFrame de exemplo
 """
 
-
+df = pd.DataFrame(data = {'Fulano': [8, 10, 4, 8, 6, 10, 8],
+                          'Beltrano': [10, 2, 0.5, 1, 3, 9.5, 10],
+                          'Sicrano': [7.5, 8, 7, 8, 8, 8.5, 7]},
+                  index = ['Matemática', 'Português', 'Inglês',
+                           'Geografia', 'História', 'Física', 'Química'])
+df.rename_axis('Matérias', axis = 'columns', inplace = True)
+df
 
 """## <font color=green>3.1 Média aritmética</font>
 ***
@@ -394,11 +400,28 @@ $n$ = número de observações (registros)
 $X_i$ = valor da i-ésima observação (registro)
 """
 
+(8 + 10 + 4 + 8 + 6 + 10 + 8) / 7
 
+df.Fulano.sum() / df.shape[0]
 
+df.Fulano.mean()
 
+dados.Renda.mean()
 
+dados.groupby(['Sexo'])['Renda'].mean()
 
+"""# <font color=cian> Exercícios"""
+
+dataset = pd.DataFrame({
+    'Sexo': ['H', 'M', 'M', 'M', 'M', 'H', 'H', 'H', 'M', 'M'],
+    'Idade': [53, 72, 54, 27, 30, 40, 58, 32, 44, 51]
+})
+
+dataset.head()
+
+dataset.groupby(['Sexo']).Idade.mean()
+
+dataset.Idade.mean()
 
 
 
@@ -438,28 +461,35 @@ Para obtermos a mediana de uma conjunto de dados devemos proceder da seguinte ma
 <img src='https://caelum-online-public.s3.amazonaws.com/1177-estatistica-parte1/01/img002.png' width='40%' style="float:left">
 """
 
+notas_fulano = df.Fulano
+notas_fulano
 
+notas_fulano = notas_fulano.sort_values()
+notas_fulano
 
+notas_fulano = notas_fulano.reset_index()
 
+notas_fulano
 
+n = notas_fulano.shape[0]
+n
 
+elemento_md = int((n + 1) / 2)
+elemento_md
 
+notas_fulano.loc[elemento_md - 1]
 
-
-
-
-
-
-
+notas_fulano.median()
 
 """### Exemplo 2 - n par
 
 <img src='https://caelum-online-public.s3.amazonaws.com/1177-estatistica-parte1/01/img003.png' width='50%' style="float:left">
 """
 
+notas_beltrano = df.Beltrano.sample(6, random_state=101)
+notas_beltrano
 
-
-
+notas_beltrano.median()
 
 
 
@@ -473,9 +503,9 @@ Para obtermos a mediana de uma conjunto de dados devemos proceder da seguinte ma
 
 """### Obtendo a mediana em nosso dataset"""
 
+dados.Renda.median()
 
-
-
+dados.Renda.quantile()
 
 """## <font color=green>3.3 Moda</font>
 ***
@@ -483,19 +513,20 @@ Para obtermos a mediana de uma conjunto de dados devemos proceder da seguinte ma
 Pode-se definir a moda como sendo o valor mais frequente de um conjunto de dados. A moda é bastante utilizada para dados qualitativos.
 """
 
+df
 
+df.mode
 
+exemplo = pd.Series([1, 2, 2, 3, 4, 4, 5, 6, 6])
+exemplo
 
-
-
-
-
+exemplo.mode()
 
 """### Obtendo a moda em nosso dataset"""
 
+dados.Renda.mode()
 
-
-
+dados.Altura.mode()
 
 """## <font color=green>3.4 Relação entre média, mediana e moda</font>
 ***
@@ -505,43 +536,58 @@ Pode-se definir a moda como sendo o valor mais frequente de um conjunto de dados
 ### Avaliando a variável RENDA
 """
 
+ax = sns.distplot(dados.query('Renda < 20000').Renda)
+ax.figure.set_size_inches(12,6)
+ax
 
+moda = dados.Renda.mode()[0]
+moda
 
+mediana = dados.Renda.median()
+mediana
 
+media = dados.Renda.mean()
+media
 
-
-
-
-
-
+moda < mediana < media
 
 """***
 
 ### Avaliando a variável ALTURA
 """
 
+ax = sns.distplot(dados.Altura)
+ax.figure.set_size_inches(12,6)
+ax
 
+moda = dados.Altura.mode()
+moda
 
+mediana = dados.Altura.median()
+mediana
 
-
-
-
-
+media = dados.Altura.mean()
+media
 
 """***
 
 ### Avaliando a variável ANOS DE ESTUDO
 """
 
+ax = sns.distplot(dados['Anos de Estudo'], bins = 17)
+ax.figure.set_size_inches(12,6)
+ax
 
+moda = dados['Anos de Estudo'].mode()[0]
+moda
 
+mediana = dados['Anos de Estudo'].median()
+mediana
 
+media = dados['Anos de Estudo'].mean()
+media
 
-
-
-
-
-
+moda > mediana > media
 
 """# <font color=green>4 MEDIDAS SEPARATRIZES</font>
 ***
