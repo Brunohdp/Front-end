@@ -598,17 +598,23 @@ moda > mediana > media
 Há uma série de medidas de posição semelhantes na sua concepção à mediana, embora não sejam medidas de tendência central. Como se sabe, a mediana divide a distribuição em duas partes iguais quanto ao número de elementos de cada parte. Já os quartis permitem dividir a distribuição em quatro partes iguais quanto ao número de elementos de cada uma; os decis em dez partes e os centis em cem partes iguais.
 """
 
+dados.Renda.quantile([0.25, 0.5, 0.75])
 
+[i / 10 for i in range(1, 10)]
 
+dados.Renda.quantile([i / 10 for i in range(1, 10)])
 
+dados.Renda.quantile([i / 100 for i in range(1, 100)])
 
+ax = sns.distplot(dados.Idade, hist_kws= {'cumulative':True},
+                  kde_kws = {'cumulative':True}, bins = 10)
+ax.figure.set_size_inches(12,6)
+ax.set_title('Distribuição de Frequências Acumuladas', fontsize=18)
+ax.set_ylabel('Acumulado', fontsize=14)
+ax.set_xlabel('Anos', fontsize=14)
+ax
 
-
-
-
-
-
-
+dados.Idade.quantile([i / 10 for i in range(1, 10)])
 
 """## <font color=green>4.2 Box-plot</font>
 ***
@@ -618,17 +624,41 @@ O box plot dá uma idéia da posição, dispersão, assimetria, caudas e dados d
 <img src='https://caelum-online-public.s3.amazonaws.com/1177-estatistica-parte1/01/img005.png' width='65%'>
 """
 
+ax = sns.boxplot(x = 'Altura', data = dados, orient = 'h')
+ax.figure.set_size_inches(12, 6)
+ax.set_title('Altura', fontsize=18)
+ax.set_xlabel('Metros', fontsize=14)
+ax
 
+ax = sns.boxplot( x = 'Altura', y = 'Sexo', data = dados, orient = 'h')
+ax.figure.set_size_inches(12, 4)
+ax.set_title('Altura', fontsize=18)
+ax.set_xlabel('Metros', fontsize=14)
+ax
 
+ax = sns.boxplot( x = 'Renda', data = dados.query('Renda < 10000'), orient = 'h')
+ax.figure.set_size_inches(12, 4)
+ax.set_title('Altura', fontsize=18)
+ax.set_xlabel('Metros', fontsize=14)
+ax
 
+ax = sns.boxplot( x = 'Renda', y = 'Sexo', data = dados.query('Renda < 10000'), orient = 'h')
+ax.figure.set_size_inches(12, 4)
+ax.set_title('Altura', fontsize=18)
+ax.set_xlabel('Metros', fontsize=14)
+ax
 
+ax = sns.boxplot( x = 'Anos de Estudo', data = dados, orient = 'h')
+ax.figure.set_size_inches(12, 4)
+ax.set_title('Altura', fontsize=18)
+ax.set_xlabel('Metros', fontsize=14)
+ax
 
-
-
-
-
-
-
+ax = sns.boxplot( x = 'Anos de Estudo', y = 'Sexo', data = dados, orient = 'h')
+ax.figure.set_size_inches(12, 4)
+ax.set_title('Altura', fontsize=18)
+ax.set_xlabel('Metros', fontsize=14)
+ax
 
 """<img src='https://caelum-online-public.s3.amazonaws.com/1177-estatistica-parte1/01/img006.png' width='80%'>
 
