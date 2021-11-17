@@ -194,34 +194,49 @@ O primeiro passo em um trabalho de análise é o conhecimento do comportamento d
 https://pandas.pydata.org/pandas-docs/version/0.22/generated/pandas.Series.value_counts.html
 """
 
+dados['Sexo'].value_counts()
 
+dados['Sexo'].value_counts(normalize=True) * 100
 
+frequencia = dados['Sexo'].value_counts()
 
+percentual = dados['Sexo'].value_counts(normalize=True) * 100
 
+dist_freq_qualitativas = pd.DataFrame({'Frequência': frequencia, 'Porcentagem (%)': percentual})
 
+dist_freq_qualitativas
 
+dist_freq_qualitativas.rename(index= {0: 'Masculino', 1: 'Feminino'}, inplace=True)
+dist_freq_qualitativas.rename_axis('Sexo', axis='columns', inplace=True)
 
-
-
-
-
-
-
-
-
+dist_freq_qualitativas
 
 """### Método 2
 
 https://pandas.pydata.org/pandas-docs/version/0.22/generated/pandas.crosstab.html
 """
 
+sexo = {0: 'Masculino',
+        1: 'Feminino'}
 
+cor = {0: 'Indígena',
+        2: 'Branca',
+        4: 'Preta',
+        6: 'Amarela',
+        8: 'Parda',
+        9: 'Sem declaração'}
 
+frequencia = pd.crosstab(dados.Sexo, dados.Cor)
+frequencia.rename(index=sexo, columns=cor, inplace=True)
+frequencia
 
+frequencia = pd.crosstab(dados.Sexo, dados.Cor, normalize=True) * 100
+frequencia.rename(index=sexo, columns=cor, inplace=True)
+frequencia
 
-
-
-
+frequencia = pd.crosstab(dados.Sexo, dados.Cor, aggfunc = 'mean', values = dados.Renda)
+frequencia.rename(index=sexo, columns=cor, inplace=True)
+frequencia
 
 """## <font color=green>2.2 Distribuição de frequências para variáveis quantitativas (classes personalizadas)</font>
 ***
@@ -253,26 +268,38 @@ onde <b>SM</b> é o valor do salário mínimo na época. Em nosso caso <b>R$ 788
 <b>E</b> ► Até 1.576
 """
 
+dados.Renda.min()
 
+dados.Renda.max()
 
+classes = [0, 1576, 3152, 7880, 15760, 200000]
 
-
-
-
-
+labels = ['E', 'D', 'C', 'B', 'A']
 
 """### Passo 2 - Criar a tabela de frequências
 
 https://pandas.pydata.org/pandas-docs/version/0.22/generated/pandas.cut.html
 """
 
+pd.cut(dados.Renda, bins = classes, labels = labels, include_lowest=True)
 
+frequencia = pd.value_counts(pd.cut(dados.Renda,
+                                    bins = classes,
+                                    labels = labels, 
+                                    include_lowest=True))
+frequencia
 
+percentual = pd.value_counts(pd.cut(dados.Renda,
+                                    bins = classes,
+                                    labels = labels, 
+                                    include_lowest=True), normalize=True) * 100
+percentual
 
+dist_freq_quantitativas_personalizadas = pd.DataFrame({'Frequência': frequencia,
+                                                       'Porcentagem (%)': percentual})
+dist_freq_quantitativas_personalizadas
 
-
-
-
+dist_freq_quantitativas_personalizadas.sort_index(ascending=False)
 
 """## <font color=green>2.3 Distribuição de frequências para variáveis quantitativas (classes de amplitude fixa)</font>
 ***
@@ -282,7 +309,7 @@ https://pandas.pydata.org/pandas-docs/version/0.22/generated/pandas.cut.html
 http://www.numpy.org/
 """
 
-
+import numpy as np
 
 """### Passo 1 - Difinindo o número de classes
 
@@ -291,21 +318,27 @@ http://www.numpy.org/
 # $$k = 1 + \frac {10}{3}\log_{10}n$$
 """
 
+n = dados.shape[0]
+n
 
+k = 1 + (10/3) * np.log10(n)
 
+k
 
-
-
-
-
+k = int(k.round(0))
+k
 
 """### Passo 2 - Criar a tabela de frequências"""
 
+frequencia = pd.value_counts(pd.cut(x = dados.Renda, bins = k, include_lowest = True), sort = False)
+frequencia
 
+percentual = pd.value_counts(pd.cut(x = dados.Renda, bins = k, include_lowest = True), sort = False, normalize=True) * 100
+percentual
 
-
-
-
+dist_freq_quantitativas_amplitude_fixa = pd.DataFrame({'Frequência': frequencia,
+                                                       'Porcentagem (%)': percentual})
+dist_freq_quantitativas_amplitude_fixa
 
 """## <font color=green>2.4 Histograma</font>
 ***
@@ -317,17 +350,27 @@ O <b>HISTOGRAMA</b> é a representação gráfica de uma distribuição de frequ
 https://seaborn.pydata.org/
 """
 
+import seaborn as sns
 
+ax = sns.displot(dados.Altura, kde = False)
 
+ax.figure.set_size_inches(12,6)
+ax.set_titles('Distribuição de Frequências - Altura', fontsize = 18)
+ax.set_xlabels("Metros", fontsize = 14)
+ax
 
+ax = sns.displot(dados.Altura, kde=True)
 
+ax.figure.set_size_inches(12,6)
+ax.set_titles('Distribuição de Frequências - Altura - KDE', fontsize = 18)
+ax.set_xlabels("Metros", fontsize = 14)
+ax
 
+dados.Altura.hist(bins = 50, figsize=(12,6))
 
+dist_freq_quantitativas_personalizadas
 
-
-
-
-
+dist_freq_quantitativas_personalizadas.Frequência.plot.bar(width = 1, color = 'blue', alpha = 0.2)
 
 """# <font color=green>3 MEDIDAS DE TENDÊNCIA CENTRAL</font>
 ***
