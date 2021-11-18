@@ -674,23 +674,42 @@ Embora as medidas de posição forneçam uma sumarização bastante importante d
 # $$DM = \frac 1n\sum_{i=1}^{n}|X_i-\bar{X}|$$
 """
 
+df
 
+notas_fulano = df[['Fulano']]
+notas_fulano
 
+nota_media_fulano = notas_fulano.mean()[0]
+nota_media_fulano
 
+notas_fulano['Desvio'] = notas_fulano['Fulano'] - nota_media_fulano
+notas_fulano
 
+notas_fulano['|Desvio|'] = notas_fulano.Desvio.abs()
+notas_fulano
 
+ax = notas_fulano['Fulano'].plot(style = 'o')
+ax.figure.set_size_inches(14, 6)
+ax.hlines(y = nota_media_fulano, xmin = 0, xmax = notas_fulano.shape[0] - 1, colors = 'red')
+for i in range(notas_fulano.shape[0]):
+    ax.vlines(x = i, ymin = nota_media_fulano, ymax = notas_fulano['Fulano'][i], linestyle='dashed')
+ax
 
+notas_fulano['|Desvio|'].mean()
 
+desvio_medio_absoluto = notas_fulano.Fulano.mad()
+desvio_medio_absoluto
 
+df1 = df[['Fulano', 'Sicrano']]
+df1
 
+sns.boxplot(df1.Fulano)
 
+sns.boxplot(df1.Sicrano)
 
+df1.Fulano.mad()
 
-
-
-
-
-
+df1.Sicrano.mad()
 
 """## <font color=green>5.2 Variância</font>
 ***
@@ -708,11 +727,13 @@ A variância é construída a partir das diferenças entre cada observação e a
 # $$S^2 = \frac 1{n-1}\sum_{i=1}^{n}(X_i-\bar{X})^2$$
 """
 
+notas_fulano['(Desvio)^2'] = notas_fulano.Desvio.pow(2)
+notas_fulano
 
+notas_fulano['(Desvio)^2'].sum() / (len(notas_fulano) - 1)
 
-
-
-
+variancia = notas_fulano.Fulano.var()
+variancia
 
 """## <font color=green>5.3 Desvio padrão</font>
 ***
@@ -728,17 +749,27 @@ Uma das restrições da variância é o fato de fornecer medidas em quadrados da
 # $$S = \sqrt{\frac 1{n-1}\sum_{i=1}^{n}(X_i-\bar{X})^2} \Longrightarrow S = \sqrt{S^2}$$
 """
 
+np.sqrt(variancia)
 
+desv_pad = notas_fulano.Fulano.std()
+desv_pad
 
+df
 
+df.mean()
 
+df.median()
 
+df.mode()
 
+df.std()
 
+dataset = pd.DataFrame({
+    'Sexo': ['H', 'M', 'M', 'M', 'M', 'H', 'H', 'H', 'M', 'M'],
+    'Idade': [53, 72, 54, 27, 30, 40, 58, 32, 44, 51]
+})
 
+dataset.Idade.std()
 
-
-
-
-
+dataset.groupby(['Sexo']).std().loc['M'][0]
 
