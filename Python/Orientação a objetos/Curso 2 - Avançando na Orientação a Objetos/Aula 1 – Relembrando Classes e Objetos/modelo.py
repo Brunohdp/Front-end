@@ -1,4 +1,4 @@
-class Filme:
+# class Filme:
     def __init__(self, nome, ano, duracao):
         self.__nome = nome.title()
         self.ano = ano
