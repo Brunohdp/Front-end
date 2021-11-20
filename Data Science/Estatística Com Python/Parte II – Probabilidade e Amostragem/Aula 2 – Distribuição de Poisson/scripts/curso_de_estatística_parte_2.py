@@ -365,9 +365,9 @@ $k$ = número de sucessos no intervalo desejado
 http://www.numpy.org/
 """
 
+import numpy as np
 
-
-
+np.e
 
 """## <font color='blue'>Exemplo: Delivery</font>
 
@@ -376,24 +376,31 @@ Um restaurante recebe em média **20 pedidos por hora**. Qual a chance de que, e
 ### Qual o número médio de ocorrências por hora ($\mu$)?
 """
 
-
+media = 20
 
 """### Qual o número de ocorrências que queremos obter no período ($k$)?"""
 
-
+k = 15
 
 """### Solução 1"""
 
-
+probabilidade = ((np.e ** (-media)) * (media ** k)) / (np.math.factorial(k))
+probabilidade
 
 """### Importando bibliotecas
 
 https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.poisson.html
-
-### Solução 2
 """
 
+from scipy.stats import poisson
 
+"""### Solução 2"""
+
+probabilidade = poisson.pmf(k, media)
+probabilidade
+
+prob = poisson.pmf(25, 20)
+prob
 
 """---
 ---
