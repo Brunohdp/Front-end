@@ -746,34 +746,41 @@ O desvio padrão das médias amostrais é conhecido como **erro padrão da médi
 ### Entendendo o Teorema do Limite Central
 """
 
+n = 2000
+total_de_amostras = 1500
 
+amostras = pd.DataFrame()
+amostras
 
+for i in range(total_de_amostras):
+  _ = dados.Idade.sample(n)
+  _.index = range(0, len(_))
+  amostras['Amostra_' + str(i)] = _
 
+amostras
 
-
-
-
+amostras.mean()
 
 """> O Teorema do Limite Central afirma que, **com o aumento do tamanho da amostra, a distribuição das médias amostrais se aproxima de uma distribuição normal** com média igual à média da população e desvio padrão igual ao desvio padrão da variável original dividido pela raiz quadrada do tamanho da amostra. Este fato é assegurado para n maior ou igual a 30."""
 
-
+amostras.mean().hist()
 
 """> O Teorema do Limite Central afirma que, com o aumento do tamanho da amostra, a distribuição das médias amostrais se aproxima de uma distribuição normal **com média igual à média da população** e desvio padrão igual ao desvio padrão da variável original dividido pela raiz quadrada do tamanho da amostra. Este fato é assegurado para n maior ou igual a 30."""
 
+dados.Idade.mean()
 
-
-
+amostras.mean().mean()
 
 """> O Teorema do Limite Central afirma que, com o aumento do tamanho da amostra, a distribuição das médias amostrais se aproxima de uma distribuição normal com média igual à média da população e **desvio padrão igual ao desvio padrão da variável original dividido pela raiz quadrada do tamanho da amostra**. Este fato é assegurado para n maior ou igual a 30.
 
 # $$\sigma_\bar{x} = \frac{\sigma}{\sqrt{n}}$$
 """
 
+amostras.mean().std()
 
+dados.Idade.std()
 
-
-
-
+dados.Idade.std() / np.sqrt(n)
 
 """## <font color=green>4.2 Níveis de confiança e significância</font>
 ***
@@ -813,32 +820,34 @@ Suponha que os pesos dos sacos de arroz de uma indústria alimentícia se distri
 ### Média amostral
 """
 
-
+media_amostral = 5050
 
 """### Nível de significância ($\alpha$)"""
 
-
+significancia = 0.05
 
 """### Nível de confiança ($1 - \alpha$)"""
 
-
+confianca = 1 - significancia
+confianca
 
 """### Obtendo $z$"""
 
-
+tabela_normal_padronizada[16:26]
 
 """### Obtendo $z$
 
 ![alt text](https://caelum-online-public.s3.amazonaws.com/1178-estatistica-parte2/01/img008.png)
 """
 
+0.95/2
 
+0.5 + (0.95/2)
 
+1.9 + 0.06
 
-
-
-
-
+z = norm.ppf(0.975)
+z
 
 """### Valores de $z$ para os níveis de confiança mais utilizados
 
@@ -851,25 +860,56 @@ Suponha que os pesos dos sacos de arroz de uma indústria alimentícia se distri
 ### Obtendo $\sigma_\bar{x}$
 """
 
+desvio_padrao = 150
 
+n = 20
 
+raiz_de_n = np.sqrt(n)
+raiz_de_n
 
-
-
-
-
+sigma = desvio_padrao / raiz_de_n
+sigma
 
 """### Obtendo $e$"""
 
-
+e = z * sigma
+e
 
 """### Solução 1 - Calculando o intervalo de confiança para a média"""
 
-
+intervalo = (
+    media_amostral - e,
+    media_amostral + e
+)
+intervalo
 
 """### Solução 2 - Calculando o intervalo de confiança para a média"""
 
+norm.interval(alpha = 0.95, loc = media_amostral, scale = sigma)
 
+"""#### margem de erro:"""
+
+from scipy.stats import norm
+import numpy as np
+
+z = norm.ppf(0.975)
+desvio_padrao = 6
+n = 50
+
+e = z * (desvio_padrao / np.sqrt(n))
+print("R$ {0:0.2f}".format(e))
+
+"""#### Intervalo"""
+
+n = 1976
+dp = 11
+m = 28
+
+rn = np.sqrt(n)
+sig = dp / rn
+conf = 0.90
+
+norm.interval(alpha = conf, loc = m, scale = sig)
 
 """# <font color=green>5 CÁLCULO DO TAMANHO DA AMOSTRA</font>
 ***
