@@ -692,17 +692,18 @@ Quando a população é finita mas muito numerosa, o custo de um censo pode torn
 É uma das principais maneiras de se extrair uma amostra de uma população. A exigência fundamental deste tipo de abordagem é que cada elemeto da população tenha as mesmas chances de ser selecionado para fazer parte da amostra.
 """
 
+dados.shape[0]
 
+round(dados.Renda.mean(), 2)
 
+amostra = dados.sample(n = 1000, random_state = 101)
+amostra.shape[0]
 
+amostra.Renda.mean()
 
+dados.Sexo.value_counts(normalize = True)
 
-
-
-
-
-
-
+amostra.Sexo.value_counts(normalize = True)
 
 
 
