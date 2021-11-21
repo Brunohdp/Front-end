@@ -530,19 +530,26 @@ Em um estudo sobre as alturas dos moradores de uma cidade verificou-se que o con
 ### Obter a variável padronizada $Z$
 """
 
+media = 1.7
 
+desvio_padrao = 0.1
 
-
-
-
+Z = (1.8 - media) / desvio_padrao
+Z
 
 """### Solução 1 - Utilizando tabela"""
 
-
+probabilidade = 0.8413
+probabilidade
 
 """### Solução 2 - Utilizando Scipy"""
 
+from scipy.stats import norm
 
+norm.cdf(Z)
+
+z = (85 - 70) / 5
+norm.cdf(z)
 
 """### Problema B - Identificação da área sob a curva
 
@@ -551,21 +558,37 @@ Em um estudo sobre as alturas dos moradores de uma cidade verificou-se que o con
 ### Obter a variável padronizada $Z$
 """
 
+Z_inferior = (1.6 - media) / desvio_padrao
+Z_inferior
 
-
-
+Z_superior = (1.8 - media) / desvio_padrao
+Z_superior
 
 """### Solução 1 - Utilizando tabela"""
 
+probabilidade = (0.8413 - 0.5) * 2
+probabilidade
 
-
-
+probabilidade = 0.8413 - (1 - 0.8413)
+probabilidade
 
 """### Solução 2 - Utilizando Scipy"""
 
+probabilidade = norm.cdf(Z_superior) - (1 - norm.cdf(Z_superior))
+probabilidade
 
+probabilidade = norm.cdf(Z_superior) - norm.cdf(Z_inferior)
+probabilidade
 
+z_inf1 = (250 - 300) / 50
+z_sup1 = (350 - 300) / 50
+prob1 = norm.cdf(z_inf1) - norm.cdf(z_sup1)
 
+z_inf2 = (400 - 300) / 50
+z_sup2 = (500 - 300) / 50
+prob2 = norm.cdf(z_inf2) - norm.cdf(z_sup2)
+
+print(prob1, prob2)
 
 """### Problema C - Identificação da área sob a curva
 
@@ -574,17 +597,49 @@ Em um estudo sobre as alturas dos moradores de uma cidade verificou-se que o con
 ### Obter a variável padronizada $Z$
 """
 
-
+Z = (1.9 - media) / desvio_padrao
+Z
 
 """### Solução 1 - Utilizando tabela"""
 
-
+probabilidade = 1 - 0.9767
+probabilidade
 
 """### Solução 2 - Utilizando Scipy"""
 
+probabilidade = 1 - norm.cdf(Z)
+probabilidade
+
+probabilidade = norm.cdf(-Z)
+probabilidade
+
+m = 720
+ds = 30
+
+li = (650 - m) / ds
+ls = (750 - m) / ds
+
+z1 = (800 - m) / ds
+z2 = (700 - m) / ds
+
+p1 = norm.cdf(ls) - norm.cdf(li)
+p2 = norm.cdf(-z1)
+p3 = norm.cdf(z2)
 
 
+print((p1.round(4) * 100), (p2.round(4) * 100), (p3.round(4) * 100))
 
+z1 = 1.96
+z2 = 2.15
+z3 = -0.78
+z4 = 0.59
+
+p1 = norm.cdf(z1)
+p2 = norm.cdf(-z2)
+p3 = norm.cdf(z3)
+p4 = norm.cdf(-z4)
+
+print(p1, p2, p3, p4)
 
 """# <font color=green>3 AMOSTRAGEM</font>
 ***
