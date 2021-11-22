@@ -952,28 +952,39 @@ $e$ = erro inferencial
 Estamos estudando o rendimento mensal dos chefes de domicílios no Brasil. Nosso supervisor determinou que o **erro máximo em relação a média seja de R$\$$ 100,00**. Sabemos que o **desvio padrão populacional** deste grupo de trabalhadores é de **R$\$$ 3.323,39**. Para um **nível de confiança de 95%**, qual deve ser o tamanho da amostra de nosso estudo?
 """
 
+0.95 / 2
 
+0.5 + (0.95 / 2)
 
-
-
-
+z = norm.ppf(0.975)
+z
 
 """### Obtendo $\sigma$"""
 
-
+sigma = 3323.39
 
 """### Obtendo $e$"""
 
-
+e = 100
 
 """### Obtendo $n$"""
 
-
+n = (z * (sigma/e)) ** 2
+n
 
 """---
 ---
+"""
 
-## <font color='red'>Problema</font>
+e = 45.5
+sig = 15
+co = 0.5 + (0.9 / 2)
+z = norm.ppf(co)
+
+n = (z * (sig / e)) ** 2
+n
+
+"""## <font color='red'>Problema</font>
 
 Em um lote de **10.000 latas** de refrigerante foi realizada uma amostra aleatória simples de **100 latas** e foi obtido o **desvio padrão amostral do conteúdo das latas igual a 12 ml**. O fabricante estipula um **erro máximo sobre a média populacional de apenas 5 ml**. Para garantir um **nível de confiança de 95%** qual o tamanho de amostra deve ser selecionado para este estudo?
 
@@ -1007,26 +1018,36 @@ Em um lote de **10.000 latas** de refrigerante foi realizada uma amostra aleató
 ### Obtendo $N$
 """
 
-
+N = 10000
 
 """### Obtendo $z$"""
 
-
+z = norm.ppf((0.5 + (0.95 / 2)))
+z
 
 """### Obtendo $s$"""
 
-
+s = 12
 
 """### Obtendo $e$"""
 
-
+e = 5
 
 """### Obtendo $n$
 
 ## $$n = \frac{z^2 s^2 N}{z^2 s^2 + e^2(N-1)}$$
 """
 
+n = ((z ** 2) * (s ** 2) * (N)) / (((z ** 2) * (s ** 2)) + ((e ** 2) * (N - 1)))
+int(n.round())
 
+N = 2000
+s = 0.48
+e = 0.3
+z = norm.ppf(0.5 + (0.95 / 2))
+
+n = ((z ** 2) * (s ** 2) * (N)) / (((z ** 2) * (s ** 2)) + ((e**2) * (N-1)))
+int(n.round())
 
 """# <font color=green>6 FIXANDO O CONTEÚDO</font>
 ***
