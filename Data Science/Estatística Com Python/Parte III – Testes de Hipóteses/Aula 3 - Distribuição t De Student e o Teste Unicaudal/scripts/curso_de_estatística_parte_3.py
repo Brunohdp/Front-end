@@ -419,7 +419,7 @@ Um consumidor desconfiado e com conhecimentos em inferência estatística resolv
 https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.t.html
 """
 
-
+from scipy.stats import t
 
 """<img src='https://caelum-online-public.s3.amazonaws.com/1229-estatistica-parte3/01/img004.png' width='250px'>
 
@@ -434,15 +434,49 @@ Os **testes unicaudais** verificam as variáveis em relação a um piso ou a um 
 ### Dados do problema
 """
 
+import pandas as pd
 
+from scipy.stats import t as t_student
 
+tabela_t_student = pd.DataFrame(
+    [], 
+    index = [i for i in range(1, 31)],
+    columns = [1 / 100 for i in range (10, 0, -1)]
+)
 
+for index in tabela_t_student.index: 
+  for column in tabela_t_student.columns: 
+    tabela_t_student.loc[index, column] = t_student.ppf(1- float (column) / 2, index)
 
+index= [('Graus de Liberdade (n - 1)', i) for i in range(1, 31)]
+tabela_t_student.index = pd.MultiIndex.from_tuples(index)
 
+columns = [("{0:0.3f}" .format(i / 100), "{0:0.3f}" .format((i / 100) / 2)) for i in range (10, 0, -1)]
+tabela_t_student.columns = pd.MultiIndex.from_tuples(columns)
 
+tabela_t_student.rename_axis (['Bicaudal', 'Unicaudal' ], axis=1, inplace = True)
 
+tabela_t_student
 
+amostra = [37.27, 36.42, 34.84, 34.60, 37.49, 
+           36.53, 35.49, 36.90, 34.52, 37.30, 
+           34.99, 36.55, 36.29, 36.06, 37.42, 
+           34.47, 36.70, 35.86, 36.80, 36.92, 
+           37.04, 36.39, 37.32, 36.64, 35.45]
+amostra = pd.DataFrame(amostra, columns=['Amostra'])
+amostra
 
+media_amostra = amostra.mean()[0]
+media_amostra
+
+desvio_padrao_amostra = amostra.std()[0]
+desvio_padrao_amostra
+
+media = 37
+significancia = 0.05
+confianca = 1 - significancia
+n = 25
+grau_de_liberdade = n - 1
 
 """### **Passo 1** - formulação das hipóteses $H_0$ e $H_1$
 
@@ -473,13 +507,14 @@ Os **testes unicaudais** verificam as variáveis em relação a um piso ou a um 
 https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.t.html
 """
 
+from scipy.stats import t as t_student
 
-
-
+tabela_t_student[22:25]
 
 """### Obtendo $t_{\alpha}$"""
 
-
+t_alpha = t_student.ppf(confianca, grau_de_liberdade)
+t_alpha
 
 """![Região de Aceitação](https://caelum-online-public.s3.amazonaws.com/1229-estatistica-parte3/01/img009.png)
 
@@ -490,7 +525,8 @@ https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.t.html
 # $$t = \frac{\bar{x} - \mu_0}{\frac{s}{\sqrt{n}}}$$
 """
 
-
+t = (media_amostra - media) / (desvio_padrao_amostra / np.sqrt(n))
+t
 
 """![Estatística-Teste](https://caelum-online-public.s3.amazonaws.com/1229-estatistica-parte3/01/img010.png)
 
@@ -506,31 +542,78 @@ https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.t.html
 > ### Rejeitar $H_0$ se $t \geq t_{\alpha}$
 """
 
+t >= t_alpha
 
+"""### <font color='green'>Conclusão: Com um nível de confiança de 95% não podemos rejeitar $H_0$, ou seja, a alegação do fabricante é verdadeira.</font>"""
 
-"""### <font color='green'>Conclusão: Com um nível de confiança de 95% não podemos rejeitar $H_0$, ou seja, a alegação do fabricante é verdadeira.</font>
+# from scipy.stats import t as t_student
+# import numpy as np
 
-### <font color='red'>Critério do valor $p$</font>
+# media_amostra = 230
+# desvio_padrao_amostra = 90
+# media = 150
+# significancia = 0.05
+# confianca = 1 - significancia
+# n = 20
+# graus_de_liberdade = n - 1
+
+# t_alpha = t_student.ppf(confianca, graus_de_liberdade)
+
+# t = (media_amostra - media) / (desvio_padrao_amostra / np.sqrt(n))
+
+# print('t(alpha) =', round(t_alpha, 4))
+# print('t =', round(t, 4))
+# if(t >= t_alpha):
+#     print('Rejeitar H0')
+# else:
+#     print('Aceitar H0')
+
+"""### <font color='red'>Critério do valor $p$</font>
 
 > ### Teste Unicaudal Superior
 > ### Rejeitar $H_0$ se o valor $p\leq\alpha$
 """
 
+t
 
+p_valor = t_student.sf(t, df = 24)
+p_valor
 
-
-
-
+p_valor <= significancia
 
 """https://www.statsmodels.org/dev/generated/statsmodels.stats.weightstats.DescrStatsW.html"""
 
+from statsmodels.stats.weightstats import DescrStatsW
 
+test = DescrStatsW(amostra)
 
+t, p_valor, df = test.ttest_mean(value=media, alternative='larger')
+print(t[0])
+print(p_valor[0])
+print(df)
 
+p_valor[0] <= significancia
 
+# from scipy.stats import norm
+# import numpy as np
 
+# media_amostra = 330
+# desvio_padrao_amostra = 80
+# media = 350
+# significancia = 0.05
+# confianca = 1 - significancia
+# n = 35
 
+# z_alpha = norm.ppf(confianca)
 
+# z = (media_amostra - media) / (desvio_padrao_amostra / np.sqrt(n))
+
+# print('z(alpha) =', round(z_alpha, 3))
+# print('z =', round(z, 3))
+# if(z <= -z_alpha):
+#     print('Rejeitar H0')
+# else:
+#     print('Aceitar H0')
 
 """---
 
