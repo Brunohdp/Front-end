@@ -261,15 +261,25 @@ O **teste bicaudal** é muito utilizado em **testes de qualidade**, como o apres
 ### Dados do problema
 """
 
+amostra = [509, 505, 495, 510, 496, 509, 497, 502, 503, 505,
+           501, 505, 510, 505, 504, 497, 506, 506, 508, 505, 
+           497, 504, 500, 498, 506, 496, 508, 497, 503, 501,
+           503, 506, 499, 498, 509, 507, 503, 499, 509, 495,
+           502, 505, 504, 509, 508, 501, 505, 497, 508, 507]
 
+amostra = pd.DataFrame(amostra, columns=['Amostra'])
+amostra.head()
 
+media_amostra = amostra.mean()[0]
+media_amostra
 
+desvio_padrao_amostra = amostra.std()[0]
+desvio_padrao_amostra
 
-
-
-
-
-
+media = 500
+significancia = 0.05
+confianca = 1 - significancia
+n = 50
 
 """### **Passo 1** - formulação das hipóteses $H_0$ e $H_1$
 
@@ -297,13 +307,15 @@ O **teste bicaudal** é muito utilizado em **testes de qualidade**, como o apres
 https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html
 """
 
+from scipy.stats import norm
 
-
-
+probabilidade = (0.5 + (confianca / 2))
+probabilidade
 
 """### Obtendo $z_{\alpha/2}$"""
 
-
+z_alpha_2 = norm.ppf(probabilidade)
+z_alpha_2
 
 """![Região de Aceitação](https://caelum-online-public.s3.amazonaws.com/1229-estatistica-parte3/01/img006.png)
 
@@ -314,7 +326,8 @@ https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html
 # $$z = \frac{\bar{x} - \mu_0}{\frac{s}{\sqrt{n}}}$$
 """
 
-
+z = (media_amostra - media) / (desvio_padrao_amostra / np.sqrt(n))
+z
 
 """![Estatística-Teste](https://caelum-online-public.s3.amazonaws.com/1229-estatistica-parte3/01/img007.png)
 
@@ -330,37 +343,64 @@ https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html
 > ### Rejeitar $H_0$ se $z \leq -z_{\alpha / 2}$ ou se $z \geq z_{\alpha / 2}$
 """
 
+z <= -z_alpha_2
 
+z >= -z_alpha_2
 
+"""### <font color='green'>Conclusão: Como a média amostral $\bar{x}$ é significativamente maior que 500 ml, rejeitamos $H_0$. Neste caso, devem ser tomadas providências para ajustar o maquinário que preenche as embalagens.</font>"""
 
+# from scipy.stats import norm
+# import numpy as np
 
-"""### <font color='green'>Conclusão: Como a média amostral $\bar{x}$ é significativamente maior que 500 ml, rejeitamos $H_0$. Neste caso, devem ser tomadas providências para ajustar o maquinário que preenche as embalagens.</font>
+# media_amostra = 485
+# desvio_padrao = 20
+# media = 500
+# significancia = 0.05
+# confianca = 1 - significancia
+# n = 30
 
-### <font color='red'>Critério do $p-valor$</font>
+# probabilidade = (0.5 + (confianca / 2))
+# z_alpha_2 = norm.ppf(probabilidade)
+
+# z = (media_amostra - media) / (desvio_padrao / np.sqrt(n))
+
+# print('z =', round(z, 4))
+# if(z <= -z_alpha_2 or z >= z_alpha_2):
+#     print('Rejeitar H0')
+# else:
+#     print('Aceitar H0')
+
+"""### <font color='red'>Critério do $p-valor$</font>
 
 > ### Teste Bicaudal
 > ### Rejeitar $H_0$ se o valor $p\leq\alpha$
 """
 
+p_valor = 2 * (1 - norm.cdf(z))
+p_valor
 
+p_valor  = 2 * (norm.sf(z))
+p_valor
 
-
-
-
+p_valor <= significancia
 
 """https://www.statsmodels.org/stable/generated/statsmodels.stats.weightstats.ztest.html"""
 
+from statsmodels.stats.weightstats import ztest
 
-
-
+ztest(x1=amostra, value=media)
 
 """https://www.statsmodels.org/dev/generated/statsmodels.stats.weightstats.DescrStatsW.html"""
 
+from statsmodels.stats.weightstats import DescrStatsW
 
+test = DescrStatsW(amostra)
 
+test.ztest_mean(value=media)
 
+# p_valor = 2 * (1 - norm.cdf(abs(z))) 
 
-
+# p_valor = 2 * norm.sf(abs(z))
 
 """---
 
