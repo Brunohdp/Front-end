@@ -835,7 +835,23 @@ Os passos de aplicação do teste são bem parecidos aos vistos para os testes p
 https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chi.html
 """
 
+import pandas as pd
+from scipy.stats import chi
 
+tabela_t_chi_2 = pd.DataFrame(
+    [],
+    index = [i for i in range(1, 31)],
+    columns = [0.005, 0.01, 0.025, 0.5, 0.75, 0.9, 0.975, 0.95, 0.99, 0.995]
+)
+
+for index in tabela_t_chi_2.index:
+  for column in tabela_t_chi_2.columns:
+    tabela_t_chi_2.loc[index, column] = '{0:0.4f}'.format(chi.ppf(float(column), index) ** 2)
+
+tabela_t_chi_2.index.name = 'Graus de Liberdade'
+tabela_t_chi_2.rename_axis(['p'], axis = 1, inplace = True)
+
+tabela_t_chi_2
 
 """<img src='https://caelum-online-public.s3.amazonaws.com/1229-estatistica-parte3/01/img016.png' width='250px'>
 
@@ -857,7 +873,12 @@ A um **nível de significância de 5%**, é possível afirmar que a moeda não �
 ### Dados do problema
 """
 
-
+f_observada = [17, 33]
+f_esperada = [25, 25]
+significancia = 0.05
+confianca = 1 - significancia
+k = 2                           # Número de eventos possíveis
+graus_de_liberdade = k - 1
 
 """### **Passo 1** - formulação das hipóteses $H_0$ e $H_1$
 
@@ -874,13 +895,14 @@ A um **nível de significância de 5%**, é possível afirmar que a moeda não �
 https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chi.html
 """
 
+from scipy.stats import chi
 
-
-
+tabela_t_chi_2[:3]
 
 """### Obtendo $\chi_{\alpha}^2$"""
 
-
+chi_2_alpha = chi.ppf(confianca, graus_de_liberdade) ** 2
+chi_2_alpha
 
 """![Região de Aceitação](https://caelum-online-public.s3.amazonaws.com/1229-estatistica-parte3/01/img018.png)
 
@@ -899,9 +921,15 @@ $F_{i}^{Esp}$ = frequência esperada para o evento $i$
 $k$ = total de eventos possíveis
 """
 
+chi_2 = ((f_observada[0] - f_esperada[0]) ** 2 / f_esperada[0]) + ((f_observada[1] - f_esperada[1]) ** 2 / f_esperada[1])
+chi_2
 
+chi_2 = 0
 
+for i in range(k):
+  chi_2 += (f_observada[i] - f_esperada[i]) ** 2 / f_esperada[i]
 
+chi_2
 
 """![Estatística-Teste](https://caelum-online-public.s3.amazonaws.com/1229-estatistica-parte3/01/img019.png)
 
@@ -916,7 +944,7 @@ $k$ = total de eventos possíveis
 > ### Rejeitar $H_0$ se $\chi_{teste}^2 > \chi_{\alpha}^2$
 """
 
-
+chi_2 > ch
 
 """### <font color='green'>Conclusão: Com um nível de confiança de 95% rejeitamos a hipótese nula ($H_0$) e concluímos que as frequências observadas e esperadas são discrepantes, ou seja, a moeda não é honesta e precisa ser substituída.</font>
 
@@ -925,19 +953,24 @@ $k$ = total de eventos possíveis
 > ### Rejeitar $H_0$ se o valor $p\leq\alpha$
 """
 
+chi_2
 
+raiz_chi_2 = np.sqrt(chi_2)
+raiz_chi_2
 
-
-
-
+p_valor = chi.sf(raiz_chi_2, df=1)
+p_valor
 
 """https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chisquare.html"""
 
+from scipy.stats import chisquare
 
+chi_2, p_valor = chisquare(f_obs = f_observada, f_exp = f_esperada)
+print(chi_2, p_valor)
 
+p_valor <= significancia
 
-
-
+# chi.sf(np.sqrt(7.45), df = 5)
 
 """---
 
