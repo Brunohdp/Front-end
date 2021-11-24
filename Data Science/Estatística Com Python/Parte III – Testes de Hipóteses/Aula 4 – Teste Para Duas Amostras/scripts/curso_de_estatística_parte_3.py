@@ -633,21 +633,29 @@ Duas amostras aleatórias, uma de **500 homens** e outra com **500 mulheres**, f
 ### Seleção das amostras
 """
 
+homens = dados.query('Sexo == 0').sample(n = 500, random_state = 101).Renda
 
-
-
+mulheres = dados.query('Sexo == 1').sample(n = 500, random_state = 101).Renda
 
 """### Dados do problema"""
 
+media_amostra_M = mulheres.mean()
+media_amostra_M
 
+desvio_padrao_amostra_M = mulheres.std()
+desvio_padrao_amostra_M
 
+media_amostra_H = homens.mean()
+media_amostra_H
 
+desvio_padrao_amostra_H = homens.std()
+desvio_padrao_amostra_H
 
-
-
-
-
-
+significancia = 0.01
+confianca = 1 - significancia
+n_M = 500
+n_H = 500
+D_0 = 0
 
 """---
 
@@ -693,9 +701,11 @@ $
 ### **Passo 3** - fixação da significância do teste ($\alpha$)
 """
 
+probabilidade = confianca
+probabilidade
 
-
-
+z_alpha = norm.ppf(probabilidade)
+z_alpha.round(2)
 
 """![Região de Aceitação](https://caelum-online-public.s3.amazonaws.com/1229-estatistica-parte3/01/img011.png)
 
@@ -706,7 +716,11 @@ $
 # $$z = \frac{(\bar{x_1} - \bar{x_2})-D_0}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}$$
 """
 
+numerador = (media_amostra_H - media_amostra_M) - D_0
+denominador = np.sqrt((desvio_padrao_amostra_H ** 2 / n_H) + (desvio_padrao_amostra_M ** 2 / n_M))
 
+z = numerador / denominador
+z
 
 """![Estatística-Teste](https://caelum-online-public.s3.amazonaws.com/1229-estatistica-parte3/01/img012.png)
 
@@ -722,11 +736,45 @@ $
 > ### Rejeitar $H_0$ se $z \geq z_{\alpha}$
 """
 
+z >= z_alpha
 
+"""### <font color='green'>Conclusão: Com um nível de confiança de 99% rejeitamos $H_0$, isto é, concluímos que a média das rendas dos chefes de domicílios do sexo masculino é maior que a média das rendas das chefes de domicílios do sexo feminino. Confirmando a alegação de desigualdade de renda entre os sexos.</font>"""
 
-"""### <font color='green'>Conclusão: Com um nível de confiança de 99% rejeitamos $H_0$, isto é, concluímos que a média das rendas dos chefes de domicílios do sexo masculino é maior que a média das rendas das chefes de domicílios do sexo feminino. Confirmando a alegação de desigualdade de renda entre os sexos.</font>
+# from scipy.stats import t as t_student
+# import numpy as np
+# import pandas as pd
 
-### <font color='red'>Critério do valor $p$</font>
+# shampoo_Novo = pd.Series([3.4, 4.9, 2.8, 5.5, 3.7, 2.5, 4.3, 4.6, 3.7, 3.4])
+# shampoo_Antigo = pd.Series([0.3, 1.2, 1.2, 1.7, 1.1, 0.6, 1.2, 1.5, 0.5, 0.7])
+
+# media_A = shampoo_Novo.mean()
+# desvio_padrao_A = shampoo_Novo.std()
+
+# media_B = shampoo_Antigo.mean()
+# desvio_padrao_B = shampoo_Antigo.std()
+
+# significancia = 0.05
+# confianca = 1 - significancia
+# n_A = len(shampoo_Novo)
+# n_B = len(shampoo_Antigo)
+# D_0 = 2
+
+# graus_de_liberdade = n_A + n_B - 2
+
+# t_alpha = t_student.ppf(confianca, graus_de_liberdade)
+
+# numerador = (media_A - media_B) - D_0
+# denominador = np.sqrt((desvio_padrao_A ** 2 / n_A) + (desvio_padrao_B ** 2 / n_B))
+# t = numerador / denominador
+
+# print('t =', round(t, 4))
+
+# if(t >= t_alpha):
+#     print('Rejeitar H0')
+# else:
+#     print('Aceitar H0')
+
+"""### <font color='red'>Critério do valor $p$</font>
 
 > ### Teste Unicaudal
 > ### Rejeitar $H_0$ se o valor $p\leq\alpha$
@@ -736,21 +784,23 @@ https://www.statsmodels.org/dev/generated/statsmodels.stats.weightstats.DescrSta
 https://www.statsmodels.org/dev/generated/statsmodels.stats.weightstats.CompareMeans.ttest_ind.html
 """
 
+from statsmodels.stats.weightstats import DescrStatsW, CompareMeans
 
+test_H = DescrStatsW(homens)
 
+test_M = DescrStatsW(mulheres)
 
+test = test_H.get_compare(test_M)
 
+z, p = test.ztest_ind(alternative='larger', value=0)
+print(z, p)
 
+test = CompareMeans(test_H, test_M)
 
+z, p = test.ztest_ind(alternative='larger', value=0)
+print(z, p)
 
-
-
-
-
-
-
-
-
+p <= significancia
 
 """---
 
