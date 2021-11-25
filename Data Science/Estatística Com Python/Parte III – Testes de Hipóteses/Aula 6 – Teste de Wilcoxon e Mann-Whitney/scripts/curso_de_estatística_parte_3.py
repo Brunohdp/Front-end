@@ -944,7 +944,7 @@ chi_2
 > ### Rejeitar $H_0$ se $\chi_{teste}^2 > \chi_{\alpha}^2$
 """
 
-chi_2 > ch
+chi_2 > chi_2_alpha
 
 """### <font color='green'>Conclusão: Com um nível de confiança de 95% rejeitamos a hipótese nula ($H_0$) e concluímos que as frequências observadas e esperadas são discrepantes, ou seja, a moeda não é honesta e precisa ser substituída.</font>
 
@@ -987,13 +987,22 @@ Empregado quando se deseja comparar duas amostras relacionadas, amostras emparel
 ### Dados do problema
 """
 
+fumo = {
+    'Antes': [39, 25, 24, 50, 13, 52, 21, 29, 10, 22, 50, 15, 36, 39, 52, 48, 24, 15, 40, 41, 17, 12, 21, 47, 14, 55, 46, 22, 28, 23, 37, 17, 31, 49, 51],
+    'Depois': [16, 8, 12, 0, 14, 16, 13, 12, 19, 17, 17, 2, 15, 10, 20, 13, 0, 4, 16, 18, 16, 16, 9, 9, 18, 4, 17, 0, 11, 14, 0, 19, 2, 9, 6]
+}
+significancia = 0.05
+confianca = 1 - significancia
+n = 35
 
+fumo = pd.DataFrame(fumo)
+fumo.head()
 
+media_antes = fumo.Antes.mean()
+media_antes
 
-
-
-
-
+media_depois = fumo.Depois.mean()
+media_depois
 
 """### **Passo 1** - formulação das hipóteses $H_0$ e $H_1$
 
@@ -1017,9 +1026,11 @@ Empregado quando se deseja comparar duas amostras relacionadas, amostras emparel
 ### Obtendo $z_{\alpha/2}$
 """
 
+probabilidade = (0.5 + (confianca / 2))
+probabilidade
 
-
-
+z_alpha_2 = norm.ppf(probabilidade)
+z_alpha_2.round(2)
 
 """![Região de Aceitação](https://caelum-online-public.s3.amazonaws.com/1229-estatistica-parte3/01/img006.png)
 
@@ -1039,36 +1050,48 @@ Onde
 ### Construindo a tabela com os postos
 """
 
+fumo
 
+fumo['Dif'] = fumo.Depois - fumo.Antes
+fumo
 
+fumo['|Dif|'] = fumo.Dif.abs()
+fumo
 
+fumo.sort_values(by='|Dif|', inplace=True)
+fumo
 
+fumo['Posto'] = range(1, len(fumo) + 1)
+fumo
 
+posto = fumo[['|Dif|', 'Posto']].groupby(['|Dif|']).mean()
+posto
 
+posto.reset_index(inplace=True)
+posto
 
+fumo.drop(['Posto'], axis=1, inplace= True)
+fumo
 
+fumo = fumo.merge(posto, left_on='|Dif|', right_on='|Dif|', how='left')
+fumo
 
+fumo['Posto (+)'] = fumo.apply(lambda x: x.Posto if x.Dif > 0 else 0, axis=1)
+fumo
 
+fumo['Posto (-)'] = fumo.apply(lambda x: x.Posto if x.Dif < 0 else 0, axis=1)
+fumo
 
-
-
-
-
-
-
-
-
-
-
-
-
+fumo.drop(['Posto'], axis=1, inplace=True)
+fumo
 
 """### Obter $T$
 
 ## $T$ = menor das somas de postos de mesmo sinal
 """
 
-
+T = min(fumo['Posto (+)'].sum(), fumo['Posto (-)'].sum())
+T
 
 """### Obter $\mu_T$
 
@@ -1076,21 +1099,24 @@ Onde
 
 """
 
-
+mu_t = (n * (n + 1)) / 4
+mu_t
 
 """### Obter $\sigma_T$
 
 # $$\sigma_T = \sqrt{\frac{n(n + 1)(2n + 1)}{24}}$$
 """
 
-
+sigma_t = np.sqrt((n * (n + 1) ) * ((2 * n) + 1) / 24)
+sigma_t
 
 """### Obter $Z_{teste}$
 
 # $$Z = \frac{T - \mu_T}{\sigma_T}$$
 """
 
-
+z = (T - mu_t) / sigma_t
+z
 
 """![Estatística-Teste](https://caelum-online-public.s3.amazonaws.com/1229-estatistica-parte3/01/img021.png)
 
@@ -1105,9 +1131,9 @@ Onde
 > ### Rejeitar $H_0$ se $Z \leq -z_{\alpha / 2}$ ou se $Z \geq z_{\alpha / 2}$
 """
 
+z <= z_alpha_2
 
-
-
+z >= z_alpha_2
 
 """### <font color='green'>Conclusão: Rejeitamos a hipótese de que não existe diferença entre os grupos, isto é, existe uma diferença entre as médias de cigarros fumados pelos pacientes antes e depois do tratamento. E como é possível verificar através das médias de cigarros fumados por dia antes (31.86) e depois (11.2) do tratamento, podemos concluir que o tratamento apresentou resultado satisfatório.</font>
 
@@ -1118,11 +1144,27 @@ Onde
 https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.wilcoxon.html
 """
 
+from scipy.stats import wilcoxon
 
+T, p_valor = wilcoxon(fumo.Antes, fumo.Depois)
+print(T, p_valor)
 
+p_valor <= significancia
 
+# from scipy.stats import wilcoxon
 
+# sem_Alura = pd.Series([ 7,  8, 6, 6, 10, 4, 2, 5,  9, 2, 4, 9, 1, 10])
+# com_Alura = pd.Series([10, 10, 9, 9,  9, 7, 5, 8, 10, 6, 3, 7, 4,  8])
 
+# significancia = 0.10
+
+# T, p_valor = wilcoxon(sem_Alura, com_Alura)
+# print('T =', T)
+
+# if(p_valor <= significancia):
+#     print('Rejeitar H0')
+# else:
+#     print('Aceitar H0')
 
 """---
 
@@ -1141,17 +1183,22 @@ Mann-Whitney é um teste não paramétrico utilizado para verificar se duas amos
 ### Seleção das amostras
 """
 
+mulheres = dados.query('Sexo == 1 and Renda > 0').sample(n = 8, random_state = 101).Renda
 
-
-
+homens = dados.query('Sexo == 0 and Renda > 0').sample(n = 6, random_state = 101).Renda
 
 """### Dados do problema"""
 
+media_amostra_M = mulheres.mean()
+media_amostra_M
 
+media_amostra_H = homens.mean()
+media_amostra_H
 
-
-
-
+significancia = 0.05
+confianca = 1 - significancia
+n_1 = len(homens)
+n_2 = len(mulheres)
 
 """### **Passo 1** - formulação das hipóteses $H_0$ e $H_1$
 
@@ -1180,11 +1227,13 @@ Deve-se optar pela distribuição **$t$ de Student**, já que nada é mencionado
 ### Obtendo $t_{\alpha}$
 """
 
+graus_de_liberdade = n_1 + n_2 - 2
+graus_de_liberdade
 
+tabela_t_student[10:13]
 
-
-
-
+t_alpha = t_student.ppf(significancia, graus_de_liberdade)
+t_alpha.round(2)
 
 """![Região de Aceitação](https://caelum-online-public.s3.amazonaws.com/1229-estatistica-parte3/01/img023.png)
 
@@ -1217,23 +1266,35 @@ Onde
 ### Obtendo os postos
 """
 
+H = pd.DataFrame(homens)
+H['Sexo'] = 'Homens'
+H
 
+M = pd.DataFrame(mulheres)
+M['Sexo'] = 'Mulheres'
+M
 
+sexo = H.append(M)
+sexo.reset_index(inplace=True, drop=True)
+sexo
 
+sexo.sort_values(by = 'Renda', inplace=True)
+sexo
 
+sexo['Posto'] = range(1, len(sexo) + 1)
+sexo
 
+posto = sexo[['Renda', 'Posto']].groupby(['Renda']).mean()
+posto
 
+posto.reset_index(inplace=True)
+posto
 
+sexo.drop(['Posto'], axis = 1, inplace=True)
+sexo
 
-
-
-
-
-
-
-
-
-
+sexo = sexo.merge(posto, left_on = 'Renda', right_on= 'Renda', how = 'left')
+sexo
 
 """### Obtendo $R$
 
@@ -1241,11 +1302,14 @@ Onde
 ### $R_2$ = soma dos postos do grupo $n_2$
 """
 
+temp = sexo[['Sexo', 'Posto']].groupby('Sexo').sum()
+temp
 
+r_1 = temp.loc['Homens'][0]
+r_1
 
-
-
-
+r_2 = temp.loc['Mulheres'][0]
+r_2
 
 """### Obter $u$
 
@@ -1256,32 +1320,38 @@ Onde
 
 """
 
+u_1 = n_1 * n_2 + ((n_1 * (n_1 + 1)) / (2)) - r_1
+u_1
 
+u_2 = n_2 * n_2 + ((n_2 * (n_2 + 1)) / (2)) - r_2
+u_2
 
-
-
-
+u = min(u_1, u_2)
+u
 
 """### Obter $\mu{(u)}$
 
 # $$\mu{(u)} = \frac{n_1 \times n_2}{2}$$
 """
 
-
+mu_u = (n_1 * n_2) / 2
+mu_u
 
 """### Obter $\sigma{(u)}$
 
 # $$\sigma{(u)} = \sqrt{\frac{n_1 \times n_2 \times (n_1 + n_2 + 1)}{12}}$$
 """
 
-
+sigma_u = np.sqrt((n_1 * n_2 * (n_1 + n_2 + 1)) / 12)
+sigma_u
 
 """### Obter $Z$
 
 # $$Z = \frac{u - \mu{(u)}}{\sigma{(u)}}$$
 """
 
-
+z = (u - mu_u) / sigma_u
+z.round(2)
 
 """![Estatística-Teste](https://caelum-online-public.s3.amazonaws.com/1229-estatistica-parte3/01/img024.png)
 
@@ -1296,7 +1366,7 @@ Onde
 > ### Rejeitar $H_0$ se $Z \leq -t_{\alpha}$
 """
 
-
+z <= t_alpha
 
 """### <font color='green'>Conclusão: Rejeitamos a hipótese de que não existe diferença entre os grupos, isto é, concluímos que a média das rendas dos chefes de domicílios do sexo feminino é menor que a média das rendas dos chefes de domicílios do sexo masculino. Confirmando a alegação de desigualdade de renda entre os sexos.</font>
 
@@ -1307,10 +1377,27 @@ Onde
 https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mannwhitneyu.html
 """
 
+from scipy.stats import mannwhitneyu
 
+u, p_valor = mannwhitneyu(mulheres, homens, alternative='less')
+print(u, p_valor)
 
+p_valor <= significancia
 
+# from scipy.stats import mannwhitneyu
 
+# sem_Exercicios = pd.Series([7, 6, 7, 8, 6, 8, 6, 9, 5])
+# com_Exercicios = pd.Series([8, 7, 6, 6, 8, 6, 10, 6, 7, 8])
 
+# significancia = 0.10
+
+# u, p_valor = mannwhitneyu(com_Exercicios, sem_Exercicios, alternative='greater')
+
+# print('u =', u)
+
+# if(p_valor <= significancia):
+#     print('Rejeitar H0')
+# else:
+#     print('Aceitar H0')
 
 """---"""
