@@ -16,7 +16,10 @@ import pandas as pd
 dados = pd.read_csv('tips.csv')
 dados.head()
 
-"""## Traduzindo Colunas e Campos"""
+"""---
+
+## Traduzindo Colunas e Campos
+"""
 
 dados.columns
 
@@ -75,3 +78,61 @@ gorjetas.refeicao = gorjetas.refeicao.map(refeicao)
 
 gorjetas.head(5)
 
+"""---
+
+---
+
+# Comparando Distribuições de Maneira Explanatória
+
+## Seaborn e Scatterplot
+"""
+
+import seaborn as sns
+
+!pip show seaborn
+
+"""### Análise 1 - Valor da Conta e Gorjeta"""
+
+gorjetas.columns
+
+valor_gorjeta = sns.scatterplot(x = 'valor_da_conta', y = 'gorjeta', data = gorjetas)
+valor_gorjeta
+
+"""<font color = green> **Visualmente o valor da gorjeta aumenta conforme aumenta o valor da conta**"""
+
+print(f'A base de dados contém {gorjetas.shape[0]}')
+print(f'Registros não nulos:')
+gorjetas.count()
+
+"""---
+
+## Coluna Porcentagem
+"""
+
+gorjetas.head(1)
+
+gorjetas['porcentagem'] = (gorjetas.gorjeta / gorjetas.valor_da_conta) * 100
+
+gorjetas.head()
+
+gorjetas.porcentagem = gorjetas.porcentagem.round(2)
+
+gorjetas.head()
+
+porcentagem_conta = sns.scatterplot(x = 'valor_da_conta', y = 'porcentagem', data = gorjetas)
+
+"""<font color = green> **Visualmente o valor da conta não é proporcional ao valor da gorjeta**
+
+---
+
+## Relplot e Implot
+"""
+
+porcentagem_conta_linha = sns.relplot(x = 'valor_da_conta', y = 'porcentagem', kind = 'line', data = gorjetas)
+
+sns.lmplot(x = 'valor_da_conta', y = 'porcentagem', data = gorjetas)
+
+# primeiro_plot.set_title('Análise do valor da gorjeta em função do valor da conta')
+# primeiro_plot.set(xlabel='Valor da conta', ylabel='Valor da gorjeta')
+# imagem = primeiro_plot.get_figure()
+# imagem.savefig('imagem.png')
