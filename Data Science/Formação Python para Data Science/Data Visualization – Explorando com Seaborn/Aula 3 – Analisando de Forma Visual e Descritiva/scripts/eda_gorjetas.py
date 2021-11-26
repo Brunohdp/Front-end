@@ -79,7 +79,6 @@ gorjetas.refeicao = gorjetas.refeicao.map(refeicao)
 gorjetas.head(5)
 
 """---
-
 ---
 
 # Comparando Distribuições de Maneira Explanatória
@@ -98,7 +97,7 @@ gorjetas.columns
 valor_gorjeta = sns.scatterplot(x = 'valor_da_conta', y = 'gorjeta', data = gorjetas)
 valor_gorjeta
 
-"""<font color = green> **Visualmente o valor da gorjeta aumenta conforme aumenta o valor da conta**"""
+"""<font color = gree> **Visualmente o valor da gorjeta aumenta conforme aumenta o valor da conta**"""
 
 print(f'A base de dados contém {gorjetas.shape[0]}')
 print(f'Registros não nulos:')
@@ -121,7 +120,7 @@ gorjetas.head()
 
 porcentagem_conta = sns.scatterplot(x = 'valor_da_conta', y = 'porcentagem', data = gorjetas)
 
-"""<font color = green> **Visualmente o valor da conta não é proporcional ao valor da gorjeta**
+"""<font color = gree> **Visualmente o valor da conta não é proporcional ao valor da gorjeta**
 
 ---
 
@@ -136,3 +135,68 @@ sns.lmplot(x = 'valor_da_conta', y = 'porcentagem', data = gorjetas)
 # primeiro_plot.set(xlabel='Valor da conta', ylabel='Valor da gorjeta')
 # imagem = primeiro_plot.get_figure()
 # imagem.savefig('imagem.png')
+
+"""---
+---
+
+# Analisando de Forma Visual e Descritiva
+
+## Análise Descritiva
+"""
+
+gorjetas.head()
+
+"""### Análise 2 - Sobremesa"""
+
+gorjetas[gorjetas.sobremesa == 'Sim'].describe()
+
+gorjetas[gorjetas.sobremesa == 'Não'].describe()
+
+"""## Análise visual"""
+
+sns.catplot(x = 'sobremesa', y = 'gorjeta', data = gorjetas)
+
+sns.relplot(x = 'valor_da_conta', y = 'gorjeta', hue = 'sobremesa', data = gorjetas)
+
+sns.relplot(x = 'valor_da_conta', y = 'gorjeta', hue = 'sobremesa', col = 'sobremesa', data = gorjetas)
+
+sns.relplot(x = 'valor_da_conta', y = 'gorjeta', col = 'sobremesa', data = gorjetas)
+
+sns.lmplot(x = 'valor_da_conta', y = 'gorjeta', hue='sobremesa', col='sobremesa', data = gorjetas)
+
+sns.lmplot(x = 'valor_da_conta', y = 'porcentagem', hue='sobremesa', col='sobremesa', data = gorjetas)
+
+sns.relplot(x = 'valor_da_conta', y = 'porcentagem', col = 'sobremesa', hue = 'sobremesa', kind = 'line', data = gorjetas)
+
+"""<font color = gree> Visualmente existe uma diferença no valor da gorjeta daqueles que pediram sobremesa e não pediram sobremesa
+
+---
+
+## Teste de Hipótese
+
+**H<sup>null</sup>**
+
+> **A Distribuição da taxa da gorjeta é a mesma nos dois grupos**
+
+**H<sup>alt</sup>**
+
+> **A Distribuição da taxa da gorjeta não é a mesma nos dois grupos**
+"""
+
+from scipy.stats import ranksums
+
+sobremesa = gorjetas.query("sobremesa == 'Sim'").porcentagem
+sobremesa
+
+sem_sobremesa = gorjetas.query("sobremesa == 'Não'").porcentagem
+sem_sobremesa
+
+r = ranksums(sobremesa, sem_sobremesa)
+
+print(f'O valor de p é {r.pvalue}')
+
+"""**H<sup>null</sup>**
+
+> **A Distribuição da taxa da gorjeta é a mesma nos dois grupos**
+"""
+
