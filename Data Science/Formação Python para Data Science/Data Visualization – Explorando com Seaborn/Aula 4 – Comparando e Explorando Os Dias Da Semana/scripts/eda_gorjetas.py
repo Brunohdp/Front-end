@@ -152,7 +152,10 @@ gorjetas[gorjetas.sobremesa == 'Sim'].describe()
 
 gorjetas[gorjetas.sobremesa == 'Não'].describe()
 
-"""## Análise visual"""
+"""---
+
+## Análise visual
+"""
 
 sns.catplot(x = 'sobremesa', y = 'gorjeta', data = gorjetas)
 
@@ -198,5 +201,69 @@ print(f'O valor de p é {r.pvalue}')
 """**H<sup>null</sup>**
 
 > **A Distribuição da taxa da gorjeta é a mesma nos dois grupos**
+
+---
+---
+
+# Comparando e Explorando Os Dias Da Semana
+
+## Dias Da Semana
+"""
+
+gorjetas.head()
+
+gorjetas.dia_da_semana.unique()
+
+sns.catplot(x = 'dia_da_semana', y = 'valor_da_conta', data = gorjetas)
+
+sns.relplot(x = 'valor_da_conta', y = 'gorjeta', hue = 'dia_da_semana', data = gorjetas)
+
+sns.relplot(x = 'valor_da_conta', y = 'porcentagem', hue = 'dia_da_semana', data = gorjetas)
+
+sns.relplot(x = 'valor_da_conta', y = 'gorjeta', hue = 'dia_da_semana', col = 'dia_da_semana', data = gorjetas)
+
+sns.relplot(x = 'valor_da_conta', y = 'porcentagem', hue = 'dia_da_semana', col = 'dia_da_semana', data = gorjetas)
+
+sns.lmplot(x = 'valor_da_conta', y = 'porcentagem', hue = 'dia_da_semana', col = 'dia_da_semana', data = gorjetas)
+
+"""---
+
+## Análise Descritiva
+"""
+
+media_geral_gorjetas = gorjetas.gorjeta.mean()
+print(f'A média geral das gorjetas é de {media_geral_gorjetas:.2f}')
+
+gorjetas.groupby(by = 'dia_da_semana').mean()
+
+gorjetas.groupby(by = 'dia_da_semana').mean()[['valor_da_conta', 'gorjeta', 'porcentagem']]
+
+print(f'Frequência dos dias:\n{gorjetas.dia_da_semana.value_counts()}')
+
+"""---
+
+## Teste de Hipótese
+
+**H<sup>null</sup>**
+
+>A distribuição do valor da conta é igual no sábado e no domindo
+
+**H<sup>alt</sup>**
+
+>A distribuição do valor da conta não é igual no sábado e no domindo
+"""
+
+valor_conta_domingo = gorjetas.query("dia_da_semana == 'Domingo'").valor_da_conta
+valor_conta_domingo
+
+valor_conta_sabado = gorjetas.query("dia_da_semana == 'Sabado'").valor_da_conta
+valor_conta_sabado
+
+r2 = ranksums(valor_conta_domingo, valor_conta_sabado)
+print(f'O valor de p é {r2.pvalue}')
+
+"""**H<sup>null</sup>**
+
+>A distribuição do valor da conta é igual no sábado e no domindo
 """
 
