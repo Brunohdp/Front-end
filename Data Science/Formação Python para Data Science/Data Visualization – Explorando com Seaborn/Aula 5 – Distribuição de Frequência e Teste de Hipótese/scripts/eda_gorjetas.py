@@ -265,5 +265,84 @@ print(f'O valor de p é {r2.pvalue}')
 """**H<sup>null</sup>**
 
 >A distribuição do valor da conta é igual no sábado e no domindo
+
+# Distribuição de Frequência e Teste de Hipótese
+
+## Distplot, Boxplot e Violinplot
+"""
+
+gorjetas.head()
+
+gorjetas.refeicao.unique()
+
+"""### Análise 4 - Refeição"""
+
+sns.catplot(x = 'refeicao', y = 'valor_da_conta', data = gorjetas)
+
+sns.catplot(x = 'refeicao', y = 'valor_da_conta', kind = 'swarm', data = gorjetas)
+
+sns.violinplot(x = 'refeicao', y = 'valor_da_conta', data = gorjetas)
+
+sns.boxplot(x = 'refeicao', y = 'valor_da_conta', data = gorjetas)
+
+almoco = gorjetas.query('refeicao == "Almoço"').valor_da_conta
+almoco
+
+sns.distplot(almoco)
+
+sns.distplot(almoco, kde=False)
+
+jantar = gorjetas.query('refeicao == "Jantar"').valor_da_conta
+jantar
+
+sns.distplot(jantar)
+
+sns.distplot(jantar, kde=False)
+
+"""---
+
+## Teste de hipótese
+"""
+
+gorjetas.groupby(by = 'refeicao').mean()[['valor_da_conta', 'gorjeta', 'porcentagem']]
+
+"""**H<sup>null</sup>**
+
+>A distribuição do valor da conta é igual no jantar e no almoço
+
+**H<sup>alt</sup>**
+
+>A distribuição do valor da conta não é igual no jantar e no almoço
+"""
+
+r3 = ranksums(jantar, almoco)
+print(f'O valor de p é {r3.pvalue}')
+
+"""<font color = gree>**H<sup>alt</sup>**
+>A distribuição do valor da conta não é igual no jantar e no almoço
+
+---
+
+**H<sup>null</sup>**
+
+>A distribuição da taxa da gorjeta é igual no jantar e no almoço
+
+**H<sup>alt</sup>**
+
+>A distribuição da taxa da gorjeta é igual no jantar e no almoço
+"""
+
+porcentagem_almoco = gorjetas.query('refeicao == "Almoço"').porcentagem
+porcentagem_almoco
+
+porcentagem_jantar = gorjetas.query('refeicao == "Jantar"').porcentagem
+porcentagem_jantar
+
+r4 = ranksums(porcentagem_almoco, porcentagem_jantar)
+print(f'O valor de p é {r4.pvalue}')
+
+"""<font color = gree>**H<sup>null</sup>**
+
+>A distribuição da taxa da gorjeta é igual no jantar e no almoço
 """
 
