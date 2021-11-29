@@ -49,3 +49,99 @@ ax.set_xlabel('Meses', fontsize = 14)
 ax.set_ylabel('Vendas (R$)', fontsize = 14)
 ax = ax
 
+"""---
+---
+
+# <font color = green>Aula 2 – Decomposição e Autocorrelação
+
+## <font color = blackpink>Decompondo As Vendas
+"""
+
+alucar.head()
+
+alucar['aumento'] = alucar.vendas.diff()
+alucar.head()
+
+sns.set_palette('Accent')
+sns.set_style('darkgrid')
+ax = sns.lineplot(x = 'mes', y = 'aumento', data = alucar)
+ax.figure.set_size_inches(12, 6)
+ax.set_title('Aumento das Vendas Alucar de 2017 e 2018', loc = 'left', fontsize = 18)
+ax.set_xlabel('Meses', fontsize = 14)
+ax.set_ylabel('Aumento', fontsize = 14)
+ax = ax
+
+def plotar(titulo: str, labelx: str, labely: str, x: str, y: str, dataset):
+  sns.set_palette('Accent')
+  sns.set_style('darkgrid')
+  ax = sns.lineplot(x = x, y = y, data = dataset)
+  ax.figure.set_size_inches(12, 6)
+  ax.set_title(titulo, loc = 'left', fontsize = 18)
+  ax.set_xlabel(labelx, fontsize = 14)
+  ax.set_ylabel(labely, fontsize = 14)
+  ax = ax
+
+plotar('Aumento das Vendas Alucar de 2017 e 2018', 'Meses', 'Aumento', 'mes', 'aumento', alucar,)
+
+alucar['aceleracao'] = alucar.aumento.diff()
+alucar.head()
+
+plotar('Aceleração das Vendas da Alucar de 2017 e 2018', 'Meses', 'Aceleração',
+       'mes', 'aceleracao', alucar)
+
+"""---
+
+## <font color = blackpink>Observação e tendência
+"""
+
+plt.figure(figsize = (16, 12))      # Seta o tamanho da imagem
+ax = plt.subplot(3, 1, 1)     # Atribui o subplot a ax e seta a loc do primeiro gráfico
+ax.set_title('Análise de Vendas da Alucar de 2017 e 2018',
+             fontsize = 18, loc = 'left')   # Seta título, fonte e localização
+sns.lineplot(x = 'mes', y = 'vendas', data = alucar)  # Primeiro Gráfico
+plt.subplot(3, 1, 2)      # Localização do segundo gráfico, divide em 3 partes, diz que ocupa a parte toda, diz qual é a parte em que plotará
+sns.lineplot(x = 'mes', y = 'aumento', data = alucar) # Segundo Gráfico
+plt.subplot(3, 1, 3)                # Localização do terceiro gráfico
+sns.lineplot(x = 'mes', y = 'aceleracao', data = alucar)  # Terceiro gráfico
+ax = ax
+
+def plot_comparacao(x: str, y1: str, y2: str, y3: str, dataset, titulo: str):
+  plt.figure(figsize = (16, 12))
+  ax = plt.subplot(3, 1, 1)
+  ax.set_title(titulo, fontsize = 18, loc = 'left')
+  sns.lineplot(x = x, y = y1, data = dataset)
+  plt.subplot(3, 1, 2)
+  sns.lineplot(x = x, y = y2, data = dataset)
+  plt.subplot(3, 1, 3)
+  sns.lineplot(x = x, y = y3, data = dataset)
+  ax = ax
+
+plot_comparacao('mes', 'vendas', 'aumento', 'aceleracao', alucar, 'Análise de Vendas da Alucar de 2017 e 2018')
+
+"""---
+
+## <font color = blackpink>Autocorrelação
+"""
+
+from pandas.plotting import autocorrelation_plot
+
+ax = plt.figure(figsize=(12,6))
+ax.suptitle('Correlação das Vendas', fontsize = 18, x = 0.26, y = 0.95)
+autocorrelation_plot(alucar.vendas)
+ax = ax
+
+ax = plt.figure(figsize=(12,6))
+ax.suptitle('Correlação do Aumento', fontsize = 18, x = 0.26, y = 0.95)
+autocorrelation_plot(alucar.aumento)
+ax = ax
+
+ax = plt.figure(figsize=(12,6))
+ax.suptitle('Correlação do Aumento', fontsize = 18, x = 0.26, y = 0.95)
+autocorrelation_plot(alucar.aumento[1:])
+ax = ax
+
+ax = plt.figure(figsize=(12,6))
+ax.suptitle('Correlação do Aumento', fontsize = 18, x = 0.26, y = 0.95)
+autocorrelation_plot(alucar.aceleracao[2:])
+ax = ax
+
