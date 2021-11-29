@@ -145,3 +145,92 @@ ax.suptitle('Correlação do Aumento', fontsize = 18, x = 0.26, y = 0.95)
 autocorrelation_plot(alucar.aceleracao[2:])
 ax = ax
 
+"""---
+---
+
+# <font color = green>Aula 3 – Importância Da Decomposição e Sazonalidade
+
+## <font color = blackpink>Analisando Assinantes
+"""
+
+assinantes = pd.read_csv('newsletter_alucar.csv')
+
+assinantes.head()
+
+assinantes.dtypes
+
+assinantes.mes = pd.to_datetime(assinantes.mes)
+assinantes.dtypes
+
+print(f'Quantidade de linhas e colunas: {assinantes.shape}')
+print(f'Quantidade de dados nulos: {assinantes.isna().sum().sum()}')
+
+assinantes['aumento'] = assinantes.assinantes.diff()
+assinantes['aceleracao'] = assinantes.aumento.diff()
+
+assinantes.head()
+
+plot_comparacao('mes', 'assinantes', 'aumento', 'aceleracao', assinantes, 'Análise de Assinantes da Newsletter')
+
+"""---
+
+## <font color = blackpink> Sazonalidade e Chocolate
+"""
+
+choco = pd.read_csv('chocolura.csv')
+choco.head()
+
+choco.dtypes
+
+print(f'Quantidade de linhas: {choco.shape}')
+print(f'Quantidade de nulos: {choco.isna().sum().sum()}')
+
+choco.mes = pd.to_datetime(choco.mes)
+choco.dtypes
+
+choco['aumento'] = choco.vendas.diff()
+choco['aceleracao'] = choco.aumento.diff()
+choco.head()
+
+plot_comparacao('mes', 'vendas', 'aumento', 'aceleracao', choco, 'Análise de Vendas da Chocolura de 2017 a 2018')
+
+"""---
+
+## <font color = blackpink>Investigando a Sazonalidade
+"""
+
+vendas_por_dia = pd.read_csv('vendas_por_dia.csv')
+vendas_por_dia.head()
+
+print(f'Quantidade de linhas e colunas: {vendas_por_dia.shape}')
+print(f'Quantidade de dados nulos:{vendas_por_dia.isna().sum().sum()}')
+
+vendas_por_dia.dtypes
+
+vendas_por_dia.dia = pd.to_datetime(vendas_por_dia.dia)
+vendas_por_dia.dtypes
+
+vendas_por_dia['aumento'] = vendas_por_dia.vendas.diff()
+vendas_por_dia['aceleracao'] = vendas_por_dia.aumento.diff()
+vendas_por_dia.head()
+
+plot_comparacao('dia', 'vendas', 'aumento', 'aceleracao', vendas_por_dia,
+                'Análise de Vendas de Outubro e Novembro -> Chocolura')
+
+vendas_por_dia['dia_da_semana'] = vendas_por_dia.dia.dt.day_name()
+
+vendas_por_dia.head(7)
+
+vendas_por_dia.dia_da_semana.unique()
+
+dias_traduzidos = {'Monday': 'Segunda', 'Tuesday': 'Terça', 'Wednesday': 'Quarta',
+                   'Thursday': 'Quinta', 'Friday': 'Sexta', 'Saturday': 'Sábado', 'Sunday': 'Domingo'}
+
+vendas_por_dia.dia_da_semana = vendas_por_dia.dia_da_semana.map(dias_traduzidos)
+vendas_por_dia.head(7)
+
+vendas_por_dia.head(14)
+
+vendas_agrupadas = vendas_por_dia.groupby(vendas_por_dia.dia_da_semana).mean().round()
+vendas_agrupadas
+
