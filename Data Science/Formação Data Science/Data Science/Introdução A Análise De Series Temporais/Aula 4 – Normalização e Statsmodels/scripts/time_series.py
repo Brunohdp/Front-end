@@ -234,3 +234,91 @@ vendas_por_dia.head(14)
 vendas_agrupadas = vendas_por_dia.groupby(vendas_por_dia.dia_da_semana).mean().round()
 vendas_agrupadas
 
+"""---
+---
+
+# <font color = green>Aula 4 – Normalização e Statsmodels
+
+## <font color = blackpink>Autocorrelação Das Vendas
+"""
+
+ax = plt.figure(figsize = (12,6))
+ax.suptitle('Correlação Das Vendas Diárias', fontsize = 18, x = 0.3, y = 0.95)
+autocorrelation_plot(vendas_por_dia.vendas)
+ax = ax
+
+ax = plt.figure(figsize = (12,6))
+ax.suptitle('Correlação Do Aumento Das Vendas Diárias', fontsize = 18, x = 0.3, y = 0.95)
+autocorrelation_plot(vendas_por_dia.aumento[1:])
+ax = ax
+
+ax = plt.figure(figsize = (12,6))
+ax.suptitle('Correlação Da Aceleração Das Vendas Diárias', fontsize = 18, x = 0.3, y = 0.95)
+autocorrelation_plot(vendas_por_dia.aceleracao[2:])
+ax = ax
+
+"""---
+
+## <font color = blackpink>Normalização
+"""
+
+cafe = pd.read_csv('cafelura.csv')
+cafe.head()
+
+cafe.dtypes
+
+print(f'Quantidade de Linhas e Colunas: {cafe.shape}')
+print(f'Quantidade de dados nulos: {cafe.isna().sum().sum()}')
+
+cafe.mes = pd.to_datetime(cafe.mes)
+cafe.dtypes
+
+plotar('Vendas da Cafelura de 2017 e 2018', 'Meses', 'Vendas', 'mes', 'vendas', cafe)
+
+quantidade_de_dias_de_fds = pd.read_csv('dias_final_de_semana.csv')
+quantidade_de_dias_de_fds.head()
+
+quantidade_de_dias_de_fds.quantidade_de_dias.values
+
+cafe['vendas_normalizadas'] = cafe.vendas / quantidade_de_dias_de_fds.quantidade_de_dias.values
+cafe.head()
+
+plotar('Vendas Normalizadas da Cafelura de 2017 a 2018', 'Meses',
+       'Vendas Normalizadas', 'mes', 'vendas_normalizadas', cafe)
+
+plt.figure(figsize = (12, 8))
+ax = plt.subplot(2, 1, 1)
+ax.set_title('Vendas da Cafelura de 2017 e 2018')
+sns.lineplot(x = 'mes', y = 'vendas', data = cafe)
+ax = plt.subplot(2, 1, 2)
+ax.set_title('Vendas Normalizadas da Cafelura de 2017 e 2018')
+sns.lineplot(x = 'mes', y = 'vendas_normalizadas', data = cafe)
+ax = ax
+
+"""---
+
+## <font color = blackpink>Statsmodel
+"""
+
+from statsmodels.tsa.seasonal import seasonal_decompose
+
+resultado = seasonal_decompose([choco.vendas], freq = 3)
+ax = resultado.plot()
+
+observacao = resultado.observed
+tendencia = resultado.trend
+sazonalidade = resultado.seasonal
+ruido = resultado.resid
+
+data = ({
+    'observacao': observacao,
+    'tendencia': tendencia,
+    'sazonalidade': sazonalidade,
+    'ruido': ruido
+})
+
+resultado = pd.DataFrame(data)
+resultado.head()
+
+plot_comparacao(resultado.index, 'observacao', 'tendencia', 'sazonalidade', resultado, 'Exemplo de Statsmodels')
+
