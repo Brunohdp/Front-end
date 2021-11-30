@@ -322,3 +322,44 @@ resultado.head()
 
 plot_comparacao(resultado.index, 'observacao', 'tendencia', 'sazonalidade', resultado, 'Exemplo de Statsmodels')
 
+"""---
+---
+
+# <font color = green>Aula 5 – Ruídos e Média Móvel
+
+## <font color = blackpink>Ruído De Uma Time Series
+"""
+
+alucel = pd.read_csv('alucel.csv')
+alucel.head()
+
+alucel.dtypes
+
+print(f'Quantidade de linhas e colunas: {alucel.shape}')
+print(f'Quantidade de valores nulos: {alucel.isna().sum().sum()}')
+
+alucel.dia = pd.to_datetime(alucel.dia)
+alucel.dtypes
+
+alucel['aumento'] = alucel.vendas.diff()
+alucel['aceleracao'] = alucel.aumento.diff()
+alucel.head()
+
+plot_comparacao('dia', 'vendas', 'aumento', 'aceleracao', alucel, 'Análise de Vendas da Alucel de Outubro e Novembro de 2018')
+
+"""---
+
+## <font color = blackpink>Média Móvel
+"""
+
+alucel['media_movel'] = alucel.vendas.rolling(7).mean()
+alucel.head(7)
+
+plotar('Análise de Vendas Com Média Móvel de 7 Dias', 'Dias', 'media_movel','dia', 'media_movel', alucel)
+
+alucel['media_movel_21'] = alucel.vendas.rolling(21).mean()
+
+plotar('Análise de Vendas Com Média Móvel de 7 Dias', 'Dias', 'media_movel_21','dia', 'media_movel_21', alucel)
+
+plot_comparacao('dia', 'vendas', 'media_movel', 'media_movel_21', alucel,'Comparando As Vendas Com Médias Móveis')
+
