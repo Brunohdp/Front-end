@@ -94,3 +94,89 @@ set([1,1,1,3,4,4,5,8,2,4,5,5,6,6])
 lista_unica = set(lista_normalizada)
 len(lista_unica)
 
+"""---
+---
+
+# <font color=green>Aula 3 – Desenvolvendo e Testando o Corretor
+
+## <font color=blackpink>Fatiando Strings
+"""
+
+lista = 'lgica'
+(lista[:1],lista[1:])
+
+palavra_exemplo = 'lgica'
+
+def gerador_palavras(palavra):
+  fatias = []
+  for i in range(len(palavra) + 1):
+    fatias.append((lista[:i],lista[i:]))
+  print(fatias)
+  # palavras_geradas = insere_letras(fatias)
+  # return palavras_geradas
+
+gerador_palavras(palavra_exemplo)
+
+"""---
+
+## <font color=blackpink>Operação De Inserção
+"""
+
+palavra_exemplo = 'lgica'
+
+
+def insere_letras(fatias):
+  novas_palavras = []
+  letras = 'abcdefghijklmnopqrstuvwxyzàáâãèéêìíîòóôõùúûç'
+  for E, D in fatias:
+    for letra in letras:
+      novas_palavras.append(E + letra + D)
+  return novas_palavras
+
+
+def gerador_palavras(palavra):
+  fatias = []
+  for i in range(len(palavra) + 1):
+    fatias.append((palavra[:i],palavra[i:]))
+  palavras_geradas = insere_letras(fatias)
+  return palavras_geradas
+
+
+palavras_geradas = gerador_palavras(palavra_exemplo)
+palavras_geradas
+
+"""---
+
+## <font color=blackpink>Construindo a Função Corretor
+"""
+
+def corretor(palavra):
+  palavras_geradas = gerador_palavras(palavra)
+  palavra_correta = max(palavras_geradas, key = probabilidade)
+  return palavra_correta
+
+# Meu método kkk
+
+for palavra in palavras_geradas:
+  for pal in lista_unica:
+    if palavra == pal:
+      print(palavra)
+
+"""---
+
+## <font color=blackpink>Probabilidade Das Palavras Geradas
+"""
+
+frequencia = nltk.FreqDist(lista_normalizada)
+total_palavras = len(lista_normalizada)
+frequencia.most_common(10)
+
+frequencia["lógica"]
+
+def probabilidade(palavras_geradas):
+  return frequencia[palavras_geradas]/total_palavras
+
+probabilidade('logica')
+
+corretor('lgica')
+
