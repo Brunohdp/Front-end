@@ -180,3 +180,39 @@ probabilidade('logica')
 
 corretor('lgica')
 
+"""---
+---
+
+# <font color=green>Aula 4 – Avaliando a Qualidade do Corretor
+
+## <font color=blackpink>Preparando Dados de Teste
+"""
+
+def cria_dados_teste(nome_arquivo):
+  lista_palavras_teste = []
+  f = open(nome_arquivo, 'r')
+  for linha in f:
+    correta, errada = linha.split()
+    lista_palavras_teste.append((correta, errada))
+  f.close()
+  return lista_palavras_teste
+
+lista_teste = cria_dados_teste('palavras.txt')
+
+"""---
+
+## <font color=blackpink>Avaliando o Corretor
+"""
+
+def avaliador(testes):
+  numero_palavras = len(testes)
+  acertou = 0
+  for correta, errada in testes:
+    palavra_corrigida = corretor(errada)
+    if palavra_corrigida == correta:
+      acertou += 1
+  taxa_acerto = acertou/numero_palavras
+  print(f'Taxa de acerto: {taxa_acerto*100:.2f}% de {numero_palavras} palavras')
+
+avaliador(lista_teste)
+
