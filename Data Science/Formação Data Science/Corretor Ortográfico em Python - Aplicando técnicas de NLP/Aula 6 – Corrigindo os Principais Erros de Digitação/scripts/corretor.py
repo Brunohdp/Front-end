@@ -253,4 +253,118 @@ palavras_geradas
 
 avaliador(lista_teste)
 
-corretor('palavrra')
+corretor('lgica')
+
+"""---
+---
+
+# <font color=green>Aula 6 – Corrigindo os Principais Erros de Digitação
+
+## <font color=blackpink>Implementando a Troca de Letras
+"""
+
+def insere_letras(fatias):
+  novas_palavras = []
+  letras = 'abcdefghijklmnopqrstuvwxyzàáâãèéêìíîòóôõùúûç'
+  for E, D in fatias:
+    for letra in letras:
+      novas_palavras.append(E + letra + D)
+  return novas_palavras
+
+
+def deletando_caracter(fatias):
+  novas_palavras = []
+  for E, D in fatias:
+    novas_palavras.append(E + D[1:])
+  return novas_palavras
+
+
+def troca_letra(fatias):
+  novas_palavras = []
+  letras = 'abcdefghijklmnopqrstuvwxyzàáâãèéêìíîòóôõùúûç'
+  for E, D in fatias:
+    for letra in letras:
+      novas_palavras.append(E + letra + D[1:])
+  return novas_palavras
+
+
+def gerador_palavras(palavra):
+  fatias = []
+  for i in range(len(palavra) + 1):
+    fatias.append((palavra[:i],palavra[i:]))
+  palavras_geradas = insere_letras(fatias)
+  palavras_geradas += deletando_caracter(fatias)
+  palavras_geradas += troca_letra(fatias)
+  return palavras_geradas
+
+corretor('lóhica')
+
+"""---
+
+## <font color=blackpink>Implementando a Inversão de Letras
+"""
+
+def inverte_letra(fatias):
+  novas_palavras = []
+  for E, D in fatias:
+    if len(D) > 1:
+      novas_palavras.append(E + D[1] + D[0] + D[2:])
+  return novas_palavras
+
+def gerador_palavras(palavra):
+  fatias = []
+  for i in range(len(palavra) + 1):
+    fatias.append((palavra[:i],palavra[i:]))
+  palavras_geradas = insere_letras(fatias)
+  palavras_geradas += deletando_caracter(fatias)
+  palavras_geradas += troca_letra(fatias)
+  palavras_geradas += inverte_letra(fatias)
+  return palavras_geradas
+
+def insere_letras(fatias):
+  novas_palavras = []
+  letras = 'abcdefghijklmnopqrstuvwxyzàáâãèéêìíîòóôõùúûç'
+  for E, D in fatias:
+    for letra in letras:
+      novas_palavras.append(E + letra + D)
+  return novas_palavras
+
+
+def deletando_caracter(fatias):
+  novas_palavras = []
+  for E, D in fatias:
+    novas_palavras.append(E + D[1:])
+  return novas_palavras
+
+
+def troca_letra(fatias):
+  novas_palavras = []
+  letras = 'abcdefghijklmnopqrstuvwxyzàáâãèéêìíîòóôõùúûç'
+  for E, D in fatias:
+    for letra in letras:
+      novas_palavras.append(E + letra + D[1:])
+  return novas_palavras
+
+
+def inverte_letra(fatias):
+  novas_palavras = []
+  for E, D in fatias:
+    if len(D) > 1:
+      novas_palavras.append(E + D[1] + D[0] + D[2:])
+  return novas_palavras
+
+
+def gerador_palavras(palavra):
+  fatias = []
+  for i in range(len(palavra) + 1):
+    fatias.append((palavra[:i],palavra[i:]))
+  palavras_geradas = insere_letras(fatias)
+  palavras_geradas += deletando_caracter(fatias)
+  palavras_geradas += troca_letra(fatias)
+  palavras_geradas += inverte_letra(fatias)
+  return palavras_geradas
+
+corretor('lógiac')
+
+avaliador(lista_teste)
+
