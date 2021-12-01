@@ -216,3 +216,41 @@ def avaliador(testes):
 
 avaliador(lista_teste)
 
+"""---
+---
+
+# <font color=green>Aula 5 – Incrementando o Corretor
+
+## <font color=blackpink>Implementando o Delete de Caracteres
+"""
+
+def deletando_caracter(fatias):
+  novas_palavras = []
+  for E, D in fatias:
+    novas_palavras.append(E + D[1:])
+  return novas_palavras
+
+"""---
+
+## <font color=blackpink>Avaliando o Novo Corretor
+"""
+
+gerador_palavras('lóigica')
+
+corretor('lóigica')
+
+def gerador_palavras(palavra):
+  fatias = []
+  for i in range(len(palavra) + 1):
+    fatias.append((palavra[:i],palavra[i:]))
+  palavras_geradas = insere_letras(fatias)
+  palavras_geradas += deletando_caracter(fatias)
+  return palavras_geradas
+
+
+palavras_geradas = gerador_palavras('lóigica')
+palavras_geradas
+
+avaliador(lista_teste)
+
+corretor('palavrra')
