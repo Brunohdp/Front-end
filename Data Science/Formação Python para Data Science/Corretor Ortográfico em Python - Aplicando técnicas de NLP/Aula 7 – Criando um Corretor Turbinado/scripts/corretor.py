@@ -91,8 +91,7 @@ lista_normalizada[:5]
 
 set([1,1,1,3,4,4,5,8,2,4,5,5,6,6])
 
-lista_unica = set(lista_normalizada)
-len(lista_unica)
+len(set(lista_normalizada))
 
 """---
 ---
@@ -367,4 +366,74 @@ def gerador_palavras(palavra):
 corretor('lógiac')
 
 avaliador(lista_teste)
+
+"""---
+---
+
+# <font color=green>Aula 7 – Criando um Corretor Turbinado
+
+## <font color=blackpink>Palavras Desconhecidas Ao Vocabulário
+"""
+
+def avaliador(testes, vocabulario):
+  numero_palavras = len(testes)
+  acertou = 0
+  desconhecida = 0
+  
+  for correta, errada in testes:
+    palavra_corrigida = corretor(errada)
+    if palavra_corrigida == correta:
+      acertou += 1
+    else:
+      desconhecida += (correta not in vocabulario)
+  
+  taxa_acerto = acertou/numero_palavras
+  taxa_desconhecida = desconhecida/numero_palavras
+  
+  print(f'Taxa de acerto: {taxa_acerto*100:.2f}% de {numero_palavras} palavras')
+  print(f'Taxa de desconhecidas: {taxa_desconhecida*100:.2f}%')
+
+vocabulario = set(lista_normalizada)
+avaliador(lista_teste, vocabulario)
+
+"""---
+
+## <font color=blackpink>Turbinando O Gerador De Palavras
+"""
+
+palavra = 'lóiigica'
+
+def gerador_turbinado(palavras_geradas):
+  novas_palavras = []
+  for palavra in palavras_geradas:
+    novas_palavras += gerador_palavras(palavra)
+  return novas_palavras
+
+palavras_g = gerador_turbinado(gerador_palavras(palavra))
+'lógica' in palavras_g
+
+len(palavras_g)
+
+"""---
+
+## <font color=blackpink>Escolhendo Os Melhores Candidatos
+"""
+
+def novo_corretor(palavra):
+  palavras_geradas = gerador_palavras(palavra)
+  palavras_turbinado = gerador_turbinado(palavras_geradas)
+  
+  todas_palavras = set(palavras_geradas + palavras_turbinado)
+  candidatos = [palavra]
+  
+  for palavra in todas_palavras:
+    if palavra in vocabulario:
+      candidatos.append(palavra)
+  
+  print(len(candidatos))
+  palavra_correta = max(candidatos, key = probabilidade)
+  
+  return palavra_correta
+
+novo_corretor(palavra)
 
