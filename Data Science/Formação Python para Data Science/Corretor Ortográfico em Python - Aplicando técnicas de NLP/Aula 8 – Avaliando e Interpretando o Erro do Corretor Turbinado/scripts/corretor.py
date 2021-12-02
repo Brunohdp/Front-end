@@ -430,10 +430,67 @@ def novo_corretor(palavra):
     if palavra in vocabulario:
       candidatos.append(palavra)
   
-  print(len(candidatos))
   palavra_correta = max(candidatos, key = probabilidade)
   
   return palavra_correta
 
 novo_corretor(palavra)
+
+"""---
+---
+
+# <font color=green>Aula 8 – Avaliando e Interpretando o Erro do Corretor Turbinado
+
+## <font color=blackpink>Avaliando O Resultado Dos Dois Corretores
+"""
+
+def avaliador(testes, vocabulario):
+  numero_palavras = len(testes)
+  acertou = 0
+  desconhecida = 0
+  
+  for correta, errada in testes:
+    palavra_corrigida = novo_corretor(errada)
+    desconhecida += (correta not in vocabulario)
+    if palavra_corrigida == correta:
+      acertou += 1
+    else:
+      print(errada + '-' + corretor(errada) + '-' + palavra_corrigida)
+  
+  taxa_acerto = acertou/numero_palavras
+  taxa_desconhecida = desconhecida/numero_palavras
+  
+  print(f'Taxa de acerto: {taxa_acerto*100:.2f}% de {numero_palavras} palavras')
+  print(f'Taxa de desconhecidas: {taxa_desconhecida*100:.2f}%')
+
+avaliador(lista_teste, vocabulario)
+
+"""---
+
+## <font color=blackpink>Avaliando o Resultado dos Dois Corretores Cont
+"""
+
+def avaliador(testes, vocabulario):
+  numero_palavras = len(testes)
+  acertou = 0
+  desconhecida = 0
+  
+  for correta, errada in testes:
+    palavra_corrigida = corretor(errada)
+    desconhecida += (correta not in vocabulario)
+    if palavra_corrigida == correta:
+      acertou += 1
+  
+  taxa_acerto = acertou/numero_palavras
+  taxa_desconhecida = desconhecida/numero_palavras
+  
+  print(f'Taxa de acerto: {taxa_acerto*100:.2f}% de {numero_palavras} palavras')
+  print(f'Taxa de desconhecidas: {taxa_desconhecida*100:.2f}%')
+
+avaliador(lista_teste, vocabulario)
+
+palavra = 'ló gica'
+
+print(novo_corretor(palavra))
+print(corretor(palavra))
 
