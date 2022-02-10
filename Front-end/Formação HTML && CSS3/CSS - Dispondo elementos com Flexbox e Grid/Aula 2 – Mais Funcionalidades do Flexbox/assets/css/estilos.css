@@ -38,6 +38,15 @@ body {
   flex-direction: column;
   height: 100vh;
   width: 75vw;
+
+  position: absolute;
+  left: -100vw;
+  transition: all, .40s;
+}
+
+.menu-lateral--ativo {
+  left: 0;
+  transition: all, .40s;
 }
 
 .menu-lateral__logo {
