@@ -135,7 +135,8 @@ body {
 .cartao__conteudo {
   padding: 16px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  grid-template-columns: auto 1fr;
 }
 
 .cartao__destaque {
