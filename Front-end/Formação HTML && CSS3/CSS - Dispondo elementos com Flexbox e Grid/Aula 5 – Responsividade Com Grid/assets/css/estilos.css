@@ -277,6 +277,61 @@ body {
   margin-right: 8px;
 }
 
+.cartao--recentes {
+  display: none;
+}
+
+@media screen and (min-width: 1440px) {
+  .cartao--recentes {
+    align-items: center;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 16px;
+    row-gap: 24px;
+    width: 256px;
+  }
+
+  .cartao--recentes .cartao__titulo {
+    grid-column: auto;
+  }
+
+  .cartao__link {
+    color: #0480DC;
+    font-size: 0.8rem;
+    font-weight: 600;
+    justify-self: flex-end;
+  }
+
+  .cartao__lista {
+    display: grid;
+    grid-column: span 2;
+    row-gap: 16px;
+  }
+
+  .cartao__item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 8px;
+  }
+
+  .cartao__item-thumbnail {
+    width: 32px;
+    grid-row: span 2;
+  }
+
+  .cartao__item-titulo {
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.2rem;
+  }
+
+  .cartao__item-perfil {
+    color: #95999C;
+    font-size: 0.8rem;
+  }
+}
+
 .secao {
   display: grid;
   gap: 16px;
