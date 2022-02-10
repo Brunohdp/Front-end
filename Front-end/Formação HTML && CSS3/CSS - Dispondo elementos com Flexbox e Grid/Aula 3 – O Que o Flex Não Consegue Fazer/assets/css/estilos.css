@@ -9,6 +9,11 @@ body {
   color: #FFFFFF;
 }
 
+
+
+
+
+/* CABEÇALHO */
 .cabecalho{
   align-items: center;
   background-color: #15191C;
@@ -32,6 +37,11 @@ body {
   width: 40px;
 }
 
+
+
+
+
+/* MENU LATERAL */
 .menu-lateral {
   background-color: #15191C;
   display: flex;
@@ -101,3 +111,14 @@ body {
 .menu-lateral__link--pinturas::before {
   content: "\e90a";
 }
+
+
+
+
+/* MAIN */
+.cartao__conteudo {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 300px;
+}
+
