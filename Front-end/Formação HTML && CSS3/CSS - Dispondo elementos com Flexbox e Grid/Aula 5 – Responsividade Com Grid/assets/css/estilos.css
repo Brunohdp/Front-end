@@ -54,6 +54,7 @@ body {
     box-sizing: border-box;
     column-gap: 32px;
     display: grid;
+    grid-column: 2;
     grid-template-columns: 1fr auto;
     height: 80px;
     padding: 16px 60px;
@@ -172,6 +173,8 @@ body {
 
 @media screen and (min-width: 1440px) {
   .menu-lateral {
+    grid-column: 1;
+    grid-row: 1 / span 2;
     position: static;
     width: 200px;
   }
@@ -196,6 +199,7 @@ body {
   .principal {
     column-gap: 32px;
     display: grid;
+    grid-column: 2;
     grid-template-columns: auto 1fr auto;
     padding: 16px 60px;
   }
