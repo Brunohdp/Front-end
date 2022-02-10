@@ -5,6 +5,10 @@ body {
 }
 
 .cabecalho{
+  align-items: center;
+  background-color: #15191C;
   display: flex;
-  justify-content: s;
+  justify-content: space-between;
+  padding: 8px 16px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.16);
 }
