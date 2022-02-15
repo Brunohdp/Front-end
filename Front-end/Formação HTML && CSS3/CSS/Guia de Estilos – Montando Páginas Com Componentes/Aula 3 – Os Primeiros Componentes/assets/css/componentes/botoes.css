@@ -4,7 +4,7 @@
   box-shadow: var(--amarelo-transparente);
   color: var(--branco);
   font-family: inherit;
-  font-weight: 700;
+  font-weight: var(--peso-botao);
   padding-top: 1rem;
   padding-bottom: 1rem;
   text-align: center;
