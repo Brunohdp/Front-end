@@ -1,7 +1,7 @@
 .botao {
   background-color: var(--amarelo);
   border: none;
-  box-shadow: var(--amarelo-transparente);
+  box-shadow: 10px 10px 30px var(--amarelo-transparente);
   color: var(--branco);
   font-family: inherit;
   font-weight: var(--peso-botao);

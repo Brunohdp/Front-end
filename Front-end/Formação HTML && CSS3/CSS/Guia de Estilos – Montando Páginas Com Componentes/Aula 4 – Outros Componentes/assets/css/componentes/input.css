@@ -1,7 +1,7 @@
 .input {
   background-color: var(--branco);
   border: none;
-  box-shadow: var(--preto-transparente);
+  box-shadow: 10px 10px 30px var(--preto-transparente);
   box-sizing: border-box;
   color: inherit;
   font-family: inherit;
