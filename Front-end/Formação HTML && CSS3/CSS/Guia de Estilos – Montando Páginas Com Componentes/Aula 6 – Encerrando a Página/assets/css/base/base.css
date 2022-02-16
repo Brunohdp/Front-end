@@ -18,7 +18,7 @@ body {
   font-size: var(--tamanho-titulo);
 }
 
-.titulo-destaque {
+.titulo--destaque {
   color: var(--preto);
   display: block;
   font-family: var(--familia-titulo-destaque);
