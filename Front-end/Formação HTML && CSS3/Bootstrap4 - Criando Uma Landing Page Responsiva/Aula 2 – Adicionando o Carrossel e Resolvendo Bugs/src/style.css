@@ -8,3 +8,7 @@
   height: 400px;
   object-fit: cover;
 }
+
+.fonte-titulo{
+  font-family: 'Pacifico', cursive;
+}
