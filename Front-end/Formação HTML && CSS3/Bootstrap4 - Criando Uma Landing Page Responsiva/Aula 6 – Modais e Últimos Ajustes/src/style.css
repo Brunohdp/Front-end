@@ -14,7 +14,7 @@
 }
 
 .texto-cor-especial {
-  color: darkred;
+  color: darkred!important;
 }
 
 .card-largura {
