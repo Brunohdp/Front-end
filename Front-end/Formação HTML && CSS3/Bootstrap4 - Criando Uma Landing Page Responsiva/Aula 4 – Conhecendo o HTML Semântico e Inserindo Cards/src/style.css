@@ -1,0 +1,18 @@
+.imagem-carrossel-um {
+  height: 400px;
+  object-fit: cover;
+  object-position: 0 80%;
+}
+
+.imagem-carrossel-dois {
+  height: 400px;
+  object-fit: cover;
+}
+
+.fonte-titulo {
+  font-family: 'Pacifico', cursive;
+}
+
+.cor-especial {
+  color: darkred;
+}
