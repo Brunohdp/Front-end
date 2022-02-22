@@ -17,6 +17,10 @@
   color: darkred;
 }
 
+.card-largura {
+  width: 18rem;
+}
+
 .botao-cor-especial {
   background-color: darkred;
   color: white;
@@ -24,4 +28,9 @@
 
 .borda-cor-especial {
   border-color: darkred;
+}
+
+.card-posicao-imagem {
+  height: 200px;
+  object-fit: cover;
 }
