@@ -34,3 +34,11 @@
   height: 200px;
   object-fit: cover;
 }
+
+.link-email {
+  text-decoration: none;
+}
+
+.link-email:hover {
+  text-decoration: underline;
+}
