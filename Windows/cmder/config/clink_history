@@ -1,0 +1,20 @@
+|CTAG_1645636346_619506062_5484_0
+|:
+cd /
+a:
+cd Users\bruno\Documents\GitHub\Alura\Windows\
+ls
+|ir
+cd codes\
+mkdir python
+mkdir javascript
+|ir
+|ir
+|d..
+|ir
+cd backup\
+|ir
+cd..
+dir
+cd \Users\bruno\Desktop\
+backup.bat

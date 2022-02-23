@@ -1,0 +1,51 @@
+2e88 start_logger              154 ---- 2022/02/23 14:27:35.711 -------------------------------------------------
+2e88 start_logger              160 Host process is 'cmd.exe' (pid 11912)
+2e88 start_logger              164 DLL path is 'A:\Users\bruno\Documents\GitHub\Alura\Windows\Prompt de Comando\vendor\clink'
+2e88 start_logger              178 Windows version 10.0.22000 (x64)
+2e88 start_logger              181 Clink version 1.2.46.69fc92 (x64)
+2e88 hook_setter::hook_setter  156 >>> Started hook transaction.
+2e88 hook_setter::attach_iat   313 Attempting to hook SetEnvironmentVariableW in IAT for module 00007FF702550000.
+2e88 pe_info::iterate_imports  160 Found import in 'api-ms-win-core-processenvironment-l1-1-0.dll'
+2e88 find_iat                  121 Found import at 00007FF7025888D0 (value is 00007FFEF1F5F840).
+2e88 hook_setter::attach_iat   313 Attempting to hook WriteConsoleW in IAT for module 00007FF702550000.
+2e88 pe_info::iterate_imports  160 Found import in 'api-ms-win-core-console-l1-1-0.dll'
+2e88 find_iat                  121 Found import at 00007FF702588550 (value is 00007FFEF1F25670).
+2e88 hook_setter::attach_iat   313 Attempting to hook GetEnvironmentVariableW in IAT for module 00007FF702550000.
+2e88 pe_info::iterate_imports  160 Found import in 'api-ms-win-core-processenvironment-l1-1-0.dll'
+2e88 find_iat                  121 Found import at 00007FF7025888C0 (value is 00007FFEF1F33D00).
+2e88 hook_setter::commit       204 <<< Hook transaction committed.
+2e88 hook_setter::hook_setter  156 >>> Started hook transaction.
+2e88 hook_setter::detach_iat   356 Attempting to unhook 00007FFEB366ADF0 from GetEnvironmentVariableW in IAT for module 00007FF702550000.
+2e88 pe_info::iterate_imports  160 Found import in 'api-ms-win-core-processenvironment-l1-1-0.dll'
+2e88 find_iat                  121 Found import at 00007FF7025888C0 (value is 00007FFEB366ADF0).
+2e88 hook_setter::commit       204 <<< Hook transaction committed.
+2e88 hook_setter::hook_setter  156 >>> Started hook transaction.
+2e88 hook_setter::attach_iat   313 Attempting to hook ReadConsoleW in IAT for module 00007FF702550000.
+2e88 pe_info::iterate_imports  160 Found import in 'api-ms-win-core-console-l1-1-0.dll'
+2e88 find_iat                  121 Found import at 00007FF702588558 (value is 00007FFEF1FAD500).
+2e88 hook_setter::commit       204 <<< Hook transaction committed.
+2e88 reset_handle              145 resetting mismatched stdout handle
+2e88 win_screen_buffer::begin  227 Using native terminal support; found 'ConEmuHk64.dll'.
+2e88 history_db::initialise   1268 master bank ctag: |CTAG_1645636346_619506062_5484_0
+2e88 history_db::compact      1492 History:  0 active, 0 deleted
+2e88 history_db::compact      1492 History:  1 active, 0 deleted
+2e88 history_db::compact      1492 History:  2 active, 0 deleted
+2e88 history_db::compact      1492 History:  2 active, 1 deleted
+2e88 history_db::compact      1492 History:  3 active, 1 deleted
+2e88 history_db::compact      1492 History:  4 active, 1 deleted
+2e88 history_db::compact      1492 History:  5 active, 1 deleted
+2e88 history_db::compact      1492 History:  6 active, 1 deleted
+2e88 history_db::compact      1492 History:  7 active, 1 deleted
+2e88 reset_handle              145 resetting mismatched stdout handle
+2e88 history_db::compact      1492 History:  8 active, 1 deleted
+2e88 history_db::compact      1492 History:  8 active, 2 deleted
+2e88 history_db::compact      1492 History:  8 active, 2 deleted
+2e88 history_db::compact      1492 History:  8 active, 3 deleted
+2e88 history_db::compact      1492 History:  9 active, 3 deleted
+2e88 history_db::compact      1492 History:  9 active, 4 deleted
+2e88 history_db::compact      1492 History:  10 active, 4 deleted
+2e88 history_db::compact      1492 History:  10 active, 5 deleted
+2e88 history_db::compact      1492 History:  10 active, 6 deleted
+2e88 history_db::compact      1492 History:  10 active, 7 deleted
+2e88 history_db::compact      1492 History:  11 active, 7 deleted
+2e88 history_db::compact      1492 History:  12 active, 7 deleted
