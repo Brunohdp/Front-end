@@ -24,6 +24,6 @@ export class Negociacao {
   }
 
   get volume() {
-    return this.#quantidade * this.#valor
+    return this.#quantidade * this.#valor;
   }
 }
