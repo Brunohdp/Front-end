@@ -7,8 +7,6 @@ $ErrorActionPreference = "Stop"
 	Linhas separadas
 #>
 
-
-
 # Comentário 1
 $nameExpr = @{
 	Label = "Nome";
@@ -29,4 +27,13 @@ $resultado =
 	 Select `
 	      $params
 
-$resultado
+
+$estilos = cat A:\Users\bruno\temp\styles.css
+$styleTag = "<style> $estilos </style>"
+$tituloPagina = "Relatorio de Scripts em Migracao"
+$tituloBody = "<h1> $tituloPagina </h1>"
+
+
+$resultado | 
+	ConvertTo-Html -Head $styleTag -Title $tituloPagina -Body $tituloBody |
+	Out-File A:\Users\bruno\temp\relatorio.html
