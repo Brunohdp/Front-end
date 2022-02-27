@@ -4,5 +4,4 @@
     "target": "ES6"               // Toda compliação será feita na versão do ECMAscript, ou seja JS, 6. Sendo a mais recente atualmente
   },
   "include": ["app/**/*"],        // Diz que tudo e qualquer arquivo que estiver dentro da pasta app e subpastas deve ser compilado
-  "compileOnSave": true
 }
