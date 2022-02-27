@@ -1,3 +1,4 @@
+param($tipoDeExportacao)
 $ErrorActionPreference = "Stop"
 
 <#
@@ -27,13 +28,21 @@ $resultado =
 	 Select `
 	      $params
 
+if ($tipoDeExportacao -eq "HTML") {
+	$estilos = cat A:\Users\bruno\temp\styles.css
+	$styleTag = "<style> $estilos </style>"
+	$tituloPagina = "Relatorio de Scripts em Migracao"
+	$tituloBody = "<h1> $tituloPagina </h1>"
 
-$estilos = cat A:\Users\bruno\temp\styles.css
-$styleTag = "<style> $estilos </style>"
-$tituloPagina = "Relatorio de Scripts em Migracao"
-$tituloBody = "<h1> $tituloPagina </h1>"
-
-
-$resultado | 
-	ConvertTo-Html -Head $styleTag -Title $tituloPagina -Body $tituloBody |
-	Out-File A:\Users\bruno\temp\relatorio.html
+	$resultado | 
+		ConvertTo-Html -Head $styleTag -Title $tituloPagina -Body $tituloBody |
+		Out-File A:\Users\bruno\temp\relatorio.html
+} elseif ($tipoDeExportacao -eq "JSON") {
+	$resultado | 
+		ConvertTo-JSON |
+		Out-File A:\Users\bruno\temp\relatorio.json
+} elseif ($tipoDeExportacao -eq "CSV") {
+	$resultado | 
+		ConvertTo-CSV -NoTypeInformation |
+		Out-File A:\Users\bruno\temp\relatorio.csv
+}
