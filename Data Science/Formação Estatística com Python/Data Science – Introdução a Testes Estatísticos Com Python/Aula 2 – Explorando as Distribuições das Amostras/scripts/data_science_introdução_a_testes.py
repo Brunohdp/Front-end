@@ -96,3 +96,39 @@ ax = sns.distplot(nota_media_dos_filmes_com_pelo_menos_10_votos.values,
                   hist_kws={'cumulative': True})
 ax.set(xlabel='Nota Média', ylabel='% acumulada de filmes')
 ax.set_title('Média de votos em filmes no Movielens 100K com 10 ou mais votos')
+
+"""# <font color=green>Aula 2 – Explorando as Distribuições das Amostras
+
+## <font color=blue>Visualizando outras informações e quantis quaisquer de forma numérica
+"""
+
+ax = sns.distplot(tmdb_com_mais_de_10_votos.vote_count)
+ax.set(xlabel='Número de votos', ylabel='Densidade')
+ax.set_title('Número de votos em filmes no TMDB 5000 com 10 ou mais votos')
+
+ax = sns.distplot(tmdb.query('budget > 0').budget)
+ax.set(xlabel='Budget (gastos)', ylabel='Densidade')
+ax.set_title('Gatos em filmes no TMDB 5000')
+
+ax = sns.distplot(tmdb.popularity)
+ax.set(xlabel='Popularidade', ylabel='Densidade')
+ax.set_title('Popularidade em filmes no TMDB 5000')
+
+ax = sns.distplot(tmdb.runtime)
+ax.set(xlabel='Tempo de Duração', ylabel='Densidade')
+ax.set_title('Tempo de Duração em filmes no TMDB 5000')
+
+tmdb.runtime.isnull().sum()
+
+ax = sns.distplot(tmdb.query('runtime>0').runtime.dropna())
+ax.set(xlabel='Popularidade', ylabel='Densidade')
+ax.set_title('Popularidade em filmes no TMDB 5000')
+
+ax = sns.distplot(tmdb.query('runtime>0').runtime.dropna(),
+                  hist_kws={'cumulative':True},
+                  kde_kws={'cumulative':True})
+ax.set(xlabel='Popularidade', ylabel='% de filmes')
+ax.set_title('Popularidade em filmes no TMDB 5000')
+
+tmdb.query('runtime>0').runtime.dropna().quantile(.8)
+
