@@ -2,7 +2,8 @@
   "compilerOptions": {        // Define as opções de compilação
     "outDir": "dist/js",      // Diz qual é o diretório em que os arquivos compilados serão direcionados
     "target": "ES6",          // Diz que o alvo de conversão, ou seja, para qual tipo de JS ou ES ele deve converter nossos arquivos TS ao compilar, nesse caso dissemos que queremos o EcmaScript 6
-    "noEmitOnError": true     // Não permite gerar arquivos JS enquanto tiver erros no nosso código
+    "noEmitOnError": true,    // Não permite gerar arquivos JS enquanto tiver erros no nosso código
+    "noImplicitAny": true     // Não permite que deixemos as nossas propriedades como any. Temos que sempre definir um tipo para elas.
   },
   "include": ["app/**/*"]     // Diz para o compilador que, ao compilar, é para incluir todos os arquivos que estiverem dentro da pasta app e suas subpastas na sua conversão
 }
