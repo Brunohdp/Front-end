@@ -208,3 +208,41 @@ plt.plot(valores[:,0], valores[:,2], color='g')
 plt.hlines(y=0.05, xmin= 2, xmax=len(temp), colors='r')
 
 valores
+
+"""# <font color=green>Aula 5 – Testes Para Duas Amostras
+
+## <font color=blue>Comparando a média de duas amostras
+"""
+
+print(ztest(notas1.rating, notas.rating))
+zconfint(notas1.rating, notas.rating)
+
+print(ztest(notas.rating, notas1.rating))
+zconfint(notas.rating, notas1.rating)
+
+from scipy.stats import ttest_ind
+
+ttest_ind(notas.rating, notas1.rating)
+
+descr_todas_as_notas = DescrStatsW(notas.rating)
+descr_toystory = DescrStatsW(notas1.rating)
+comparacao = descr_todas_as_notas.get_compare(descr_toystory)
+comparacao.summary()
+
+comparacao.summary(use_t=False)
+
+"""## <font color=blue>Visualizando graficamente"""
+
+plt.boxplot([notas.rating, notas1.rating], labels=['Todas as notas', 'Toy Story'])
+plt.title('Distribuição das notas de acordo com filmes')
+
+"""## <font color=blue>Cuidado ao interpretar o intervalo de confiança"""
+
+plt.boxplot([notas.rating, notas1[3:12].rating], labels=['Todas as notas', 'Toy Story (do 3 ao 12)'])
+plt.title('Distribuição das notas de acordo com filmes')
+
+descr_todas_as_notas = DescrStatsW(notas.rating)
+descr_toystory = DescrStatsW(notas1[3:12].rating)
+comparacao = descr_todas_as_notas.get_compare(descr_toystory)
+comparacao.summary()
+
