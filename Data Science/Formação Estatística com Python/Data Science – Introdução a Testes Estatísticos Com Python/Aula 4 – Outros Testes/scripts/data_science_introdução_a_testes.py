@@ -162,3 +162,49 @@ from statsmodels.stats.weightstats import DescrStatsW
 descr_todos_com_10_votos = DescrStatsW(nota_media_dos_filmes_com_pelo_menos_10_votos)
 descr_todos_com_10_votos.tconfint_mean()
 
+"""# <font color=green>Aula 4 – Outros Testes
+
+## <font color=blue>Zteste para uma amostra
+"""
+
+filmes = pd.read_csv('movies.csv')
+filmes.query('movieId==1')
+
+notas1 = notas.query('movieId==1')
+notas1.head()
+
+ax = sns.distplot(notas1.rating)
+ax.set(xlabel='Nota', ylabel='Densidade')
+ax.set_title('Distribuição das notas para o Toy Story')
+
+ax = sns.boxplot(x=notas1.rating)
+ax.set_xlabel('Nota')
+ax.set_title('Distribuição das notas para o Toy Story')
+
+notas1.rating.mean()
+
+notas1.rating.count()
+
+zconfint(notas1.rating)
+
+from statsmodels.stats.weightstats import ztest
+
+ztest(notas1.rating, value = 3.4320503405352603)
+
+"""## <font color = blue> Problemas de amostras pequenas"""
+
+np.random.seed(75241)
+temp = notas1.rating.sample(frac=1)
+
+def calcula_teste(i):
+  media = temp[0:i].mean()
+  stat, p = ztest(temp[0:i], value = 3.4320503405352603)
+  return (i, media, p)
+
+valores = np.array([calcula_teste(i) for i in range(2, len(temp))])
+
+plt.plot(valores[:,0], valores[:,1])
+plt.plot(valores[:,0], valores[:,2], color='g')
+plt.hlines(y=0.05, xmin= 2, xmax=len(temp), colors='r')
+
+valores
