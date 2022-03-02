@@ -132,3 +132,33 @@ ax.set_title('Popularidade em filmes no TMDB 5000')
 
 tmdb.query('runtime>0').runtime.dropna().quantile(.8)
 
+"""# <font color = green>Aula 3 – Testes de Uma Amostra
+
+## <font color=blue>O efeito do tamanho de uma amostra
+"""
+
+print(f'Média dos filmes com pelo menos 10 votos: {nota_media_dos_filmes_com_pelo_menos_10_votos.mean()}')
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+np.random.seed(75243)
+temp = nota_media_dos_filmes_com_pelo_menos_10_votos.sample(frac=1)
+
+medias = [temp[0:i].mean() for i in range(1, len(temp))]
+
+plt.plot(medias)
+
+len(nota_media_dos_filmes_com_pelo_menos_10_votos)
+
+"""## <font color=blue>Intervalo de confiança da média com t e ztest"""
+
+from statsmodels.stats.weightstats import zconfint
+
+zconfint(nota_media_dos_filmes_com_pelo_menos_10_votos)
+
+from statsmodels.stats.weightstats import DescrStatsW
+
+descr_todos_com_10_votos = DescrStatsW(nota_media_dos_filmes_com_pelo_menos_10_votos)
+descr_todos_com_10_votos.tconfint_mean()
+
