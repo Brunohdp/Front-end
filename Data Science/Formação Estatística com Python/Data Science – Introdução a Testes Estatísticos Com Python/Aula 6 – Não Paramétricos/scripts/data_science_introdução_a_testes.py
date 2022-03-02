@@ -246,3 +246,46 @@ descr_toystory = DescrStatsW(notas1[3:12].rating)
 comparacao = descr_todas_as_notas.get_compare(descr_toystory)
 comparacao.summary()
 
+"""# <font color=green>Aula 6 – Não Paramétricos
+
+## <font color=blue>Comparando Filmes
+"""
+
+filmes.query('movieId in [1, 593, 72226]')
+
+notas1 = notas.query('movieId == 1')
+notas593 = notas.query('movieId == 593')
+notas72226 = notas.query('movieId == 72226')
+
+plt.boxplot([notas1.rating, notas593.rating, notas72226.rating], labels=['Toy Story', 'Silêncio dos inocentes', 'Fantástico senho raposa'])
+plt.title('Distribuição das notas de acordo com os filmes')
+
+sns.boxplot(x='movieId', y='rating', data=notas.query('movieId == [1,593,72226]'))
+
+notas.query('movieId in [1, 593, 72226]').groupby('movieId').count()
+
+descr_1 = DescrStatsW(notas1.rating)
+descr_593 = DescrStatsW(notas593.rating)
+comparacao = descr_1.get_compare(descr_593)
+comparacao.summary()
+
+descr_72226 = DescrStatsW(notas72226.rating)
+descr_593 = DescrStatsW(notas593.rating)
+comparacao = descr_72226.get_compare(descr_593)
+comparacao.summary()
+
+comparacao = descr_1.get_compare(descr_72226)
+comparacao.summary()
+
+"""## <font color=blue>Comparação não paramétrica com Wilcoxon Ranksums"""
+
+from scipy.stats import normaltest
+
+_, p = normaltest(notas1.rating)
+p
+
+from scipy.stats import ranksums
+
+_, p = ranksums(notas1.rating, notas593.rating)
+p
+
