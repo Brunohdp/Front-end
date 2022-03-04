@@ -247,15 +247,15 @@ A covariância, ou variância conjunta, é a medida do grau de interdependência
 ### Gerando uma amostra aleatória para facilitar o entendimento
 """
 
-
+amostra = dados.query('Renda < 5000').sample(n=20, random_state=101)
 
 """### Obtendo a matriz de covariância"""
 
-
+amostra[['Idade', 'Renda', 'Anos de Estudo', 'Altura']].cov()
 
 """### Identificando as variâncias na diagonal principal da matriz"""
 
-
+amostra.Idade.var()
 
 """## <font color=green>3.2 Interpretação da Covariância</font>
 ***
@@ -271,15 +271,33 @@ Finalmente, se os pontos estiverem uniformemente distribuídos pelos quadrantes,
 ### Verificando a existência de uma associação linear negativa
 """
 
+x = amostra.Renda
+y = amostra.Idade
 
+ax = sns.scatterplot(x, y)
+ax.figure.set_size_inches(10, 6)
+ax.hlines(y = y.mean(), xmin = x.min(), xmax = x.max(), colors='black', linestyles='dashed')
+ax.vlines(x = x.mean(), ymin = y.min(), ymax = y.max(), colors='black', linestyles='dashed')
 
 """### Verificando a existência de uma associação linear positiva"""
 
+x = amostra.Renda
+y = amostra['Anos de Estudo']
 
+ax = sns.scatterplot(x, y)
+ax.figure.set_size_inches(10, 6)
+ax.hlines(y = y.mean(), xmin = x.min(), xmax = x.max(), colors='black', linestyles='dashed')
+ax.vlines(x = x.mean(), ymin = y.min(), ymax = y.max(), colors='black', linestyles='dashed')
 
 """### Verificando a inexistência de uma associação linear entre as variáveis"""
 
+x = amostra.Idade
+y = amostra.Altura
 
+ax = sns.scatterplot(x, y)
+ax.figure.set_size_inches(10, 6)
+ax.hlines(y = y.mean(), xmin = x.min(), xmax = x.max(), colors='black', linestyles='dashed')
+ax.vlines(x = x.mean(), ymin = y.min(), ymax = y.max(), colors='black', linestyles='dashed')
 
 """### <font color='red'>Observação Importante:</font>
 > Pelo que foi apresentado pode parecer que valores elevados, tanto positivos quanto negativos, para a covariância indicam relações lineares fortes entre as variáveis envolvidas. No entanto, um problema quando se usa a covariância como uma medida da intensidade da relação linear é que o valor da covariância depende das unidades de medida para x e y.
@@ -316,27 +334,51 @@ $s_{x}$ e $s_{y}$ = desvios padrão amostrais de x e y, respectivamente
 ### Obtendo $s_{xy}$
 """
 
+sig_xy = 2178803.59
+sig_x = np.sqrt(7328865.85)
+sig_y = np.sqrt(667839.78)
+p_xy = sig_xy / (sig_x * sig_y)
+p_xy
 
 
 
+s_xy = dados[['Altura', 'Renda']].cov()
+s_xy
+
+s_xy = s_xy.Altura.loc['Renda']
+s_xy
 
 """### Obtendo $s_x$ e $s_y$"""
 
-
+s_x = dados.Altura.std()
+s_y = dados.Renda.std()
 
 """### Obtendo o coeficiente de correlação $r_{xy}$"""
 
-
+r_xy = s_xy / (s_x * s_y)
+r_xy
 
 """### Obtendo uma matriz de correlação com o Pandas"""
 
+dados[['Altura', 'Renda']].corr()
 
+dataset[['Y', 'X']].corr()
 
+x = amostra.Renda
+y = amostra.Altura
 
+ax = sns.scatterplot(x, y)
+ax.figure.set_size_inches(10, 6)
+ax.hlines(y = y.mean(), xmin = x.min(), xmax = x.max(), colors='black', linestyles='dashed')
+ax.vlines(x = x.mean(), ymin = y.min(), ymax = y.max(), colors='black', linestyles='dashed')
 
+x = dataset.Y
+y = dataset.X
 
-
-
+ax = sns.scatterplot(x, y)
+ax.figure.set_size_inches(10, 6)
+ax.hlines(y = y.mean(), xmin = x.min(), xmax = x.max(), colors='black', linestyles='dashed')
+ax.vlines(x = x.mean(), ymin = y.min(), ymax = y.max(), colors='black', linestyles='dashed')
 
 """---
 
