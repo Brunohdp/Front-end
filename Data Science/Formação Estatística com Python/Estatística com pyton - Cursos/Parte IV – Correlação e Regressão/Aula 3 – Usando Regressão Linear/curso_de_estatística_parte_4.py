@@ -334,13 +334,13 @@ $s_{x}$ e $s_{y}$ = desvios padrão amostrais de x e y, respectivamente
 ### Obtendo $s_{xy}$
 """
 
+# Atividade do curso
+
 sig_xy = 2178803.59
 sig_x = np.sqrt(7328865.85)
 sig_y = np.sqrt(667839.78)
 p_xy = sig_xy / (sig_x * sig_y)
 p_xy
-
-
 
 s_xy = dados[['Altura', 'Renda']].cov()
 s_xy
@@ -419,9 +419,13 @@ Em uma análise de regressão linear simples, o interesse está em estimar a fun
 ### Carregando o dataset
 """
 
+dataset = {
+    'Y': [3011, 1305, 1879, 2654, 2849, 1068, 2892, 2543, 3074, 849, 2184, 2943, 1357, 2755, 2163, 3099, 1600, 353, 1778, 740, 2129, 3302, 2412, 2683, 2515, 2395, 2292, 1000, 600, 1864, 3027, 1978, 2791, 1982, 900, 1964, 1247, 3067, 700, 1500, 3110, 2644, 1378, 2601, 501, 1292, 2125, 1431, 2260, 1770],
+    'X': [9714, 3728, 6062, 8845, 8378, 3338, 8507, 7947, 9915, 1632, 6825, 8918, 4100, 9184, 6180, 9997, 4500, 1069, 5925, 2466, 6083, 9712, 7780, 8383, 7185, 7483, 7640, 2100, 2000, 6012, 8902, 5345, 8210, 5662, 2700, 6546, 2900, 9894, 1500, 5000, 8885, 8813, 3446, 7881, 1164, 3401, 6641, 3329, 6648, 4800]
+}
 
-
-
+dataset = pd.DataFrame(dataset)
+dataset.head()
 
 """### Identificando a relação entre as variáveis
 
@@ -430,11 +434,16 @@ https://seaborn.pydata.org/generated/seaborn.lmplot.html
 Plota a reta de regressão entre duas variáveis juntamente com a dispersão entre elas.
 """
 
-
+ax = sns.lmplot(x="X", y="Y", data=dataset)
+ax.fig.set_size_inches(12, 6)
+ax.fig.suptitle('Reta de Regressão - Gasto X Renda', fontsize=16, y=1.02)
+ax.set_xlabels("Renda das Famílias", fontsize=14)
+ax.set_ylabels("Gasto das Famílias", fontsize=14)
+ax
 
 """### Matriz de correlação"""
 
-
+dataset.corr()
 
 """### Função de regressão populacional
 
@@ -520,44 +529,58 @@ $$
 ### Obter $n$
 """
 
-
+n = len(dataset)
+n
 
 """### Obter $\sum{Y}$"""
 
-
+SOMA_Y = dataset.Y.sum()
+SOMA_Y
 
 """### Obter $\sum{X}$"""
 
-
+SOMA_X = dataset.X.sum()
+SOMA_X
 
 """### Obter $\sum{X^2}$"""
 
+dataset['X2'] = dataset.X ** 2
+dataset.head()
 
+SOMA_X2 = dataset.X2.sum()
+SOMA_X2
 
-
-
-
+SOMA_X2 = dataset.X.apply(lambda x: x**2).sum()
+SOMA_X2
 
 """### Obter $\sum{Y^2}$"""
 
-
+SOMA_Y2 = dataset.Y.apply(lambda y: y**2).sum()
+SOMA_Y2
 
 """### Obter $\sum{XY}$"""
 
+dataset['XY'] = dataset.X * dataset.Y
+dataset.head()
 
+SOMA_XY = dataset.XY.sum()
+SOMA_XY
 
+SOMA_XY = dataset.apply(lambda data: data.X * data.Y, axis=1).sum()
+SOMA_XY
 
-
-
-
-
+dataset.drop(['X2', 'XY'], axis=1, inplace=True)
+dataset.head()
 
 """### Obter $\hat{\beta}_2$
 
 # $$\hat{\beta}_2 = \frac{n\sum{X_iY_i} - \sum{X_i}\sum{Y_i}}{n\sum{X_i^2} - (\sum{X_i})^2}$$
 """
 
-
+numerador = n * SOMA_XY - SOMA_X * SOMA_Y
+denominador = n * SOMA_X2 - (SOMA_X) ** 2
+beta_2 = numerador / denominador
+beta_2
 
 """### Obter $\hat{\beta}_1$
 
@@ -569,7 +592,8 @@ $$
 $$ 
 """
 
-
+beta_1 = dataset.Y.mean() - beta_2 * dataset.X.mean()
+beta_1
 
 """### Obtendo a estimativa dos parâmetros com o StatsModels
 
@@ -577,33 +601,48 @@ $$
 https://www.statsmodels.org/stable/index.html
 """
 
+import statsmodels.api as sm
 
+y = dataset.Y
+x = sm.add_constant(dataset.X)
 
+y.head()
 
-
-
-
-
+x.head()
 
 """### Estimando o modelo"""
 
-
+resultado_regressão = sm.OLS(y, x, missing='drop').fit()
 
 """### Visualizando os parâmetros estimados"""
 
+beta_1
 
+beta_2
 
+resultado_regressão.params
 
+beta_1 = resultado_regressão.params[0]
+beta_1
 
-
-
-
-
-
+beta_2 = resultado_regressão.params[1]
+beta_2
 
 """### Intervalo de confiança para os parâmetros estimados"""
 
+resultado_regressão.conf_int(alpha=0.05)
 
+# Exercício
+ds = {
+    'Y': [670, 220, 1202, 188, 1869, 248, 477, 1294, 816, 2671, 1403, 1586, 3468, 973, 701, 5310, 10950, 2008, 9574, 28863, 6466, 4274, 6432, 1326, 1423, 3211, 2140], 
+    'X': [1.59, 0.56, 2.68, 0.47, 5.2, 0.58, 1.32, 3.88, 2.11, 5.53, 2.6, 2.94, 6.62, 1.91, 1.48, 10.64, 22.39, 4.2, 21.9, 59.66, 14.22, 9.57, 14.67, 3.28, 3.49, 6.94, 6.25]
+}
+ds = pd.DataFrame(ds)
+ds_y = ds.Y
+ds_x = sm.add_constant(ds.X)
+
+res_reg = sm.OLS(ds_y, ds_x, missing='drop').fit()
+res_reg.params
 
 """## <font color=green>4.4 Obtendo previsões</font>
 ***
@@ -613,23 +652,30 @@ https://www.statsmodels.org/stable/index.html
 ### Previsões dentro da amostra
 """
 
-
+dataset['Y_previsto'] = beta_1 + beta_2 * dataset.X
+dataset.head()
 
 """### Utilizando o statsmodels"""
 
+dataset['Y_previsto_statsmodels'] = resultado_regressao.predict()
+dataset.head()
 
-
-
+dataset.drop('Y_previsto_statsmodels', axis=1, inplace=True)
+dataset.head()
 
 """### Estimando o 'Gasto das Famílias' fora da amostra"""
 
+def prever(x):
+  return beta_1 + beta_2 * x
 
-
-
+prever(7510)
 
 """### Estimando o 'Gasto das Famílias' fora da amostra via StatsModels"""
 
+resultado_regressao.predict([1, 7510])[0]
 
+# Exercício
+round(res_reg.predict([1, 2.345678])[0])
 
 """## <font color=green>4.5 Resíduos</font>
 ***
