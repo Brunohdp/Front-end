@@ -475,23 +475,23 @@ Observe que a podemos representar a FRP em sua forma estocástica da seguinte ma
 
 Considere a seguinte **função de regressão da população (FRP)** para duas variáveis:
 
-# $$Y_i = \beta_1 + \beta_2X_i + u_i$$
+### $$Y_i = \beta_1 + \beta_2X_i + u_i$$
 
 Como a **FRP** não pode ser obtida de forma direta, precisamos estimá-la através da **função de regressão amostral (FRA)**.
 
-# $$Y_i = \hat{\beta}_1 + \hat{\beta}_2X_i + \hat{u}_i$$
-# $$Y_i = \hat{Y}_i + \hat{u}_i$$
+### $$Y_i = \hat{\beta}_1 + \hat{\beta}_2X_i + \hat{u}_i$$
+### $$Y_i = \hat{Y}_i + \hat{u}_i$$
 
 onde $\hat{Y}_i$ é o valor estimado de $Y_i$.
 
 A partir da equação acima podemos expressar o erro da seguinte maneira:
 
-# $$\hat{u}_i = Y_i - \hat{Y}_i$$
-# $$\hat{u}_i = Y_i - \hat{\beta}_1 - \hat{\beta}_2X_i$$
+### $$\hat{u}_i = Y_i - \hat{Y}_i$$
+### $$\hat{u}_i = Y_i - \hat{\beta}_1 - \hat{\beta}_2X_i$$
 
 A ideia é determinar **FRA** de forma que fique o mais próximo possível do valor observado de $Y$. Intuitivamente uma forma interessante de fazer isso seria determinar **FRA** de maneira que a soma dos resíduos seja a menor possível.
 
-# $$\sum\hat{u}_i = \sum{(Y_i - \hat{Y}_i)}$$
+### $$\sum\hat{u}_i = \sum{(Y_i - \hat{Y}_i)}$$
 
 Avaliando a figura abaixo se pode verificar que talvez o critério de minimizar a soma dos resíduos não seja a melhor abordagem para solucionar o problema.
 
@@ -501,18 +501,18 @@ O critério de minimização da soma dos resíduos assume que todos os resíduos
 
 Para evitar tal problema adotou-se o critério de minimização da soma dos quadrados dos resíduos que é conhecido como **Método de Mínimos Quadrados**.
 
-# $$\sum\hat{u}_i^2 = \sum{(Y_i - \hat{Y}_i)^2}$$
-# $$\sum\hat{u}_i^2 = \sum{(Y_i - \hat{\beta}_1 - \hat{\beta}_2X_i)^2}$$
+### $$\sum\hat{u}_i^2 = \sum{(Y_i - \hat{Y}_i)^2}$$
+### $$\sum\hat{u}_i^2 = \sum{(Y_i - \hat{\beta}_1 - \hat{\beta}_2X_i)^2}$$
 
 Após um procedimento de diferenciação, algumas simplificações e manipulações algébricas obtemos os **estimadores de mínimos quadrados**.
 
-# $$
+### $$
 \begin{equation}
 \boxed{\hat{\beta}_2 = \frac{n\sum{X_iY_i} - \sum{X_i}\sum{Y_i}}{n\sum{X_i^2} - (\sum{X_i})^2}}
 \end{equation}
 $$
 
-# $$
+### $$
 \begin{equation}
 \boxed{
 \begin{eqnarray}
@@ -612,7 +612,7 @@ x.head()
 
 """### Estimando o modelo"""
 
-resultado_regressão = sm.OLS(y, x, missing='drop').fit()
+resultado_regressao = sm.OLS(y, x, missing='drop').fit()
 
 """### Visualizando os parâmetros estimados"""
 
@@ -620,17 +620,17 @@ beta_1
 
 beta_2
 
-resultado_regressão.params
+resultado_regressao.params
 
-beta_1 = resultado_regressão.params[0]
+beta_1 = resultado_regressao.params[0]
 beta_1
 
-beta_2 = resultado_regressão.params[1]
+beta_2 = resultado_regressao.params[1]
 beta_2
 
 """### Intervalo de confiança para os parâmetros estimados"""
 
-resultado_regressão.conf_int(alpha=0.05)
+resultado_regressao.conf_int(alpha=0.05)
 
 # Exercício
 ds = {
@@ -647,7 +647,7 @@ res_reg.params
 """## <font color=green>4.4 Obtendo previsões</font>
 ***
 
-# $$\hat{Y}_i = 207,9033 + 0,2973X_i$$
+### $$\hat{Y}_i = 207,9033 + 0,2973X_i$$
 
 ### Previsões dentro da amostra
 """
@@ -682,18 +682,21 @@ round(res_reg.predict([1, 2.345678])[0])
 
 Como vimos anteriormente, o resíduo da i-ésima observação é a diferença entre o valor observado de nossa variável dependente ($Y_i$) e o valor estimado da variável dependente ($\hat{Y}_i$).
 
-# $$\hat{u}_i = Y_i - \hat{Y}_i$$
+### $$\hat{u}_i = Y_i - \hat{Y}_i$$
 
 Em outras palavras, $\hat{u}_i$ é o erro obtido ao se utilizar a equação de regressão estimada para prever o valor da variável dependente.
 """
 
+dataset['u'] = dataset.Y - dataset.Y_previsto
+dataset.head()
 
+dataset['Residuos'] = resultado_regressao.resid
+dataset.head()
 
+dataset.drop('u', axis=1, inplace=True)
+dataset.head()
 
-
-
-
-
+dataset.Residuos.mean()
 
 """## <font color=green>4.6 Suposições sobre o termo de erro $u$</font>
 ***
@@ -708,57 +711,78 @@ Em outras palavras, $\hat{u}_i$ é o erro obtido ao se utilizar a equação de r
 https://seaborn.pydata.org/generated/seaborn.scatterplot.html
 """
 
+ax = sns.scatterplot(x=dataset.X, y=dataset.Residuos)
+ax.figure.set_size_inches(12, 6)
+ax.set_title('Resíduos vs Variável Independente', fontsize=18)
+ax.set_xlabel('X', fontsize=14)
+ax.set_ylabel('Resíduos', fontsize=14)
+ax
 
-
-
+ax = sns.scatterplot(x=dataset.Y_previsto, y=dataset.Residuos)
+ax.figure.set_size_inches(12, 6)
+ax.set_title('Resíduos vs Y_Previsto', fontsize=18)
+ax.set_xlabel('Y_Previsto', fontsize=14)
+ax.set_ylabel('Resíduos', fontsize=14)
+ax
 
 """### Hipótese de variância constante
 
 <img src="https://caelum-online-public.s3.amazonaws.com/1273-estatistica-parte4/01/img028.jpg" width=80%>
+
 Fonte: Econometria Básica - 5ª edição - Gujarati e Porter
 """
 
-
+ax = sns.scatterplot(x=dataset.Y_previsto, y=dataset.Residuos**2)
+ax.figure.set_size_inches(12, 6)
+ax.set_title('Resíduos^2 vs Y_Previsto', fontsize=18)
+ax.set_xlabel('Y_Previsto', fontsize=14)
+ax.set_ylabel('Resíduos^2', fontsize=14)
+ax
 
 """## <font color=green>4.7 O coeficiente de determinação $R^2$</font>
 ***
 
 O **coeficiente de determinação R²** é uma medida resumida que diz quanto a linha de regressão amostral se ajusta aos dados. Pode ser obtido a partir da seguinte fórmula:
 
-# $$R^2 = \frac{\big[\sum{(Y_i - \bar{Y})(\hat{Y}_i - \bar{Y})}\big]^2}{\sum{(Y_i - \bar{Y}})^2 \sum{(\hat{Y}_i - \bar{Y}})^2}$$
+### $$R^2 = \frac{\big[\sum{(Y_i - \bar{Y})(\hat{Y}_i - \bar{Y})}\big]^2}{\sum{(Y_i - \bar{Y}})^2 \sum{(\hat{Y}_i - \bar{Y}})^2}$$
 
 Sabemos que o i-ésimo resíduo representa o erro de usarmos $\hat{Y}_i$ para estimar $Y_i$. A soma dos quadrados desses resíduos é o valor que é minimizado pelo método dos mínimos quadrados. Esse valor pode ser representado da seguinte forma:
 
-# $$SQE = \sum{(Y_i - \hat{Y}_i)^2}$$
+### $$SQE = \sum{(Y_i - \hat{Y}_i)^2}$$
 
 O valor da SQE é uma medida do erro de se usar a equação de regressão estimada para estimar os valores da variável dependente na amostra.
 
 Outro componente que podemos medir é a soma dos quadrados total (SQT) que representa a medida do erro envolvido no uso da média ($\bar{Y}$) para fazer as estimativas. A SQT pode ser representada da forma abaixo:
 
-# $$SQT = \sum{(Y_i - \bar{Y})^2}$$
+### $$SQT = \sum{(Y_i - \bar{Y})^2}$$
 
 Para quantificar o quanto os valores estimados ($\hat{Y}_i$) se afastam da média ($\bar{Y}$) podemos obter mais uma soma de quadrados. Essa soma é chamada de soma dos quadrados da regressão (SQR) e é representada pela seguinte fórmula:
 
-# $$SQR = \sum{(\hat{Y}_i - \bar{Y})^2}$$
+### $$SQR = \sum{(\hat{Y}_i - \bar{Y})^2}$$
 
 ### Soma do quadrados do erros (SQE)
 """
 
+dataset.head()
 
+SQE = dataset.Residuos.apply(lambda u: u**2).sum()
+SQE
 
-
-
-
+# Utilizando ssr (sum of squared residuals) do statsmodels
+resultado_regressao.ssr
 
 """### Soma do quadrados total (SQT)"""
 
-
+SQT = dataset.Y.apply(lambda y: (y-dataset.Y.mean())**2).sum()
+SQT
 
 """### Soma do quadrados da regressão (SQR)"""
 
+SQR = dataset.Y_previsto.apply(lambda y: (y-dataset.Y.mean())**2).sum()
+SQR
 
-
-
+# Utilizando o ess (explained sum of squares) do statsmodels
+resultado_regressao.ess
 
 """### Relação entre as somas de quadrados
 
@@ -794,16 +818,21 @@ A razão $\frac{SQR}{SQT}$, que assume valores entre 0 e 1, é utilizada como me
 significativa. Este tipo de afirmação deve basear-se em considerações que envolvem o tamanho da amostra e as propriedades da distribuição amostral dos estimadores mínimos quadrados.
 """
 
+R2 = SQR / SQT
+R2
 
+# Utilizando o statsmodels
+resultado_regressao.rsquared
 
-
+# Exercício
+res_reg.rsquared
 
 """## <font color=green>4.8 Testes aplicados a modelos de regressão</font>
 ***
 
 Como vimos, em uma regressão linear simples, a média da variável dependente ($Y$) é uma função linear da variável independente ($X$):
 
-# $$Y_i = \beta_1 + \beta_2X_i$$
+### $$Y_i = \beta_1 + \beta_2X_i$$
 
 Se o valor de $\beta_2$ for zero podemos verificar que o valor médio de $Y$ não depende do valor de $X$ e, portanto, concluímos que $X$ e $Y$ não estão linearmente relacionados. De forma alternativa, se o valor de $\beta_2$ não for igual a zero, concluímos que as duas variáveis estão relacionadas.
 
@@ -812,7 +841,7 @@ Para testar se a relação de regressão é significativa, é preciso realizar u
 ### Output do modelo de regressão estimado
 """
 
-
+print(resultado_regressao.summary())
 
 """### Erro quadrático médio - estimativa de $\sigma^2$
 
@@ -823,19 +852,22 @@ O **erro quadrático médio**, representado pela equação abaixo, pode ser obti
 # $$EQM = \frac{SQE}{n-2}$$
 """
 
+SQE
 
+n
 
+EQM = SQE / (n - 2)
+EQM
 
-
-
-
-
+# Utilizando statsmodels
+EQM = resultado_regressao.mse_resid
+EQM
 
 """### Teste de hipótese para nulidade do coeficiente angular
 
 Considere o seguinte modelo de regressão linear simples:
 
-# $$Y_i = \beta_1 + \beta_2X_i + u_i$$
+### $$Y_i = \beta_1 + \beta_2X_i + u_i$$
 
 Se as variáveis $Y$ e $X$ são linearmente relacionadas, espera-se que $\beta_2$ seja diferente de zero. Para testar esta hipótese formulamos um teste de hipótese com a seguinte especificação de hipóteses nula e alternativa:
 
@@ -860,43 +892,51 @@ Note que o valor esperado de $b_2$ é $\beta_2$, logo, $b_2$ é um estimador nã
 ### Calculando $s$
 """
 
-
+s = np.sqrt(EQM)
+s
 
 """### Calculando $\sum{(X_i - \bar{X})^2}$"""
 
-
+SOMA_DESVIO2 = dataset.X.apply(lambda x: (x-dataset.X.mean()) ** 2).sum()
+SOMA_DESVIO2
 
 """### Calculando $s_{b_2}$"""
 
-
+s_beta_2 = s / np.sqrt(SOMA_DESVIO2)
+s_beta_2
 
 """### Determinando as áreas de aceitação e rejeição de $H_0$"""
 
-
+from scipy.stats import t as t_student
 
 """![Região de Aceitação](https://caelum-online-public.s3.amazonaws.com/1273-estatistica-parte4/01/img031.png)
 
 ### Níveis de confiança e significância
 """
 
+confianca = 0.95
+significancia = 1 - confianca
 
-
-
+graus_de_liberdade = resultado_regressao.df_resid
+graus_de_liberdade
 
 """### Obtendo $t_{\alpha/2}$"""
 
+probabilidade = (0.5 + (confianca / 2))
+probabilidade
 
-
-
+t_alpha_2 = t_student.ppf(probabilidade, graus_de_liberdade)
+t_alpha_2
 
 """![Região de Aceitação](https://caelum-online-public.s3.amazonaws.com/1273-estatistica-parte4/01/img032.png)
 
 ### Obtendo $t = \frac{b_2 - \beta_2}{s_{b_2}}$
 """
 
+t = (beta_2 - 0) / s_beta_2
+t
 
-
-
+resultado_regressao.tvalues
 
 """![Região de Aceitação](https://caelum-online-public.s3.amazonaws.com/1273-estatistica-parte4/01/img033.png)
 
@@ -910,9 +950,9 @@ Note que o valor esperado de $b_2$ é $\beta_2$, logo, $b_2$ é um estimador nã
 > ### Rejeitar $H_0$ se $t \leq -t_{\alpha / 2}$ ou se $t \geq t_{\alpha / 2}$
 """
 
+t < t_alpha_2
 
-
-
+t > t_alpha_2
 
 """### <font color='red'>Critério do $p-valor$</font>
 
@@ -920,15 +960,17 @@ Note que o valor esperado de $b_2$ é $\beta_2$, logo, $b_2$ é um estimador nã
 > ### Rejeitar $H_0$ se o valor $p\leq\alpha$
 """
 
+p = 2 * (t_student.sf(t, graus_de_liberdade))
+p
 
+p = resultado_regressao.pvalues[1]
+p
 
-
-
-
+p < significancia
 
 """### <font color='green'>Conclusão: Rejeitamos $H_0$ e concluímos que existe uma relação significativa entre as duas variáveis.</font>"""
 
-
+print(resultado_regressao.summary())
 
 """---
 
@@ -940,12 +982,12 @@ Em nosso caso (regressão linear simples) ele fornece a mesma conclusão obtida 
 
 **Hipóteses:**
 
-## $H_0: \beta_2 = 0$
-## $H_0: \beta_2 \neq 0$
+#### $H_0: \beta_2 = 0$
+#### $H_0: \beta_2 \neq 0$
 
 **Estatística de teste:**
 
-# $$F = \frac{\frac{SQR}{k}}{\frac{SQE}{n-k-1}}$$
+### $$F = \frac{\frac{SQR}{k}}{\frac{SQE}{n-k-1}}$$
 
 Onde,
 
@@ -968,23 +1010,25 @@ $F_{\alpha}$ - baseia-se na distribuição F com $k$ graus de liberdade no numer
 ### Calculando a estatística de teste ($F$)
 """
 
+resultado_regressao.mse_model
 
+resultado_regressao.mse_resid
 
+F = resultado_regressao.mse_model / resultado_regressao.mse_resid
+F
 
-
-
-
-
+resultado_regressao.fvalue
 
 """### Obtendo o p-valor"""
 
+resultado_regressao.f_pvalue
 
+from scipy.stats import f
 
+p = f.sf(F, 1, 48)
+p
 
-
-
-
-
+p <= 0.05
 
 """# <font color=green>5 EXTRAS</font>
 ***
@@ -993,7 +1037,7 @@ $F_{\alpha}$ - baseia-se na distribuição F com $k$ graus de liberdade no numer
 ***
 """
 
-
+print(resultado_regressao.summary())
 
 """### Normalidade dos resíduos - Omnibus
 
@@ -1002,24 +1046,33 @@ $F_{\alpha}$ - baseia-se na distribuição F com $k$ graus de liberdade no numer
 https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.normaltest.html
 """
 
+from scipy.stats import normaltest
 
+stat, p = normaltest(dataset.Residuos)
+p
 
-
+p <= 0.05
 
 """https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.probplot.html"""
 
+from scipy.stats import probplot
+import matplotlib.pyplot as plt
 
+(_, (_, _, _)) = probplot(dataset.Residuos, plot = plt)
 
+dados.Altura.hist(bins=50)
 
-
-
+(_, (_, _, _)) = probplot(dados.Altura, plot = plt)
 
 """### Verificando a simetria
 
 https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.skew.html
 """
 
+from scipy.stats import skew
 
+S = skew(dataset.Residuos)
+S
 
 
 
@@ -1028,7 +1081,10 @@ https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.skew.html
 https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kurtosis.html
 """
 
+from scipy.stats import kurtosis
 
+C = 3 + kurtosis(dataset.Residuos)
+C
 
 """### Normalidade dos resíduos - Jarque-Bera (statsmodels)
 
@@ -1042,11 +1098,15 @@ https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kurtosis.html
 > #### $C$ - Coeficiente de curtose
 """
 
+JB = (n / 6) * (S ** 2 + (1/4) * (C - 3) ** 2)
+JB
 
+from scipy.stats import chi2
 
+p = chi2.sf(JB, 2)
+p
 
-
-
+p <= 0.05
 
 """### Normalidade dos resíduos - Jarque-Bera (Correção)
 
@@ -1061,9 +1121,13 @@ https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kurtosis.html
 > #### $C$ - Coeficiente de curtose
 """
 
+JB = (n - 1 / 6) * (S ** 2 + (1/4) * (C - 3) ** 2)
+JB
 
+from scipy.stats import chi2
 
+p = chi2.sf(JB, 2)
+p
 
-
-
+p <= 0.05
 
