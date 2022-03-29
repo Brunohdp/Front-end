@@ -1,0 +1,23 @@
+E vamos mais 1 hahaha
+
+Último por hoje, juro.
+
+
+
+Esse é o site da "Alurinha cursos online" que fizemos junto com a Alura para aprender a usar a ferramenta incrível e cheia de praticidades que é o flexbox, nos permitindo organizar os elementos na tela de quase todas as formas possíveis para deixar o site da maneira que quisermos. Fizemos o curso com a excelente didática e com um conteúdo super robusto do professor Yuri Padilha. Este site também foi disponibilizado pelo professor para usar como material didático e somente reorganizar todos os elementos na tela, então não construímos ele. Entretanto, eu gostei tanto do curso e do site que decidi refazer ele por inteiro desde o zero por conta própria, utilizando não somente elementos do flexbox, mas todos os outros conhecimentos que adquirimos durante toda a formação até o momento desse curso, incluindo a arquitetura CSS que falei no post anterior. O vídeo abaixo não é o que eu fiz, mas sim o que foi disponibilizado pelo professor do curso e fizemos juntos, mas vou deixar também o link do site que eu fiz aqui e se alguém se interessar posso fazer um post com todo o código e organização que fiz nele também.
+
+
+
+- Link: https://brunohdp.github.io/Alurinha/
+
+
+
+
+
+#html #html5 #css #css3 #flexbox #alura #aprendinaalura #frontend #frontenddeveloper #frontenddevelopment #frontendwebdeveloper 
+
+
+
+
+
+Paulo Silveira, Guilherme Silveira
