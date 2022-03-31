@@ -9,7 +9,6 @@ export abstract class View<T> {
     } else {
       throw Error(`Seletor ${seletor} não existe no DOM. Verifique`)
     }
-    this.elemento = document.querySelector(seletor);
     if (escapar) {
       this.escapar = escapar;
     }
