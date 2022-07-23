@@ -2,6 +2,7 @@ body {
     margin: 0;
     padding: 0;
     border: 0;
+    font-family: 'Montserrat', sans-serif;
 }
 
 
@@ -102,7 +103,7 @@ em strong {
 /* footer */
 footer {
     text-align: center;
-    background: url("../imagens/bg.jpg");
+    background: url("../img/bg.jpg");
     padding: 40px 0;
 }
 .copyright {
