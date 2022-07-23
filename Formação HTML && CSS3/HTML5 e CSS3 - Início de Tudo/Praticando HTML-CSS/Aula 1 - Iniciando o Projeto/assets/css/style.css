@@ -1,6 +1,7 @@
 :root {
-  --branco-principal: #ffffff;
   --botao-azul: #167bf7;
+  --botao-azul-efeito: #3c92fa;
+  --branco-principal: #ffffff;
   --cinza-secundario: #c0c0c0;
   --cor-de-fundo: #00030c;
   --font-principal: 'Inter';
@@ -50,6 +51,12 @@ body {
   padding: 1em;
   text-decoration: none;
 }
+
+.container__botao:hover {
+  background-color: var(--botao-azul-efeito);
+  color: var(--cor-de-fundo);
+  
+} 
 
 .botao_secundario {
   background-color: transparent;
@@ -131,6 +138,14 @@ body {
   font-size: 16px;
   margin-left: 1em;
   text-decoration: none;
+}
+
+.rodape__lista a:hover {
+  color: var(--botao-azul);
+}
+
+.rodape__lista a:active {
+  color: purple;
 }
 
 .rodape__texto {
