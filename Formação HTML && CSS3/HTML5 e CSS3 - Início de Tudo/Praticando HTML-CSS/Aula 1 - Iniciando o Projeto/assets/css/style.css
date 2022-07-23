@@ -7,9 +7,6 @@
 
 body {
   background-color: var(--cor-de-fundo);
-}
-
-.titulo-principal {
   color: var(--branco-principal);
 }
 
@@ -20,6 +17,8 @@ body {
 }
 
 .container {
+  display: grid;
+  grid-template-columns: 50% 50%;
   height: 100vh;
 }
 
@@ -30,4 +29,12 @@ body {
   display: block;
   padding: 1em;
   text-decoration: none;
+  text-align: center;
 }
+
+.botao_secundario {
+  background-color: transparent;
+  border: 2px solid var(--branco-principal);
+}
+
+
