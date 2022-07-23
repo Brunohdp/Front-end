@@ -110,3 +110,31 @@ body {
   color: var(--branco-principal);
   font-size: 32px;
 }
+
+.rodape {
+  margin: 5em 3em;
+  text-align: center;
+}
+
+.rodape__imagem {
+  margin-top: 4em;
+  margin-bottom: 1em;
+}
+
+.rodape__lista {
+  display: flex;
+  margin: 2em;
+}
+
+.rodape__lista a {
+  color: var(--branco-principal);
+  font-size: 16px;
+  margin-left: 1em;
+  text-decoration: none;
+}
+
+.rodape__texto {
+  color: var(--cinza-secundario);
+  font-size: 14px;
+  margin-bottom: 2em;
+}
