@@ -1,4 +1,5 @@
 @import url("header.css");
+@import url("banner.css");
 
 :root {
   --azul-degrade: linear-gradient(97.54deg, #002F52 35.49%, #326589 165.37%);
