@@ -2,6 +2,8 @@
 @import url("banner.css");
 @import url("carrossel.css");
 @import url("topicos.css");
+@import url("contatos.css");
+@import url("rodape.css");
 
 :root {
   --azul: #002f52;
