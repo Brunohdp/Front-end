@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <title>AluraBooks</title>
 </head>
+
 <body>
   <header class="cabecalho">
     <div class="container">
@@ -69,107 +70,106 @@
     <p class="banner__texto">Encontre em nossa estante o que precisa para seu desenvolvimento!</p>
     <input type="search" class="banner__pesquisa" placeholder="Qual será sua próxima leitura?">
   </section>
+  
   <section class="carrossel">
     <h2 class="carrossel__titulo">Últimos Lançamentos</h2>
       <!-- Slider main container -->
-    <div class="swiper">
-    <!-- Additional required wrapper -->
-    
-    <!-- If we need pagination -->
-    <div class="swiper-pagination"></div>
-
-    <div class="swiper-wrapper">
-      <!-- Slides -->
-      <div class="swiper-slide"><img src="assets/img/Construct2.svg" alt="Livro sobre Construct2 da AluraBooks"></div>
-      <div class="swiper-slide"><img src="assets/img/Gestão2.svg" alt="Livro sobre gestão da AluraBooks"></div>
-      <div class="swiper-slide"><img src="assets/img/Guia Front-end.svg" alt="Guia de Front-end da AluraBooks"></div>
-      <div class="swiper-slide"><img src="assets/img/Portugol.svg" alt="Livro sobre Portugol da AluraBooks"></div>
-      <div class="swiper-slide"><img src="assets/img/Javascript.svg" alt="Livro sobre Javascript da AluraBooks"></div>
-      <div class="swiper-slide"><img src="assets/img/ReactNative.svg" alt="Livro sobre ReactNative da AluraBooks"></div>
-      <div class="swiper-slide"><img src="assets/img/Tuning.svg" alt="Livro sobre Tuning da AluraBooks"></div>
-      <div class="swiper-slide"><img src="assets/img/UX.svg" alt="Livro sobre UX da AluraBooks"></div>
+    <div class="carrossel__container">
+      <div class="container">
+        <div class="swiper">
+        <!-- Additional required wrapper -->
+      
+        <!-- If we need pagination -->
+        <div class="swiper-pagination"></div>
+        <div class="swiper-wrapper">
+          <!-- Slides -->
+          <div class="swiper-slide"><img src="assets/img/Construct2.svg" alt="Livro sobre Construct2 da AluraBooks"></div>
+          <div class="swiper-slide"><img src="assets/img/Gestão2.svg" alt="Livro sobre gestão da AluraBooks"></div>
+          <div class="swiper-slide"><img src="assets/img/Guia Front-end.svg" alt="Guia de Front-end da AluraBooks"></div>
+          <div class="swiper-slide"><img src="assets/img/Portugol.svg" alt="Livro sobre Portugol da AluraBooks"></div>
+          <div class="swiper-slide"><img src="assets/img/Javascript.svg" alt="Livro sobre Javascript da AluraBooks"></div>
+          <div class="swiper-slide"><img src="assets/img/ReactNative.svg" alt="Livro sobre ReactNative da AluraBooks"></div>
+          <div class="swiper-slide"><img src="assets/img/Tuning.svg" alt="Livro sobre Tuning da AluraBooks"></div>
+          <div class="swiper-slide"><img src="assets/img/UX.svg" alt="Livro sobre UX da AluraBooks"></div>
+        </div>
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+          </div>
+      
+          <div class="card">
+        <!-- 1º linha -->
+        <div class="card__descricao">
+          <!-- 1º coluna -->
+          <div class="descricao">
+            <h3 class="descricao__titulo">Talvez você também se interesse por...</h3>
+            <h2 class="descricao__titulo-livro">Angular 11 e Firebase</h2>
+            <p class="descricao__texto">Construindo uma aplicação integrada com a plataforma do Google.</p>
+          </div>
+          <!-- 2º linha -->
+          <img class="descricao__imagem" src="assets/img/Angular.svg" alt="">
+        </div>
+        <!-- 2º linha -->
+        <div class="card__botoes">
+          <!-- 1º coluna -->
+          <ul class="botoes">
+            <li class="botoes__item"><img src="assets/img/Favoritos.svg" alt="Favoritar livro"></li>
+            <li class="botoes__item"><img src="assets/img/Sacola.svg" alt="Adicionar ao carrinho de compras"></li>
+          </ul>
+          <!-- 2º coluna -->
+          <a href="#" class="botoes__ancora">Saiba mais</a>
+        </div>
+          </div>
+    </section>
     </div>
-
-    <!-- If we need navigation buttons -->
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
-  </div>
-
-  <div class="card">
-    <!-- 1º linha -->
-    <div class="card__descricao">
-      <!-- 1º coluna -->
-      <div class="descricao">
-        <h3 class="descricao__titulo">Talvez você também se interesse por...</h3>
-        <h2 class="descricao__titulo-livro">Angular 11 e Firebase</h2>
-        <p class="descricao__texto">Construindo uma aplicação integrada com a plataforma do Google.</p>
+        <section class="carrossel">
+      <h2 class="carrossel__titulo">Mais vendidos</h2>
+        <!-- Slider main container -->
+      <div class="swiper">
+      <!-- Additional required wrapper -->
+      
+      <!-- If we need pagination -->
+      <div class="swiper-pagination"></div>
+      <div class="swiper-wrapper">
+        <!-- Slides -->
+        <div class="swiper-slide"><img src="assets/img/Guia Front-end.svg" alt="Guia de Front-end da AluraBooks"></div>
+        <div class="swiper-slide"><img src="assets/img/Liderança.svg" alt="Livro sobre liderança da AluraBooks"></div>
+        <div class="swiper-slide"><img src="assets/img/ReactNative.svg" alt="Livro sobre ReactNative da AluraBooks"></div>
+        <div class="swiper-slide"><img src="assets/img/Tuning.svg" alt="Livro sobre Tuning da AluraBooks"></div>
+        <div class="swiper-slide"><img src="assets/img/Arquitetura.svg" alt="Livro sobre arquitetura de código da AluraBooks"></div>
+        <div class="swiper-slide"><img src="assets/img/MEAN.svg" alt="Livro sobre mean da AluraBooks"></div>
+        <div class="swiper-slide"><img src="assets/img/Nodejs.svg" alt="Livro sobre nodejs da AluraBooks"></div>
+      </div>
+      <!-- If we need navigation buttons -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+        </div>
+      
+        <div class="card">
+      <!-- 1º linha -->
+      <div class="card__descricao">
+        <!-- 1º coluna -->
+        <div class="descricao">
+          <img class="card__estrelas" src="assets/img/Estrelinhas.svg" alt="Estrelinhas da autora">
+          <h3 class="descricao__titulo">Autora do Mês</h3>
+          <h2 class="descricao__titulo-livro">Juliana Agarikov</h2>
+          <p class="descricao__texto">Analista de sistemas e escritora, Juliana é especialista em Front-End.</p>
+        </div>
+        <!-- 2º linha -->
+        <img class="descricao__imagem" src="assets/img/Perfil-escritora.svg" alt="Foto da escritora">
       </div>
       <!-- 2º linha -->
-      <img class="descricao__imagem" src="assets/img/Angular.svg" alt="">
-    </div>
-
-    <!-- 2º linha -->
-    <div class="card__botoes">
-      <!-- 1º coluna -->
-      <ul class="botoes">
-        <li class="botoes__item"><img src="assets/img/Favoritos.svg" alt="Favoritar livro"></li>
-        <li class="botoes__item"><img src="assets/img/Sacola.svg" alt="Adicionar ao carrinho de compras"></li>
-      </ul>
-      <!-- 2º coluna -->
-      <a href="#" class="botoes__ancora">Saiba mais</a>
-    </div>
-  </div>
-  </section>
-  <section class="carrossel">
-    <h2 class="carrossel__titulo">Mais vendidos</h2>
-      <!-- Slider main container -->
-    <div class="swiper">
-    <!-- Additional required wrapper -->
-    
-    <!-- If we need pagination -->
-    <div class="swiper-pagination"></div>
-
-    <div class="swiper-wrapper">
-      <!-- Slides -->
-      <div class="swiper-slide"><img src="assets/img/Guia Front-end.svg" alt="Guia de Front-end da AluraBooks"></div>
-      <div class="swiper-slide"><img src="assets/img/Liderança.svg" alt="Livro sobre liderança da AluraBooks"></div>
-      <div class="swiper-slide"><img src="assets/img/ReactNative.svg" alt="Livro sobre ReactNative da AluraBooks"></div>
-      <div class="swiper-slide"><img src="assets/img/Tuning.svg" alt="Livro sobre Tuning da AluraBooks"></div>
-      <div class="swiper-slide"><img src="assets/img/Arquitetura.svg" alt="Livro sobre arquitetura de código da AluraBooks"></div>
-      <div class="swiper-slide"><img src="assets/img/MEAN.svg" alt="Livro sobre mean da AluraBooks"></div>
-      <div class="swiper-slide"><img src="assets/img/Nodejs.svg" alt="Livro sobre nodejs da AluraBooks"></div>
-    </div>
-
-    <!-- If we need navigation buttons -->
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
-  </div>
-
-  <div class="card">
-    <!-- 1º linha -->
-    <div class="card__descricao">
-      <!-- 1º coluna -->
-      <div class="descricao">
-        <img class="card__estrelas" src="assets/img/Estrelinhas.svg" alt="Estrelinhas da autora">
-        <h3 class="descricao__titulo">Autora do Mês</h3>
-        <h2 class="descricao__titulo-livro">Juliana Agarikov</h2>
-        <p class="descricao__texto">Analista de sistemas e escritora, Juliana é especialista em Front-End.</p>
+      <div class="card__botoes">
+        <!-- 1º coluna -->
+        <ul class="botoes">
+          <li class="botoes__item"><img src="assets/img/Favoritos.svg" alt="Favoritar livro"></li>
+          <li class="botoes__item"><img src="assets/img/Sacola.svg" alt="Adicionar ao carrinho de compras"></li>
+        </ul>
+        <!-- 2º coluna -->
+        <a href="#" class="botoes__ancora">Saiba mais</a>
       </div>
-      <!-- 2º linha -->
-      <img class="descricao__imagem" src="assets/img/Perfil-escritora.svg" alt="Foto da escritora">
+        </div>
     </div>
-
-    <!-- 2º linha -->
-    <div class="card__botoes">
-      <!-- 1º coluna -->
-      <ul class="botoes">
-        <li class="botoes__item"><img src="assets/img/Favoritos.svg" alt="Favoritar livro"></li>
-        <li class="botoes__item"><img src="assets/img/Sacola.svg" alt="Adicionar ao carrinho de compras"></li>
-      </ul>
-      <!-- 2º coluna -->
-      <a href="#" class="botoes__ancora">Saiba mais</a>
-    </div>
-  </div>
   </section>
   <section class="topicos">
     <h2 class="topicos__titulo">Tópicos visitados recentemente</h2>
