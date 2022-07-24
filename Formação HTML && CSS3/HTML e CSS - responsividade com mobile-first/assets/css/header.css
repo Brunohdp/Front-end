@@ -23,6 +23,10 @@
   display: none;
 }
 
+.container__texto {
+  display: none;
+}
+
 .cabecalho__menu-hamburguer {
   background-image: url("../img/Menu.svg");
   background-position: center;
@@ -109,6 +113,28 @@
 
   .opcoes__link {
     color: var(--preto);
+    text-decoration: none;
+  }
+}
+
+@media screen and (min-width: 1728px) {
+  .cabecalho {
+    padding: 0 2em;
+  }
+  
+  .opcoes {
+    margin-left: 2em;
+    margin-right: auto;
+  }
+
+  .container__texto {
+    display: block;
+  }
+
+  .container__link {
+    align-items: center;
+    color: var(--preto);
+    display: flex;
     text-decoration: none;
   }
 }
