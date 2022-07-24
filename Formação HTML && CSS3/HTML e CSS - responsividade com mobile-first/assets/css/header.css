@@ -3,6 +3,7 @@
   background-color: var(--branco);
   display: flex;
   justify-content: space-between;
+  position: relative;
 }
 
 .container {
@@ -22,4 +23,15 @@
   height: 24px;
   width: 24px;
 }
+
+.lista-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+}
+
+.container__botao:checked ~ .lista-menu {
+  display: block;
+}
+
 
