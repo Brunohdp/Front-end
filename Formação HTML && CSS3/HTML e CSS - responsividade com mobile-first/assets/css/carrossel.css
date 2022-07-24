@@ -99,11 +99,3 @@
     margin: 2em auto;
   }
 }
-
-@media screen and (min-width: 1728px) {
-  .carrossel__container {
-    align-items: center;
-    display: flex;
-    margin: 0 20vw 3em 20vw;
-  }
-}
