@@ -15,6 +15,14 @@
   padding: 1em 0.7em;
 }
 
+.container__titulo {
+  display: none;
+}
+
+.opcoes {
+  display: none;
+}
+
 .cabecalho__menu-hamburguer {
   background-image: url("../img/Menu.svg");
   background-position: center;
@@ -59,5 +67,39 @@
 
 
 @media screen and (min-width: 1024px) {
+  .cabecalho__menu-hamburguer {
+    display: none;
+  }
   
+  .container__imagem-transparente {
+    display: none;
+  }
+  
+  .container__titulo, .container__titulo--negrito {
+    font-family: var(--font-secundaria);
+  }
+
+  .container__titulo--negrito {
+    font-weight: 700;
+  }
+
+  .container__titulo {
+    display: block;
+    font-size: 30px;
+    font-weight: 400;
+  }
+
+  .opcoes {
+    display: flex;
+  }
+
+  .opcoes__item {
+    padding: 0 1em;
+    text-transform: uppercase;
+  }
+
+  .opcoes__link {
+    color: var(--preto);
+    text-decoration: none;
+  }
 }
