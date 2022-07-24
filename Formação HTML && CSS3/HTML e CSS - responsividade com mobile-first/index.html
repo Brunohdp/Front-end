@@ -5,10 +5,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="assets/css/reset.css">
-  <link rel="stylesheet" href="assets/css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+  <link rel="stylesheet" href="assets/css/style.css">
   <title>AluraBooks</title>
 </head>
 <body>
@@ -39,5 +40,46 @@
     <p class="banner__texto">Encontre em nossa estante o que precisa para seu desenvolvimento!</p>
     <input type="search" class="banner__pesquisa" placeholder="Qual será sua próxima leitura?">
   </section>
+  <section class="carrossel">
+    <h2 class="carrossel__titulo">Últimos Lançamentos</h2>
+      <!-- Slider main container -->
+    <div class="swiper">
+    <!-- Additional required wrapper -->
+    
+    <!-- If we need pagination -->
+    <div class="swiper-pagination"></div>
+
+    <div class="swiper-wrapper">
+      <!-- Slides -->
+      <div class="swiper-slide"><img src="assets/img/Construct2.svg" alt="Livro sobre Construct2 da AluraBooks"></div>
+      <div class="swiper-slide"><img src="assets/img/Gestão2.svg" alt="Livro sobre gestão da AluraBooks"></div>
+      <div class="swiper-slide"><img src="assets/img/Guia Front-end.svg" alt="Guia de Front-end da AluraBooks"></div>
+      <div class="swiper-slide"><img src="assets/img/Portugol.svg" alt="Livro sobre Portugol da AluraBooks"></div>
+      <div class="swiper-slide"><img src="assets/img/Javascript.svg" alt="Livro sobre Javascript da AluraBooks"></div>
+      <div class="swiper-slide"><img src="assets/img/ReactNative.svg" alt="Livro sobre ReactNative da AluraBooks"></div>
+      <div class="swiper-slide"><img src="assets/img/Tuning.svg" alt="Livro sobre Tuning da AluraBooks"></div>
+      <div class="swiper-slide"><img src="assets/img/UX.svg" alt="Livro sobre UX da AluraBooks"></div>
+    </div>
+
+    <!-- If we need navigation buttons -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+
+  </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+  <script>
+    const swiper = new Swiper('.swiper', {
+    speed: 400,
+    spaceBetween: 10,
+    slidesPerView: 3,
+    pagination: {
+      el: '.swiper-pagination',
+      type: "bullets",
+      clickable: true,
+    },
+    });
+  </script>
 </body>
 </html>
