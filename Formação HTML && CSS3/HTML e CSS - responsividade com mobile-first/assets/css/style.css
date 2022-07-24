@@ -5,8 +5,12 @@
   --branco: #fff;
   --cor-de-fundo: #ebecee;
   --laranja: #eb9b00;
+  --fonte-principal: "Poppins";
 }
 
 body {
   background-color: var(--cor-de-fundo);
+  font-family: var(--fonte-principal);
+  font-size: 16px;
+  font-weight: 400;
 }

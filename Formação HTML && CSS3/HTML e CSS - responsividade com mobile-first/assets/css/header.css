@@ -12,7 +12,7 @@
 }
 
 .container__imagem {
-  padding: 1em;
+  padding: 1em 0.7em;
 }
 
 .cabecalho__menu-hamburguer {
@@ -22,6 +22,10 @@
   display: inline-block;
   height: 24px;
   width: 24px;
+}
+
+.container__botao {
+  display: none;
 }
 
 .container__botao:checked ~ .lista-menu {
@@ -42,6 +46,7 @@
 
 .lista-menu__titulo {
   color: var(--laranja);
+  font-weight: 700;
 }
 
 .lista-menu__link {
