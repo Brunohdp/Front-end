@@ -1,0 +1,8 @@
+Finalmente postando depois de muito tempo pronto kkk
+Um app chamado "Alura MIDI" desenvolvido no curso de JavaScript para web ministrado pela instrutora @Vanessa Me Tonini na @Alura que utilizado para aprender e praticar ainda mais essa linguagem incrível que é o JavaScript! Linkamos cada tecla/botão com um som diferente utilizando JS e sempre que clicamos nela esses sons são tocados, bem como quando colocamos o foco utilizando o TAB e apertando espaço ou enter.
+
+Link do site: https://alura-midi-theta.vercel.app/
+
+#html #html5 #css #css3 #flexbox #alura #aprendinaalura #frontend #frontenddeveloper #frontenddevelopment #frontendwebdeveloper
+
+@Paulo Silveira, @Guilherme Silveira
