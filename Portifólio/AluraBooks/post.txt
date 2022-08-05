@@ -1,0 +1,7 @@
+Mais um site desenvolvido com o pensamento mobile-first com auxílio da instrutora @Monica H. no curso de responsividade com mobile first na @Alura. Um ótimo projeto e com várias técnicas novas e interessantes como swiperJS para desenvolvimento de carrossel. Demos início ao projeto pela versão mobile e fomos evoluindo o site até que ele se tornasse responsivo em qualquer tela que o usuária venha a acessar. Todo o desenvolvimento de menu dentre outras coisinhas foi feito somente em css!
+
+Link do site: https://alura-books-omega.vercel.app/
+
+#html #html5 #css #css3 #alura #aprendinaalura #flexbox #frontend #frontenddeveloper #frontenddevelopment #frontendwebdeveloper #flexbox
+
+@Paulo Silveira, @Guilherme Silveira

@@ -1,7 +1,0 @@
-Esse foi um site bem interessante de se construir. Desenvolvido junto com o curso da @Alura para aprendizagem e pratica de grid com css a fim de simplificar layouts. Com a ajuda do instrutor @Matheus Castiglioni conseguimos concluir esse projeto super divertido de uma appstore colocando aplicativos em diferentes categorias e deixanto todos eles alinhados e separados utilizando a técnica de grid.
-
-Link do site: https://alura-store-sooty.vercel.app/
-
-#html #html5 #css #css3 #flexbox #alura #aprendinaalura #frontend #frontenddeveloper #frontenddevelopment #frontendwebdeveloper
-
-Paulo Silveira, Guilherme Silveira

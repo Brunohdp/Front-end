@@ -1,0 +1,8 @@
+Esse é um dos sites que mais gostei de fazer e tenho um orgulhozinho. O "HZC" foi um site que desenvolvi junto com o instrutor @Matheus Alberto Marcus no curso de dispondo elementos com flexbox e grid na @Alura pensando em mobile-first. Entretanto, esse não foi o mesmo que construímos durante o curso. Eu gostei tanto da ideia que decidi ir um pouco além, comecei tudo do zero novamente e desenvolvi não só a página principal, mas também 2 outras secundárias e as páginas de cada conteúdo como modelo. Como não fiz o site inteiro, pois era basicamente uma replicação das modelos, decidi também criar uma página de erro caso o usuário tente acessar uma pág. que não foi desenvolvida. Além disso também fizemos o menu hamburguer lateral quando na versão mobile e a área de notificações que permanece independentemente do tamanho da tela que está sendo acessada utilizando JavaScript. Levou um tempo para fazer tudo e superar os erros e problemas que iam surgindo, mas eu fiquei muito satisfeito com o resultado final :).
+Compartilho com vocês o link do site, o vídeo dele sendo acessado e o código todo no final do vídeo.
+
+Link do site: https://hzc-six.vercel.app/
+
+#html #html5 #css #css3 #alura #aprendinaalura #felxbox #frontend #frontenddeveloper #frontenddevelopment #frontendwebdeveloper #javascript #js #javascriptdeveloper
+
+@Paulo Silveira, @Guilherme Silveira

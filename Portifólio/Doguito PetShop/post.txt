@@ -1,0 +1,8 @@
+O site "Doguito petshop" foi desenvolvido para aprender e praticar validações a serem feitas em uma página de cadastro de usuário utilizando JavaScript no curso de Validação de Formulários e HTML na @Alura, que foi ministrado pelo instrutor @Matheus Alberto Marcus. Nessa validação somente usuários que tenham inserido uma forma de e-mail, senha e CEP válidos podem fazer o cadastro no site. Além do cadastro de usuário, também desenvolvemos a página de cadastro de produtos para o petshop.
+
+Link do site de cadastro de usuário: https://pet-shop-cadastro.vercel.app/
+Link do site de cadastro de produto: https://pet-shop-produto.vercel.app/
+
+#html #html5 #css #css3 #alura #aprendinaalura #frontend #frontenddeveloper #frontenddevelopment #frontendwebdeveloper #javascript #js #javascriptdeveloper
+
+@Paulo Silveira, @Guilherme Silveira

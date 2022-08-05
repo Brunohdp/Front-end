@@ -1,0 +1,7 @@
+O site "AluraBooks" foi desenvolvido durante o curso de praticando HTML/CSS ministrado pela instrutora @Monica H. na @alura. Foi um site mais simples. Mais para poder relembrar conceitos, tecnicas e praticar, de fato!
+
+Link do site: https://alura-books-omega.vercel.app/
+
+#html #html5 #css #css3 #alura #aprendinaalura #flexbox #frontend #frontenddeveloper #frontenddevelopment #frontendwebdeveloper
+
+@Paulo Silveira, @Guilherme Silveira

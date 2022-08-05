@@ -1,0 +1,7 @@
+Mais um curso e projeto finalizado com @Alura. Nesse projeto feito com o instrutor @Pedro Marins para aprender e praticar os conceitos básicos de JavaScript e manipulação dinâmica do DOM utilizando funções, variáveis dentre outras técnicas e funcionalidade que a linguagem permite. Nesse projeto fizemos com que fosse possível a alteração da cor do personagem, bem como a montagem dele (braços, foguetes e afins), e, quanto mais coisas acrescentamos, suas estatísticas se alteram dinamicamente para vermos o resultado do robô que está sendo criado.
+
+Link do site: https://robotron2000-henna.vercel.app/?
+
+#html #html5 #css #css3 #alura #aprendinaalura #flexbox #frontend #frontenddeveloper #frontenddevelopment #frontendwebdeveloper #javascript #js #javascriptdeveloper
+
+@Paulo Silveira, @Guilherme Silveira
