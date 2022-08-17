@@ -11,11 +11,18 @@
 
   <script>
     let ano = prompt("Digite o ano");
+    var idadeBruno = (ano - 2000);
+    var idadeJosi = (ano - 1981);
+    var idadeAdriano = (ano - 2009);
+    var idadeFábio = (ano - 1979);
 
-    document.write("Bruno tem " + (ano - 2000) + " anos" + "<br>");
-    document.write("Josiane tem " + (ano - 1981) + " anos" + "<br>");
-    document.write("Adriano tem " + (ano - 2009) + " anos" + "<br>");
-    document.write("Fábio tem " + (ano - 1979) + " anos" + "<br>");
+    document.write("Bruno tem " + idadeBruno + " anos" + "<br>");
+    document.write("Josiane tem " + idadeJosi + " anos" + "<br>");
+    document.write("Adriano tem " + idadeAdriano + " anos" + "<br>");
+    document.write("Fábio tem " + idadeFábio + " anos" + "<br>");
+
+    var media = (idadeBruno + idadeJosi + idadeAdriano + idadeFábio) / 4;
+    document.write("<br>A média das idades é " + Math.round(media));
   </script>
 </body>
 </html>
