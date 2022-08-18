@@ -7,7 +7,11 @@
   <title>Cálculo de IMC</title>
 </head>
 <body style="text-align: center;">
+  
   <img src="imc.png" alt="Tabela imc">
+
+  <hr>
+
   <script>
     function pulaLinha() {
       document.write("<br>");
@@ -18,24 +22,39 @@
       document.write(texto);
     }
     
-    let altura = prompt("Digite a sua altura");
-    let peso = prompt("Digite o seu peso");
-    let imc = peso / (altura * altura);
-    printa("O seu IMC é " + imc);
+    function calculaImc(pessoa, peso, altura) {
+      let imc = peso / (altura * altura);
+      
+      printa("O IMC de " + pessoa + " é " + imc)
 
-    if (imc < 18.5) {
-      printa("Você está abaixo do peso");
-    } else if (imc < 25) {
-      printa("Você está no peso ideal");
-    } else if (imc < 30) {
-      printa("Você está acima do peso");
-    } else if (imc < 35) {
-      printa("Você está com obesidade grau I");
-    } else if (imc < 40) {
-      printa("Você está com obesidade grau II");
-    } else {
-      printa("Você está com obesidade grau III");
+      if (imc < 18.5) {
+        printa("Você está abaixo do peso");
+      } else if (imc < 25) {
+        printa("Você está no peso ideal");
+      } else if (imc < 30) {
+        printa("Você está acima do peso");
+      } else if (imc < 35) {
+        printa("Você está com obesidade grau I");
+      } else if (imc < 40) {
+        printa("Você está com obesidade grau II");
+      } else {
+        printa("Você está com obesidade grau III");
+      }
+
+      pulaLinha();
+
+      return imc;
     }
+
+    let quantidade_pessoas = parseInt(prompt("Quantas pessoas você quer calcular?"));
+    
+    for (var i = 0; i < quantidade_pessoas; i++) {
+      let pessoa = prompt("Digito o nome da " + (i + 1) + "ª pessoa");
+      let altura = prompt("Digite a altura de " + pessoa);
+      let peso = prompt("Digite a peso de " + pessoa);
+      calculaImc(pessoa, peso, altura);
+    }
+    
   </script>
 </body>
 </html>
