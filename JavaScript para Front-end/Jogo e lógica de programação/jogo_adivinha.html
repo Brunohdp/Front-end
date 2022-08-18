@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adivinha | jogo</title>
+</head>
+<body>
+  <script>
+    function pulaLinha() {
+      document.write("<br>");
+    }
+
+    function printa(texto) {
+      document.write(texto);
+      pulaLinha();
+    }
+
+    let chute = parseInt(prompt("Digite um número entre 1 e 10"));
+    let numero_sorteado = Math.round(Math.random() * 10);
+
+
+    let acertou = chute == numero_sorteado;
+      
+    if (acertou) {
+      printa("Parabéns, você acertou! O número sorteado foi " + numero_sorteado);
+      breaks;
+    } else {
+      printa("Você errou, o número sorteado foi " + numero_sorteado);
+    }
+  </script>
+</body>
+</html>
