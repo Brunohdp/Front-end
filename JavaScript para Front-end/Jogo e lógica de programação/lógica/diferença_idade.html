@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diferença de idade</title>
+</head>
+<body>
+  <script>
+    function pulaLinha() {
+      document.write("<br>");
+    }
+
+    function printa(texto) {
+      document.write(texto);
+      pulaLinha();
+    }
+
+    let anoAtual = new Date().getFullYear();
+    let minhaIdade = anoAtual - 2000;
+    let idadeDri = anoAtual - 2009;
+    let diferenca = (idadeDri - minhaIdade) * -1;
+    
+    printa("A diferença de idade entre Adriano e Bruno é de " + diferenca + " anos");
+  </script>
+</body>
+</html>

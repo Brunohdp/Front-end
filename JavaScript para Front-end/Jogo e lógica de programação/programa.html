@@ -10,19 +10,30 @@
   
 
   <script>
-    let ano = prompt("Digite o ano");
-    var idadeBruno = (ano - 2000);
-    var idadeJosi = (ano - 1981);
-    var idadeAdriano = (ano - 2009);
-    var idadeFábio = (ano - 1979);
+    function pulaLinha(){
+      document.write("<br>");
+    }
 
-    document.write("Bruno tem " + idadeBruno + " anos" + "<br>");
-    document.write("Josiane tem " + idadeJosi + " anos" + "<br>");
-    document.write("Adriano tem " + idadeAdriano + " anos" + "<br>");
-    document.write("Fábio tem " + idadeFábio + " anos" + "<br>");
+    function printa(texto){
+      document.write(texto);
+      pulaLinha();
+    }
+    
+    // let ano = prompt("Digite o ano");
+    let anoAtual = new Date().getFullYear();
+
+    var idadeBruno = (anoAtual - 2000);
+    var idadeJosi = (anoAtual - 1981);
+    var idadeAdriano = (anoAtual - 2009);
+    var idadeFábio = (anoAtual - 1979);
+
+    printa("Bruno tem " + idadeBruno + " anos");
+    printa("Josiane tem " + idadeJosi + " anos");
+    printa("Adriano tem " + idadeAdriano + " anos");
+    printa("Fábio tem " + idadeFábio + " anos");
 
     var media = (idadeBruno + idadeJosi + idadeAdriano + idadeFábio) / 4;
-    document.write("<br>A média das idades é " + Math.round(media));
+    printa("A média das idades é " + Math.round(media));
   </script>
 </body>
 </html>
