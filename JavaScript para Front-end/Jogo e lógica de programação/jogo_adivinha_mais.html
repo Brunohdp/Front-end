@@ -11,20 +11,53 @@
   <button>Tentar</button>
   
   <script>
-    let segredo = Math.round(Math.random() * 10);
-    let input = document.querySelector("input");
-    input.focus();
-    let botao = document.querySelector("button");
-    
+    function sorteia() {
+      return Math.round(Math.random() * 10);
+    }
+
+    function sorteiaNumeros(quantidade) {
+      let segredo = [];
+      let i = 1;
+      while (i <= quantidade) {
+        var numeroAleatorio = sorteia();
+        if (numeroAleatorio != 0) {
+          var achou = false;
+  
+          for (var posicao = 0; posicao < segredo.length; posicao++) {
+            if (segredo[posicao] == numeroAleatorio) {
+              achou = true;
+              break;
+            }
+          }
+          if (achou == false) {
+            segredo.push(numeroAleatorio);
+            i++;
+          }
+        }
+      }
+      return segredo;
+    }
+
     function verifica () {
-      if (input.value == segredo) {
-        alert('Acertou');
-      } else {
-        alert('Errou');
+      for (i = 0; i < segredo.length; i++) {
+        if (input.value == segredo[i]) {
+          alert('Parabéns, você acertou! O segredo era ' + segredo[i]);
+          break;
+        } else if (i == segredo.length - 1) {
+          alert('Você errou todo os segredo!!!!');
+        }
       }
       input.value = "";
       input.focus();
     }
+
+    let segredo = sorteiaNumeros(5);
+    console.log(segredo);
+
+    let input = document.querySelector("input");
+    let botao = document.querySelector("button");
+    input.focus();
+    
     
     botao.addEventListener("click", verifica);
   </script>
