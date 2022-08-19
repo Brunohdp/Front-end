@@ -17,18 +17,25 @@
       pulaLinha();
     }
 
-    let chute = parseInt(prompt("Digite um número entre 1 e 10"));
     let numero_sorteado = Math.round(Math.random() * 10);
+    
+    let tentativa = 1;
+    let numero_tentativas = 3;
+    
+    while(tentativa <= numero_tentativas) {
+      let chute = parseInt(prompt("Digite um número entre 1 e 10"));
+      let acertou = chute == numero_sorteado;
 
-
-    let acertou = chute == numero_sorteado;
-      
-    if (acertou) {
-      printa("Parabéns, você acertou! O número sorteado foi " + numero_sorteado);
-      breaks;
-    } else {
-      printa("Você errou, o número sorteado foi " + numero_sorteado);
+      if (acertou) {
+        printa("Parabéns, você acertou! O número sorteado foi " + numero_sorteado);
+        break;
+      } else {
+        printa("Você errou!");
+      }
+      tentativa++;
     }
+
+    printa("FIM!");
   </script>
 </body>
 </html>

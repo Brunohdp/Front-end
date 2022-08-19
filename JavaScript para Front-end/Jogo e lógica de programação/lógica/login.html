@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bloqueia 33 e 37</title>
+</head>
+<body>
+  <script>
+    let loginCadastrado = "alura";
+    let senhaCadastrada = "alura321";
+    let tentativa = 1;
+    let maxTentativas = 3;
+    
+    while (tentativa <= maxTentativas) {
+      var loginInformado = prompt("Informe seu login");
+      var senhaInformada = prompt("Informe sua senha");
+
+      if( loginCadastrado == loginInformado && senhaCadastrada == senhaInformada ) {
+        alert("Bem-vindo ao sistema " + loginInformado);
+        breaks();
+      } else {
+        if (tentativa == maxTentativas) {
+          alert("Você excedeu o número máximo de tentativas");
+          breaks();
+        } else {
+          alert("Login ou senha inválidos");
+        }
+      }
+      tentativa++;
+    }
+  </script>
+</body>
+</html>

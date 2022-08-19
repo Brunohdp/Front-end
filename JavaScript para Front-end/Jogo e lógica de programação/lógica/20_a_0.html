@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bloqueia 33 e 37</title>
+</head>
+<body style="padding-left: 20px">
+  <script>
+    function pulaLinha() {
+      document.write('<br>');
+    }
+
+    function printa(texto) {
+      document.write(texto);
+      pulaLinha();
+    }
+    
+    let contador = 20;
+
+    while (contador >= 0) {
+      printa(contador);
+      contador--;
+    }
+    
+    printa("FIM!")
+  </script>
+</body>
+</html>
